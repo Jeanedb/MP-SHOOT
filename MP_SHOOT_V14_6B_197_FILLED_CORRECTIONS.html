@@ -12787,7 +12787,7 @@ const updateBefore173=update;update=dt=>{updateBefore173(dt);const s=env173(),r=
 };
 function proofGlyph173(){if(proofGlyph173.texture)return proofGlyph173.texture;return proofGlyph173.texture=tex(tc(64,c=>{c.clearRect(0,0,64,64);c.strokeStyle='#d55139';c.lineWidth=7;c.beginPath();c.moveTo(17,15);c.lineTo(47,49);c.moveTo(47,15);c.lineTo(17,49);c.stroke();c.strokeStyle='#f4ba87';c.lineWidth=2;c.stroke();}));}
 const effectsBefore173=renderBlastEffects;renderBlastEffects=vp=>{const r=cr172(),hazards=r?.hazards;if(r)r.hazards=[];try{effectsBefore173(vp);}finally{if(r)r.hazards=hazards;}if(!r||f4ClosedCab())return;const blend=gl.isEnabled(gl.BLEND);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);const draw=o=>renderObj({...o,t:o.t||detachmentUpgradeAssets().plain,em:o.em??.8},vp);
- for(const h of hazards){const hot=h.age>=h.warn,v=h.w<h.d,len=v?h.d:h.w;for(const side of [-1,1])draw({x:h.x+(v?side*h.w/2:0),y:.035,z:h.z+(v?0:side*h.d/2),sx:v?.035:h.w,sy:.018,sz:v?h.d:.035,tint:hot?[1,.30,.13,.9]:[.85,.28,.20,.50+.15*Math.sin(h.age*12)]});for(let t=-len/2+.7;t<len/2;t+=1.8)draw({x:h.x+(v?0:t),y:.045,z:h.z+(v?t:0),sx:.63,sy:.018,sz:.63,t:proofGlyph173(),tint:hot?[1,1,.8,.95]:[1,.75,.63,.45]});const u=Math.min(1,h.age/h.warn);draw({x:h.x+(v?0:(u-.5)*len),y:.08,z:h.z+(v?(u-.5)*len:0),sx:v?.65:.16,sy:hot?.26:.045,sz:v?.16:.65,tint:hot?[1,.51,.21,.95]:[1,.36,.20,.9],em:1.2});}
+ for(const h of hazards)correctionLane197(h,draw);
  gl.depthMask(true);if(!blend)gl.disable(gl.BLEND);
 };
 const startBefore173=startLevel4;startLevel4=(...args)=>{const s=f4?.environment173;if(s){for(const m of s.meshes)gl.deleteBuffer(m.buf);if(s.automation)gl.deleteTexture(s.automation.texture);}return startBefore173(...args);};
@@ -13800,9 +13800,7 @@ function correctionStyle196(h){
 function correctionDraw196(h,draw){
  const a=correctionStyle196(h),vertical=h.w<h.d,length=vertical?h.d:h.w,width=vertical?h.w:h.d;
  const stroke=(offset,thickness,alpha,y=.036)=>draw({x:h.x+(vertical?offset:0),y,z:h.z+(vertical?0:offset),sx:vertical?thickness:length,sy:.012,sz:vertical?length:thickness,tint:[1,.055,.035,alpha],em:1.15*a.strength});
- // V197: fill the entire danger strip beneath the unchanged boundary lines and Xs.
- draw({x:h.x,y:.026,z:h.z,sx:h.w,sy:.012,sz:h.d,tint:[1,.035,.025,a.line*.46],em:1.05*a.strength});
- // Boundary lines and Xs remain above the smoothly fading red fill.
+ // Faint lane boundaries retain the true danger width; a soft central line carries the effect.
  for(const side of [-1,1])stroke(side*width/2,.024,a.line*.43);
  stroke(0,.20,a.line*.14,.038);stroke(0,.045,a.line*.82*a.strength,.044);
  // The X arrives promptly and remains legible as the line fades away.
@@ -13812,6 +13810,13 @@ function correctionDraw196(h,draw){
  }
 }
 
+// V197: the live proof-mark renderer fills the complete strip and keeps its repeated X glyphs.
+function correctionLane197(h,draw){
+ const a=correctionStyle196(h),v=h.w<h.d,len=v?h.d:h.w;
+ draw({x:h.x,y:.044,z:h.z,sx:h.w,sy:.014,sz:h.d,tint:[1,.035,.025,a.line*.46],em:1.05*a.strength});
+ for(const side of [-1,1])draw({x:h.x+(v?side*h.w/2:0),y:.052,z:h.z+(v?0:side*h.d/2),sx:v?.035:h.w,sy:.018,sz:v?h.d:.035,tint:[1,.15,.10,a.line*.65],em:1.0});
+ for(let t=-len/2+.7;t<len/2;t+=1.8)draw({x:h.x+(v?0:t),y:.065,z:h.z+(v?t:0),sx:.63,sy:.018,sz:.63,t:proofGlyph173(),tint:[1,.75,.63,a.mark*.75],em:1.1});
+}
 })();
 
 
