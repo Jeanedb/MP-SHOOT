@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MP SHOOT — V14.6B.218 Clear Weapon Sightlines</title>
+  <title>MP SHOOT — V14.6B.223 Enemy Discharge Tuning</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:#05070a;font-family:Arial,Helvetica,sans-serif;color:#fff}#gl{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}#hud{position:fixed;inset:0;pointer-events:none}#status{position:absolute;left:18px;top:18px;background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:12px 15px;font-size:14px;line-height:1.45;min-width:250px}#hint{position:absolute;left:50%;top:18px;transform:translateX(-50%);background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:9px 14px;font-size:14px;white-space:nowrap}#cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%)}#cross:before,#cross:after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000}#cross:before{left:8px;top:1px;width:2px;height:16px}#cross:after{left:1px;top:8px;width:16px;height:2px}#weapon{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:500px;height:430px;image-rendering:pixelated;filter:drop-shadow(0 5px 4px #000)}#flash{position:absolute;left:50%;bottom:212px;transform:translateX(-50%);width:132px;height:100px;opacity:0;mix-blend-mode:screen;image-rendering:pixelated}.small{font-size:12px;color:#9eabbc}.obj{color:#fbbf24;font-weight:700;margin-top:5px}.keyB{color:#38bdf8}.keyR{color:#ef4444}
 #mapWrap{position:absolute;right:18px;top:86px;background:rgba(4,8,14,.80);border:1px solid #415066;border-radius:8px;padding:8px}#map{width:300px;height:190px;image-rendering:pixelated}.legend{font-size:11px;color:#b8c4d4;margin-top:4px}
@@ -310,7 +310,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
 <body>
 <canvas id="gl"></canvas>
 <div id="hud">
-  <div id="status"><b>MP SHOOT — V14.6B.218 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
+  <div id="status"><b>MP SHOOT — V14.6B.223 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
   <div id="gameHud">
     <div id="objectiveStrip"><span id="objective">PRIMARY // LOCATE BLUE ACCESS CARD</span><span id="objectiveRecallHint">O // RECALL OBJECTIVE</span></div>
     <div id="bossHud">
@@ -410,7 +410,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
     <div class="menuStatus"><span>OPS STATUS <b>ACTIVE</b></span><span>CLEARANCE <b>RED</b></span></div>
   </div>
   <div class="menuFlavor" id="menuFlavor"><span>OPS COMMENT // UNOFFICIAL</span>TO SERVE. TO PROTECT. TO COMPLETE THE APPROPRIATE PAPERWORK.</div>
-  <div class="menuVersion">MP SHOOT // V14.6B.218 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
+  <div class="menuVersion">MP SHOOT // V14.6B.223 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
 </div>
 
 <!-- Mission Select -->
@@ -2959,7 +2959,7 @@ function enemyDirectMove(e,tx,tz,dt){
 function enemyNavigate(e,tx,tz,dt){
   e.navClock=(e.navClock||0)-dt;
   const goalChanged=!e.navGoal||Math.hypot(e.navGoal.x-tx,e.navGoal.z-tz)>1.0;
-  if(goalChanged||e.navClock<=0||!e.path||(activeLevel!==3&&!e.path.length)){
+  if(goalChanged||e.navClock<=0||!e.path){
     e.path=findNavPath(e.x,e.z,tx,tz);e.pathIndex=0;e.navGoal={x:tx,z:tz};e.navClock=.55+Math.random()*.25;
   }
   let wx=tx,wz=tz;
@@ -4165,14 +4165,14 @@ function updateEnemyProjectiles(dt){
       if(explosive){
         tankBurst(nx,ny,nz,p.explosionRadius);applyEnemyExplosion(p,nx,ny,nz);
       }else{
-        damagePlayer(p.damage,.78);plasmaBurst(nx,ny,nz);
+        damagePlayer(p.damage,.78);plasmaBurst(nx,ny,nz,'player');
       }
       enemyProjectiles.splice(i,1);continue;
     }
     if(wallHit||groundHit){
       const x=wallHit?wallHit.x:nx,y=wallHit?wallHit.y:ny,z=wallHit?wallHit.z:nz;
       if(explosive){tankBurst(x,y,z,p.explosionRadius);applyEnemyExplosion(p,x,y,z)}
-      else plasmaBurst(x,y,z);
+      else plasmaBurst(x,y,z,wallHit?impactMaterial154(wallHit.obj):'concrete');
       enemyProjectiles.splice(i,1);continue;
     }
     p.x=nx;p.y=ny;p.z=nz;
@@ -4566,7 +4566,7 @@ function objectInView(o,planes){
   return true;
 }
 
-function render(){resize();gl.uniform1f(U.exterior,v14GreyboxActive&&activeLevel===1?1:0);const devBright=v14GreyboxActive;gl.clearColor(devBright?.055:.015,devBright?.065:.022,devBright?.072:.028,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const showroomZone=player.x>22&&player.z>16;const ls=devBright?[[player.x-7,3.4,player.z-7,21],[player.x+7,3.4,player.z-7,21],[player.x-7,3.4,player.z+7,21],[player.x+7,3.4,player.z+7,21]]:(showroomZone?[[30,3.2,22,10],[46,3.2,22,10],[30,3.2,34,10],[46,3.2,34,10]]:[[-12,3.2,8,7],[-3,3.2,8,7],[8,3.2,-4,8],[15,3.2,-9,7]]),cs=devBright?[[1.05,1.05,1.02],[1.05,1.05,1.02],[1.00,1.04,1.08],[1.08,1.02,.96]]:(showroomZone?[[.72,.78,.78],[.72,.78,.78],[.72,.78,.78],[.72,.78,.78]]:[[.55,.72,.65],[.55,.72,.65],[.50,.68,.72],[.65,.55,.42]]);for(let i=0;i<4;i++){gl.uniform4fv(U.lightPos[i],ls[i]);gl.uniform3fv(U.lightColor[i],cs[i])}const p=m4(),v=m4(),vp=m4();persp(p,currentViewFov()*Math.PI/180,canvas.width/canvas.height,.05,80);const viewPitch=Math.max(-PITCH_LIMIT184,Math.min(PITCH_LIMIT184,player.pitch+c8AdsCamera212()+feelCamera215(false))),viewYaw=player.yaw+feelCamera215(true),cp=Math.cos(viewPitch),ld=[Math.sin(viewYaw)*cp,Math.sin(viewPitch),-Math.cos(viewYaw)*cp];look(v,[player.x,player.y,player.z],[player.x+ld[0],player.y+ld[1],player.z+ld[2]],[0,1,0]);mul(vp,p,v);renderDetachmentSky(vp);const frustum=viewFrustum(vp),occluders=opaqueWallOccluders(frustum);for(const o of objects)if(!(v14GreyboxActive&&o.mechanicalBatched)&&objectInView(o,frustum)&&!hiddenBehindOpaqueWall(o,occluders))renderObj(o,vp);if(v14GreyboxActive)for(const o of mechanicalRenderBatches)if(objectInView(o,frustum)&&!hiddenBehindOpaqueWall(o,occluders))renderObj(o,vp);for(const d of doors)renderObj(doorBox(d),vp);for(const d of secretDoors)renderObj(secretDoorBox(d),vp);if(typeof renderInteractableEnvironment==='function')renderInteractableEnvironment(vp);for(const i of items)if(!i.taken&&(i.key!=='red'||blue)){const gh=groundHeight(i.x,i.z),bobY=Math.sin(performance.now()*.003+i.phase)*.09;renderObj({x:i.x,y:gh+.10,z:i.z,sx:.70,sy:.20,sz:.70,t:T.metal,tint:[.55,.62,.68,1],solid:false,em:.15},vp);renderBill(i.x,gh+.88+bobY,i.z,1.22,-.68,i.t,vp,[1,1,1,1],1.0);renderBill(i.x,gh+.57+bobY*.4,i.z,.82,-.26,i.t,vp,[1,1,1,.60],.9);}for(const p of gameplayPickups)if(!p.taken){const d=PICKUP_DEFS[p.type],gy=groundHeight(p.x,p.z),baseY=(p.y??gy),tm=performance.now()*.0017+p.phase,bobY=Math.sin(tm*2.4)*.07,hoverY=baseY+d.hover+bobY,pulse=.94+Math.sin(tm*3.7)*.06,tex=T[d.tex];if(p.type==='red_beret'){const bp=.94+Math.sin(tm*4.6)*.10;renderGlowBill(p.x,hoverY,p.z,d.w*2.15*bp,d.h*2.05*bp,T.bossAura,vp,[1,.03,.08,.30],1.45);renderGlowBill(p.x,hoverY,p.z,d.w*1.48,d.h*1.42,T.bossAura,vp,[1,.72,.12,.18],1.15);for(let si=0;si<4;si++){const a=tm*1.45+si*Math.PI*.5,rr=.52+Math.sin(tm*2.1+si)*.06,sx=p.x+Math.cos(a)*rr,sy=hoverY+.05+Math.sin(a*1.7)*.22,sz=p.z+Math.sin(a)*rr;renderBill(sx,sy,sz,.10,-.10,T.spark,vp,[1,.80,.20,.72],1.35)}}else{renderGlowBill(p.x,hoverY,p.z,d.w*1.50*pulse,d.h*1.45*pulse,T.bossAura,vp,d.glow,1.0)}renderBill(p.x,hoverY,p.z,d.w,-d.h,tex,vp,[1,1,1,1],1.0);renderGlowBill(p.x,baseY+.05,p.z,d.w*.70,.12,T.bossAura,vp,[d.glow[0],d.glow[1],d.glow[2],.08],.25);}for(const c of ndi20s)if(!c.taken){const gy=groundHeight(c.x,c.z),baseY=(c.y??(gy+.12)),t=performance.now()*.0015+c.x*.6+c.z*.35,bobY=Math.sin(t*2.35)*.05,hoverY=baseY+.22+bobY,pulse=.95+Math.sin(t*3.9)*.05;renderGlowBill(c.x,hoverY+.01,c.z,.78*pulse,.50*pulse,T.bossAura,vp,[.30,.95,.55,.15],.75);renderBill(c.x,hoverY,c.z,.62,-.40,T.ndi20,vp,[1,1,1,1],1.0);renderObj({x:c.x,y:baseY-.02,z:c.z,sx:.40,sy:.03,sz:.26,t:T.metal,tint:[.18,.24,.28,1],solid:false,em:.08},vp);renderGlowBill(c.x,baseY+.03,c.z,.48,.10,T.bossAura,vp,[.22,.85,.45,.08],.22);}for(const r of bossRelays)if(!r.off){const gy=groundHeight(r.x,r.z),rp=1+Math.sin(performance.now()*.008+r.x)*.10;if(activeLevel!==2)renderObj({x:r.x,y:gy+.58,z:r.z,sx:.72,sy:1.16,sz:.72,t:T.metal,tint:[.28,.12,.15,1],solid:false,em:.15},vp);renderObj({x:r.x,y:gy+1.12,z:r.z,sx:.42,sy:.18,sz:.42,t:T.redDoor,tint:[1,.35,.42,1],solid:false,em:1.0},vp);renderGlowBill(r.x,gy+1.20,r.z,1.08*rp,1.55*rp,T.bossAura,vp,[.25,.55,1,.28],1.55);if(activeLevel!==2)renderBill(r.x,gy+1.50,r.z,.82,-.38,T.redKey,vp,[1,1,1,.82],1.0);}for(const d of decals){const mm=decalMat(d),mvp=m4();mul(mvp,vp,mm);gl.uniformMatrix4fv(U.model,false,mm);gl.uniformMatrix4fv(U.mvp,false,mvp);gl.uniform4fv(U.tint,[1,1,1,1]);gl.uniform1f(U.emissive,0);gl.bindTexture(gl.TEXTURE_2D,T.bullet);bind(quad);gl.disable(gl.CULL_FACE);gl.drawArrays(gl.TRIANGLES,0,quad.count);gl.enable(gl.CULL_FACE)}for(const q of particles)renderBill(q.x,q.y,q.z,q.s,q.s,q.t,vp,[1,1,1,Math.max(0,q.life/.35)]);// Tank charge telegraph: a small hot core forms in front of the cannon before launch.
+function render(){resize();gl.uniform1f(U.exterior,v14GreyboxActive&&activeLevel===1?1:0);const devBright=v14GreyboxActive;gl.clearColor(devBright?.055:.015,devBright?.065:.022,devBright?.072:.028,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const showroomZone=player.x>22&&player.z>16;const ls=devBright?[[player.x-7,3.4,player.z-7,21],[player.x+7,3.4,player.z-7,21],[player.x-7,3.4,player.z+7,21],[player.x+7,3.4,player.z+7,21]]:(showroomZone?[[30,3.2,22,10],[46,3.2,22,10],[30,3.2,34,10],[46,3.2,34,10]]:[[-12,3.2,8,7],[-3,3.2,8,7],[8,3.2,-4,8],[15,3.2,-9,7]]),cs=devBright?[[1.05,1.05,1.02],[1.05,1.05,1.02],[1.00,1.04,1.08],[1.08,1.02,.96]]:(showroomZone?[[.72,.78,.78],[.72,.78,.78],[.72,.78,.78],[.72,.78,.78]]:[[.55,.72,.65],[.55,.72,.65],[.50,.68,.72],[.65,.55,.42]]);for(let i=0;i<4;i++){gl.uniform4fv(U.lightPos[i],ls[i]);gl.uniform3fv(U.lightColor[i],cs[i])}const p=m4(),v=m4(),vp=m4();persp(p,currentViewFov()*Math.PI/180,canvas.width/canvas.height,.05,80);const viewPitch=Math.max(-PITCH_LIMIT184,Math.min(PITCH_LIMIT184,player.pitch+c8AdsCamera212()+feelCamera215(false))),viewYaw=player.yaw+feelCamera215(true),cp=Math.cos(viewPitch),ld=[Math.sin(viewYaw)*cp,Math.sin(viewPitch),-Math.cos(viewYaw)*cp];look(v,[player.x,player.y,player.z],[player.x+ld[0],player.y+ld[1],player.z+ld[2]],[0,1,0]);mul(vp,p,v);renderDetachmentSky(vp);const frustum=viewFrustum(vp),occluders=opaqueWallOccluders(frustum);renderWorld220(vp,frustum,occluders);if(v14GreyboxActive)for(const o of mechanicalRenderBatches)if(objectInView(o,frustum)&&!hiddenBehindOpaqueWall(o,occluders))renderObj(o,vp);for(const d of doors)renderObj(doorBox(d),vp);for(const d of secretDoors)renderObj(secretDoorBox(d),vp);if(typeof renderInteractableEnvironment==='function')renderInteractableEnvironment(vp);for(const i of items)if(!i.taken&&(i.key!=='red'||blue)){const gh=groundHeight(i.x,i.z),bobY=Math.sin(performance.now()*.003+i.phase)*.09;renderObj({x:i.x,y:gh+.10,z:i.z,sx:.70,sy:.20,sz:.70,t:T.metal,tint:[.55,.62,.68,1],solid:false,em:.15},vp);renderBill(i.x,gh+.88+bobY,i.z,1.22,-.68,i.t,vp,[1,1,1,1],1.0);renderBill(i.x,gh+.57+bobY*.4,i.z,.82,-.26,i.t,vp,[1,1,1,.60],.9);}for(const p of gameplayPickups)if(!p.taken){const d=PICKUP_DEFS[p.type],gy=groundHeight(p.x,p.z),baseY=(p.y??gy),tm=performance.now()*.0017+p.phase,bobY=Math.sin(tm*2.4)*.07,hoverY=baseY+d.hover+bobY,pulse=.94+Math.sin(tm*3.7)*.06,tex=T[d.tex];if(p.type==='red_beret'){const bp=.94+Math.sin(tm*4.6)*.10;renderGlowBill(p.x,hoverY,p.z,d.w*2.15*bp,d.h*2.05*bp,T.bossAura,vp,[1,.03,.08,.30],1.45);renderGlowBill(p.x,hoverY,p.z,d.w*1.48,d.h*1.42,T.bossAura,vp,[1,.72,.12,.18],1.15);for(let si=0;si<4;si++){const a=tm*1.45+si*Math.PI*.5,rr=.52+Math.sin(tm*2.1+si)*.06,sx=p.x+Math.cos(a)*rr,sy=hoverY+.05+Math.sin(a*1.7)*.22,sz=p.z+Math.sin(a)*rr;renderBill(sx,sy,sz,.10,-.10,T.spark,vp,[1,.80,.20,.72],1.35)}}else{renderGlowBill(p.x,hoverY,p.z,d.w*1.50*pulse,d.h*1.45*pulse,T.bossAura,vp,d.glow,1.0)}renderBill(p.x,hoverY,p.z,d.w,-d.h,tex,vp,[1,1,1,1],1.0);renderGlowBill(p.x,baseY+.05,p.z,d.w*.70,.12,T.bossAura,vp,[d.glow[0],d.glow[1],d.glow[2],.08],.25);}for(const c of ndi20s)if(!c.taken){const gy=groundHeight(c.x,c.z),baseY=(c.y??(gy+.12)),t=performance.now()*.0015+c.x*.6+c.z*.35,bobY=Math.sin(t*2.35)*.05,hoverY=baseY+.22+bobY,pulse=.95+Math.sin(t*3.9)*.05;renderGlowBill(c.x,hoverY+.01,c.z,.78*pulse,.50*pulse,T.bossAura,vp,[.30,.95,.55,.15],.75);renderBill(c.x,hoverY,c.z,.62,-.40,T.ndi20,vp,[1,1,1,1],1.0);renderObj({x:c.x,y:baseY-.02,z:c.z,sx:.40,sy:.03,sz:.26,t:T.metal,tint:[.18,.24,.28,1],solid:false,em:.08},vp);renderGlowBill(c.x,baseY+.03,c.z,.48,.10,T.bossAura,vp,[.22,.85,.45,.08],.22);}for(const r of bossRelays)if(!r.off){const gy=groundHeight(r.x,r.z),rp=1+Math.sin(performance.now()*.008+r.x)*.10;if(activeLevel!==2)renderObj({x:r.x,y:gy+.58,z:r.z,sx:.72,sy:1.16,sz:.72,t:T.metal,tint:[.28,.12,.15,1],solid:false,em:.15},vp);renderObj({x:r.x,y:gy+1.12,z:r.z,sx:.42,sy:.18,sz:.42,t:T.redDoor,tint:[1,.35,.42,1],solid:false,em:1.0},vp);renderGlowBill(r.x,gy+1.20,r.z,1.08*rp,1.55*rp,T.bossAura,vp,[.25,.55,1,.28],1.55);if(activeLevel!==2)renderBill(r.x,gy+1.50,r.z,.82,-.38,T.redKey,vp,[1,1,1,.82],1.0);}for(const d of decals){const mm=decalMat(d),mvp=m4();mul(mvp,vp,mm);gl.uniformMatrix4fv(U.model,false,mm);gl.uniformMatrix4fv(U.mvp,false,mvp);gl.uniform4fv(U.tint,[1,1,1,1]);gl.uniform1f(U.emissive,0);gl.bindTexture(gl.TEXTURE_2D,T.bullet);bind(quad);gl.disable(gl.CULL_FACE);gl.drawArrays(gl.TRIANGLES,0,quad.count);gl.enable(gl.CULL_FACE)}for(const q of particles)renderBill(q.x,q.y,q.z,q.s,q.s,q.t,vp,[1,1,1,Math.max(0,q.life/.35)]);// Tank charge telegraph: a small hot core forms in front of the cannon before launch.
 for(const e of enemies){
   if(!e.alive||e.kind!=='tank'||e.tankPhase!=='brace')continue;
   const cx=e.x+Math.sin(e.facing)*1.02,cz=e.z-Math.cos(e.facing)*1.02,cy=enemyEyeY(e)-.30;
@@ -8318,7 +8318,7 @@ function startV14GreyboxMission(){
   gameHud.style.display='block';uiGameStarted=true;uiPaused=false;
   simulationRemainder=0;last=performance.now();updatePresentationHud();
   canvas.requestPointerLock();
-  message('V14.6B.218 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
+  message('V14.6B.223 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
   setTimeout(()=>hudToast('AUTHORED COMBAT PASS','Eight encounters active. Patrol and O.R. are pre-staged; Mechanical has a two-contact response.','standard',4.4),700);
   setTimeout(()=>hudToast('OBJECTIVE RECALL','Press O at any time to repeat your current objective.','standard',3.2),5400);
 }
@@ -13317,7 +13317,7 @@ function lifeStep182(dt){const s=f4.life182;if(!s)return;s.clock+=dt;lightFireSy
 const updateBefore182=update;update=dt=>{updateBefore182(dt);if(activeLevel!==4||!f4?.life182||uiPaused||missionDone||f4.map||f4.lift.mode!=='idle')return;lifeStep182(Math.min(.05,dt));};
 const makeAudioBefore182=makeMachinery153;makeMachinery153=ctx=>{const e=makeAudioBefore182(ctx),old=e.buffer;e.buffer=kind=>{if(!['fire182','extinguish182'].includes(kind))return old(kind);if(e.cache.has(kind))return e.cache.get(kind);const duration=kind==='fire182'?4:1.15,b=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*duration),ctx.sampleRate),d=b.getChannelData(0);let seed=182,low=0,crackle=0;for(let i=0;i<d.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const n=seed/2147483648-1,t=i/ctx.sampleRate;low+=.045*(n-low);if(seed%11003<3)crackle=.11;crackle*=.9982;d[i]=kind==='fire182'?low*.11+n*(.015+crackle):(.065*n+.04*low)*Math.sin(Math.PI*t/duration)**.5;}e.cache.set(kind,b);return b;};return e;};
 const extrasBefore182=facilityExtras160;facilityExtras160=clock=>{const a=extrasBefore182(clock);if(activeLevel===4&&f4?.life182&&!uiPaused&&!f4.map&&f4.lift.mode==='idle')for(const f of f4.life182.fires)if(f.intensity>.05)a.moving.push({key:f,kind:'fire182',x:f.x,z:f.z,y:.55});return a;};
-const effectsBefore182=renderBlastEffects;renderBlastEffects=vp=>{effectsBefore182(vp);const s=activeLevel===4?f4?.life182:null;if(!s||f4ClosedCab())return;const blend=gl.isEnabled(gl.BLEND),depth=gl.getParameter(gl.DEPTH_WRITEMASK);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);const a=lifeAssets182(),smoke=a.smoke182;
+const effectsBefore182=renderBlastEffects;renderBlastEffects=vp=>{effectsBefore182(vp);const s=activeLevel===4?f4?.life182:null;if(!s||f4ClosedCab())return;const blend=renderBlend220,depth=renderDepth220;gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);const a=lifeAssets182(),smoke=a.smoke182;
  for(const f of s.fires){if(f.intensity<.01||Math.hypot(f.x-player.x,f.z-player.z)>38)continue;for(let i=0;i<4;i++){const phase=s.clock*1.5+i*.71,q=i*2.4,x=f.x+Math.sin(q)*f.w*.25,z=f.z+Math.cos(q)*f.d*.24,h=f.h*(.78+.18*Math.sin(phase));renderBill(x,.08+h*.45,z,f.w*.57*f.intensity,h*f.intensity,a.flames[(Math.floor(s.clock*9)+i)%6],vp,[1,.88,.64,f.intensity],.92);}
   for(let i=0;i<3;i++){const u=(s.clock*.23+i*.31)%1,h=.9+u*1.8;renderBill(f.x+Math.sin(i*2.1+u)*.16,h,f.z,.65+u*.65,.7+u*.65,smoke,vp,[.55,.55,.50,(1-u)*.40*f.intensity],.04);}
  }
@@ -13369,7 +13369,7 @@ const breakBefore183=fp126Break;fp126Break=p=>{if(activeLevel!==4||!p?.id?.start
 const useBefore183=f4Use;f4Use=p=>{const result=useBefore183(p);if(activeLevel===4&&p?.lifeExt182){const e=f4.life182.extinguishers.find(e=>e.id===p.lifeExt182);if(e?.used){fp126Ensure();const prop=fp126Props.find(q=>q.id==='EXT4_'+e.id);if(prop)prop.broken=true;}}return result;};
 const extrasBefore183=facilityExtras160;facilityExtras160=clock=>{const a=extrasBefore183(clock);if(activeLevel===4&&f4?.life182){const room=f4Room(player.x,player.z)?.[6];a.moving=a.moving.filter(p=>p.kind!=='fire182'||!p.key.out&&Math.hypot(p.x-player.x,p.z-player.z)<12&&(f4Room(p.x,p.z)?.[6]===room||lineClear3D(player.x,player.y,player.z,p.x,.6,p.z)));}return a;};
 // Replace only V182's flame drawing. Earlier blast, pressure-pop, glass and boss effects stay in their chain.
-renderBlastEffects=vp=>{effectsBefore182(vp);const s=activeLevel===4?f4?.life182:null;if(!s||f4ClosedCab())return;const blend=gl.isEnabled(gl.BLEND),depth=gl.getParameter(gl.DEPTH_WRITEMASK),a=lifeAssets182(),art=fireArt183();gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
+renderBlastEffects=vp=>{effectsBefore182(vp);const s=activeLevel===4?f4?.life182:null;if(!s||f4ClosedCab())return;const blend=renderBlend220,depth=renderDepth220,a=lifeAssets182(),art=fireArt183();gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
  for(const f of s.fires){if(f.intensity<.01||Math.hypot(f.x-player.x,f.z-player.z)>38)continue;
   // Asymmetric, curling tongues replace the uniform row of pointed wedges.
   for(let i=0;i<3;i++){const q=i*2.39996,x=f.x+Math.sin(q)*f.w*.24,z=f.z+Math.cos(q)*f.d*.20,h=f.h*(.82+.16*Math.sin(s.clock*4.2+i*1.7));renderBill(x,.06+h*.5,z,f.w*(i===1?.53:.65)*f.intensity,h*f.intensity,art.frames[(Math.floor(s.clock*9)+i*2)%6],vp,[1,.93,.78,f.intensity],.92);}
@@ -13976,7 +13976,7 @@ function icStep198(dt){const t=ic198();if(!t||uiPaused||missionDone||fpMapOpen||
  }
  for(let i=t.shots.length-1;i>=0;i--){const p=t.shots[i];p.life-=dt;const x=p.x+p.vx*dt,y=p.y+p.vy*dt,z=p.z+p.vz*dt;if(p.life<=0){t.shots.splice(i,1);continue;}
   const cover=readerCoverHit195(p.x,p.y,p.z,x,y,z),hit=readerBoxHit195(p.x,p.y,p.z,x,y,z,{x:player.x,y:playerChestY(),z:player.z,sx:.90,sy:1.45,sz:.90});
-  if(cover&&(!hit||cover.t<=hit.t)){for(let j=0;j<3;j++)particles.push({x:cover.x,y:cover.y,z:cover.z,vx:Math.cos(j*2.4)*.5,vy:.35+j*.1,vz:Math.sin(j*2.4)*.5,life:.20,t:T.spark,s:.045});impactSound154('metal',cover);t.shots.splice(i,1);continue;}if(hit){damagePlayer(p.damage);t.shots.splice(i,1);continue;}p.x=x;p.y=y;p.z=z;
+  if(cover&&(!hit||cover.t<=hit.t)){for(let j=0;j<3;j++)particles.push({x:cover.x,y:cover.y,z:cover.z,vx:Math.cos(j*2.4)*.5,vy:.35+j*.1,vz:Math.sin(j*2.4)*.5,life:.20,t:T.spark,s:.045});plasmaImpact221(cover,'metal');t.shots.splice(i,1);continue;}if(hit){damagePlayer(p.damage);t.shots.splice(i,1);continue;}p.x=x;p.y=y;p.z=z;
  }
 }
 const updateBefore198=update;update=dt=>{updateBefore198(dt);icStep198(dt);};
@@ -14758,7 +14758,7 @@ function lidarPose217(e){
 function lidarFreeze217(hit,texture,pose){
  const e=hit.enemy;if(e.alive||e.kind==='boss')return;
  const rightX=Math.cos(player.yaw),rightZ=Math.sin(player.yaw),u=.5+((hit.x-e.x)*rightX+(hit.z-e.z)*rightZ)/pose.w,v=.5-(hit.y-e.y)/pose.h;
- e.lidarDeath217={left:.38,texture,w:pose.w,h:pose.h,x:e.x,y:e.y,z:e.z,u:Math.max(0,Math.min(1,u)),v:Math.max(0,Math.min(1,v))};
+ e.lidarDeath217={left:.55,texture,w:pose.w,h:pose.h,x:e.x,y:e.y,z:e.z,u:Math.max(0,Math.min(1,u)),v:Math.max(0,Math.min(1,v))};
 }
 const holeUniform217=gl.getUniformLocation(prog,'uLidarHole217');
 const enemyRenderBefore217=fp114RenderEnemy;fp114RenderEnemy=(e,w,h,vp)=>{
@@ -14785,6 +14785,165 @@ weaponViewConfig=()=>{
  // begins at least 48 CSS pixels below the crosshair. Lower wrists can crop naturally.
  return {...cfg,cssW,cssH,viewBottom218:Math.min(-6,innerHeight/2-48-cssH)};
 };
+
+// Reuse the already validated Floor 3 navigation grid on every authored floor.
+// Its masks retain furniture, doors, living actors, diagonal clearance and terrain steps.
+const navigationBefore220=findNavPath;
+findNavPath=(...args)=>v14GreyboxActive&&furnishedCollisionReady?f3FindNav141(...args):navigationBefore220(...args);
+
+// Avoid synchronous GPU state readbacks in the fire effects renderer.
+let renderBlend220=gl.isEnabled(gl.BLEND),renderDepth220=gl.getParameter(gl.DEPTH_WRITEMASK);
+const enableBefore220=gl.enable.bind(gl),disableBefore220=gl.disable.bind(gl),depthBefore220=gl.depthMask.bind(gl);
+gl.enable=cap=>{if(cap===gl.BLEND)renderBlend220=true;return enableBefore220(cap);};
+gl.disable=cap=>{if(cap===gl.BLEND)renderBlend220=false;return disableBefore220(cap);};
+gl.depthMask=value=>{renderDepth220=!!value;return depthBefore220(value);};
+
+// Floors 1/2 predate the later floors' static rendering batches. Keep originals for
+// collision and interaction; automatically stop batching anything that changes.
+let world220=null;
+const white220=[1,1,1,1];
+function worldScene220(){return activeLevel===1?v14TestState:activeLevel===2?b1State:activeLevel===3?f3:activeLevel===4?f4:f5;}
+function clearWorld220(){if(world220)for(const g of world220.groups)if(g.batch){gl.deleteBuffer(g.batch.mesh.buf);g.batch=null;}world220=null;}
+function sourceRecord220(o){const t=o.tint||white220;return {o,x:o.x,y:o.y,z:o.z,sx:o.sx,sy:o.sy,sz:o.sz,rot:o.rot||0,mesh:o.mesh||cube,t:o.t,r:t[0],g:t[1],b:t[2],a:t[3],em:o.em||0,material:o.fp112Material||0};}
+function sourceUnchanged220(s,live){const o=s.o,t=o.tint||white220;return live.has(o)&&!o.mechanicalBatched&&!o.fpInvisiblePortal&&!o.envHidden173&&o.x===s.x&&o.y===s.y&&o.z===s.z&&o.sx===s.sx&&o.sy===s.sy&&o.sz===s.sz&&(o.rot||0)===s.rot&&(o.mesh||cube)===s.mesh&&o.t===s.t&&t[0]===s.r&&t[1]===s.g&&t[2]===s.b&&t[3]===s.a&&(o.em||0)===s.em&&(o.fp112Material||0)===s.material;}
+function buildWorld220(){
+ clearWorld220();const state=world220={scene:worldScene220(),count:objects.length,groups:[],members:new Set(),sources:0},textures=new Map();
+ for(const o of objects){
+  if(o.mechanicalBatched||o.fpInvisiblePortal||o.envHidden173||(o.tint?.[3]??1)!==1||o.sx<=0||o.sy<=0||o.sz<=0)continue;
+  const shape=o.mesh||cube;if(!shape.data)continue;
+  let groups=textures.get(o.t);if(!groups){groups=new Map();textures.set(o.t,groups);}
+  const key=JSON.stringify([Math.floor(o.x/8),Math.floor(o.z/8),o.tint||white220,o.em||0,o.fp112Material||0]);
+  let g=groups.get(key);if(!g){g={sources:[],batch:null};groups.set(key,g);}g.sources.push(sourceRecord220(o));
+ }
+ for(const groups of textures.values())for(const g of groups.values()){
+  if(g.sources.length<2)continue;const data=[];
+  for(const s of g.sources){const o=s.o,m=model(m4(),s.x,s.y,s.z,s.sx,s.sy,s.sz,s.rot),d=s.mesh.data;for(let i=0;i<d.length;i+=8)data.push(m[0]*d[i]+m[8]*d[i+2]+m[12],m[5]*d[i+1]+m[13],m[2]*d[i]+m[10]*d[i+2]+m[14],d[i+3],d[i+4],m[0]*d[i+5]+m[8]*d[i+7],m[5]*d[i+6],m[2]*d[i+5]+m[10]*d[i+7]);state.members.add(o);}
+  const first=g.sources[0];g.batch={x:0,y:0,z:0,sx:1,sy:1,sz:1,t:first.t,tint:[first.r,first.g,first.b,first.a],em:first.em,fp112Material:first.material,mesh:mesh(data)};state.groups.push(g);state.sources+=g.sources.length;
+ }
+ return state;
+}
+function renderWorld220(vp,frustum,occluders){
+ if(!v14GreyboxActive||activeLevel>2){if(world220)clearWorld220();for(const o of objects)if(!(v14GreyboxActive&&o.mechanicalBatched)&&objectInView(o,frustum)&&!hiddenBehindOpaqueWall(o,occluders))renderObj(o,vp);return;}
+ const s=world220?.scene===worldScene220()&&world220.count===objects.length?world220:buildWorld220(),live=new Set(objects);
+ for(const g of s.groups){if(!g.batch)continue;if(!g.sources.every(r=>sourceUnchanged220(r,live))){for(const r of g.sources)s.members.delete(r.o);gl.deleteBuffer(g.batch.mesh.buf);g.batch=null;}}
+ for(const o of objects)if(!o.mechanicalBatched&&!s.members.has(o)&&objectInView(o,frustum)&&!hiddenBehindOpaqueWall(o,occluders))renderObj(o,vp);
+ for(const g of s.groups)if(g.batch&&objectInView(g.batch,frustum)&&!hiddenBehindOpaqueWall(g.batch,occluders))renderObj(g.batch,vp);
+}
+
+// Procedural combat placeholders: cached buffers and a private random generator.
+// No gameplay randomness, damage, projectile timing or preferred player gun reports change.
+function makeCombatAudio221(ctx){
+ const e={ctx,cache:new Map(),voices:new Set(),scene:null,clock:0,seed:221,stats:{},lastPain:-100,lastImpact:-100,dead:new WeakSet(),emitters:new WeakMap()};
+ e.rand=()=>{e.seed=(Math.imul(e.seed,1664525)+1013904223)>>>0;return e.seed/4294967296;};
+ e.master=ctx.createGain();e.master.gain.value=0;const limit=ctx.createDynamicsCompressor();limit.threshold.value=-14;limit.knee.value=10;limit.ratio.value=5;limit.attack.value=.003;limit.release.value=.13;e.master.connect(limit);limit.connect(ctx.destination);
+ e.buffer=(kind,variant=0)=>{
+  const key=kind+':'+variant;if(e.cache.has(key))return e.cache.get(key);
+  const vocal=kind.startsWith('death')||kind.startsWith('pain'),heavy=kind==='deathHeavy'||kind==='painHeavy';
+  const duration=vocal?(kind==='pain'?.28:kind==='painHeavy'?.43:kind==='deathHeavy'?.86:kind==='deathOfficer'?.74:.61):({plasma:.23,heavy:.32,lob:.27,officer:.24,metal:.23,stone:.19,wood:.20,glass:.22,armour:.19,flesh:.20,blast:.65}[kind]||.25);
+  const sr=22050,b=ctx.createBuffer(1,Math.ceil(duration*sr),sr),d=b.getChannelData(0),variation=1+(variant-1)*.045;
+  let seed=221+variant*7919;for(let i=0;i<kind.length;i++)seed=(Math.imul(seed,31)+kind.charCodeAt(i))>>>0;
+  const rnd=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  const pitch=(kind==='deathHeavy'?53:kind==='deathOfficer'?79:kind==='death'?106:heavy?99:139)*variation,table=new Float32Array(1024);
+  if(vocal){let peak=0;for(let i=0;i<table.length;i++){const phase=i/table.length*Math.PI*2;let v=0;for(let h=1;h<=24;h++){const f=h*pitch,form=.12+1.3*Math.exp(-(((f-(heavy?420:570))/190)**2))+.8*Math.exp(-(((f-1150)/290)**2))+.32*Math.exp(-(((f-2300)/450)**2));v+=Math.sin(phase*h)*form/h**.72;}table[i]=v;peak=Math.max(peak,Math.abs(v));}for(let i=0;i<table.length;i++)table[i]/=peak||1;}
+  let low=0,mid=0,phase=0,peak=0;
+  for(let i=0;i<d.length;i++){
+   const t=i/sr,u=t/duration,n=rnd()*2-1;low+=.075*(n-low);mid+=.35*(n-mid);let v=0;
+   if(vocal){
+    phase+=pitch*(1-.36*u+.018*Math.sin(t*71)+.010*low)/sr;
+    const a=(phase%1)*1024,j=Math.floor(a),voice=table[j]*(1-(a-j))+table[(j+1)%1024]*(a-j);
+    const envelope=Math.min(1,t/.018)*Math.pow(Math.sin(Math.PI*u),.55)*(1-.30*u),pulse=.78+.22*Math.sin(t*(kind.startsWith('death')?44:26));
+    v=envelope*(voice*.61*pulse+low*.26+(n-mid)*.035*(.3+u));
+   }else if(['plasma','heavy','lob','officer'].includes(kind)){
+    // Short, rough electrical pressure rather than a pitched sci-fi sweep.
+    const heavy=kind==='heavy',lob=kind==='lob',body=heavy?58:lob?76:kind==='officer'?113:94;
+    const env=(1-Math.exp(-t*260))*Math.exp(-t*(heavy?16:lob?20:25));
+    const crackle=(mid-low)*(.75+.25*Math.sin(t*2*Math.PI*173));
+    const fizz=(mid-low)*.17*(1-Math.exp(-t*110))*Math.exp(-t*16);
+    v=env*(1.02*crackle+.24*low+.075*Math.sin(2*Math.PI*body*variation*t))+fizz+.055*(n-mid)*Math.exp(-t*110)*Math.min(1,t/.005);
+   }else if(kind==='blast')v=(1-Math.exp(-t*500))*(.39*Math.sin(2*Math.PI*(62*t-16*t*t))*Math.exp(-t*9)+.48*low*Math.exp(-t*7)+.16*Math.sin(t*1300)*Math.exp(-t*23));
+   else{
+    const metal=kind==='metal'||kind==='armour',body=kind==='flesh';
+    v=(1-Math.exp(-t*900))*((metal?.24:body?.17:.20)*(mid-low)*Math.exp(-t*35)+.32*low*Math.exp(-t*(body?21:31))+.13*(n-mid)*Math.exp(-t*70));
+    if(metal)v+=(.10*Math.sin(t*2*Math.PI*1770)+.06*Math.sin(t*2*Math.PI*2910))*Math.exp(-t*28);
+    if(body)v+=.15*Math.sin(t*2*Math.PI*106)*Math.exp(-t*33);
+    if(kind==='glass')v+=(.12*Math.sin(t*2*Math.PI*3100)+.06*Math.sin(t*2*Math.PI*4900))*Math.exp(-t*24);
+    v+=.10*Math.sin(2*Math.PI*(750*t-950*t*t))*Math.exp(-t*28);
+   }
+   v*=Math.min(1,t/.0015)*Math.min(1,(duration-t)/.018);d[i]=v;peak=Math.max(peak,Math.abs(v));
+  }
+  if(peak>.8)for(let i=0;i<d.length;i++)d[i]*=.8/peak;
+  e.cache.set(key,b);return b;
+ };
+ e.stop=v=>{if(v.stopped)return;v.stopped=true;try{v.source.stop();}catch{}e.voices.delete(v);for(const n of [v.source,v.gain,v.pan,v.filter])n.disconnect();};
+ e.clear=()=>{for(const v of [...e.voices])e.stop(v);};
+ e.play=(kind,group,position=null,volume=1,delay=0)=>{
+  const cap={shot:8,death:3,pain:1,impact:5}[group]||3;
+  if([...e.voices].filter(v=>v.group===group).length>=cap)return false;
+  if(group==='pain'&&e.voices.size>=16){const oldest=[...e.voices].find(v=>v.group==='impact'||v.group==='shot');if(oldest)e.stop(oldest);}
+  if(e.voices.size>=16)return false;
+  const dx=position?position.x-player.x:0,dz=position?position.z-player.z:0,dist=Math.hypot(dx,dz);
+  if(position&&dist>38)return false;
+  const source=ctx.createBufferSource(),gain=ctx.createGain(),pan=ctx.createStereoPanner(),filter=ctx.createBiquadFilter();source.buffer=e.buffer(kind,Math.floor(e.rand()*3));source.playbackRate.value=.97+e.rand()*.06;
+  const blocked=position&&dist>2&&!lineClear3D(player.x,player.y,player.z,position.x,position.y??1.1,position.z);
+  gain.gain.value=volume*(position?1/(1+(dist/12)**2):1)*(blocked?.48:1);pan.pan.value=position?Math.max(-.9,Math.min(.9,(dx*Math.cos(player.yaw)+dz*Math.sin(player.yaw))/(dist||1))):0;
+  filter.type='lowpass';filter.frequency.value=blocked?1100:10500;source.connect(filter);filter.connect(gain);gain.connect(pan);pan.connect(e.master);
+  const v={source,gain,pan,filter,group};source.onended=()=>e.stop(v);e.voices.add(v);source.start(ctx.currentTime+Math.max(0,delay));e.stats[kind]=(e.stats[kind]||0)+1;return true;
+ };
+ return e;
+}
+let combatAudio221=null,combatKiller221=null;
+function combatAudioActive221(){return !!(audioCtx&&uiGameStarted&&!uiPaused&&!missionDone&&uiVolume>0&&document.pointerLockElement===canvas&&!(activeLevel===2&&fpMapOpen)&&!(activeLevel===3&&f3?.map)&&!(activeLevel===4&&f4?.map)&&!(activeLevel===5&&f5?.map));}
+function combatAudioSync221(){
+ const active=combatAudioActive221();if(!combatAudio221&&active)combatAudio221=makeCombatAudio221(audioCtx);const e=combatAudio221;if(!e)return false;
+ const scene=worldScene220();if(e.scene!==scene){e.clear();e.scene=scene;e.clock=0;e.lastPain=e.lastImpact=-100;e.dead=new WeakSet();e.emitters=new WeakMap();}
+ const volume=active?uiVolume*.62:0;if(e.volume!==volume){e.volume=volume;e.master.gain.setTargetAtTime(volume,e.ctx.currentTime,.008);}
+ if(!active){e.clear();return false;}return true;
+}
+function combatShot221(actor,kind){if(!combatAudioSync221())return;const e=combatAudio221,last=e.emitters.get(actor)??-100;if(e.clock-last<.045)return;e.emitters.set(actor,e.clock);e.play(kind,'shot',{x:actor.x,y:actor.y??enemyEyeY(actor),z:actor.z},kind==='heavy'?.9:.72);}
+function plasmaImpact221(hit,material='concrete'){if(!combatAudioSync221())return;const e=combatAudio221;if(e.clock-e.lastImpact<.035)return;e.lastImpact=e.clock;const k=material==='metal'?'metal':material==='wood'?'wood':material==='glass'?'glass':'stone';e.play(k,'impact',hit,.70);}
+// Old launch reports are replaced at successful projectile creation, avoiding double reports.
+sEnemyShot=sPlasmaLaunch=sTankLaunch=sBossLaunch=sBossBurst=sPlasmaImpact=sTankImpact=sDamage=()=>{};
+const projectileBefore221=spawnEnemyProjectile;spawnEnemyProjectile=(actor,opt={})=>{const before=enemyProjectiles.length,r=projectileBefore221(actor,opt);if(enemyProjectiles.length>before)combatShot221(actor,actor.kind==='tank'?'heavy':actor.kind==='grenadier'?'lob':['commander','boss'].includes(actor.kind)?'officer':'plasma');return r;};
+const icShotBefore221=icShot198;icShot198=(origin,...args)=>{const r=icShotBefore221(origin,...args);combatShot221(origin,'officer');return r;};
+const plasmaBefore221=plasmaBurst;plasmaBurst=(x,y,z,material='concrete')=>{const r=plasmaBefore221(x,y,z);if(material!=='player')plasmaImpact221({x,y,z},material);return r;};
+const tankBefore221=tankBurst;tankBurst=(x,y,z,...args)=>{const r=tankBefore221(x,y,z,...args);if(combatAudioSync221())combatAudio221.play('blast','impact',{x,y,z},.95);return r;};
+const damageBefore221=damagePlayer;damagePlayer=(...args)=>{
+ const beforeHP=hp,beforeArmour=armor,r=damageBefore221(...args),flesh=Math.max(0,beforeHP-hp),plate=Math.max(0,beforeArmour-armor),total=flesh+plate;
+ if(total>0&&combatAudioSync221()){
+  const e=combatAudio221;if(e.clock-e.lastImpact>=.055){e.lastImpact=e.clock;e.play(flesh>0?'flesh':'armour','impact',null,flesh>0?.82:.70);}
+  if(e.clock-e.lastPain>=.68){e.lastPain=e.clock;e.play(total>=12?'painHeavy':'pain','pain',null,total>=12?.88:.65);}
+ }return r;
+};
+const dropBefore221=spawnEnemyDrop;spawnEnemyDrop=(actor,...args)=>{
+ const r=dropBefore221(actor,...args);if(!actor.alive&&actor.hp<=0&&combatAudioSync221()){const e=combatAudio221;if(!e.dead.has(actor)){e.dead.add(actor);const heavy=['tank','shield','boss'].includes(actor.kind),kind='death_'+actor.kind;e.play(kind,'death',{x:actor.x,y:actor.y,z:actor.z},heavy?.92:.78,combatKiller221==='lidar'?.14:0);}}return r;
+};
+const lidarBefore221=fireLidar;fireLidar=()=>{combatKiller221=lidarCharge>=LIDAR_PROFILE.instantKillCharge&&lidarMaxChargeForCell()>=LIDAR_PROFILE.instantKillCharge?'lidar':null;try{return lidarBefore221();}finally{combatKiller221=null;}};
+const updateBefore221=update;update=dt=>{const active=combatAudioSync221();if(active)combatAudio221.clock+=Math.max(0,Math.min(.1,dt));const r=updateBefore221(dt);combatAudioSync221();return r;};
+const renderBefore221=render;render=()=>{combatAudioSync221();return renderBefore221();};
+
+// Derive death sounds from the same per-species grunts used by the living enemies.
+// Keep their throat/noise texture, with a stronger attack and a dying breath envelope.
+const combatFactoryBefore222=makeCombatAudio221;
+makeCombatAudio221=ctx=>{
+ const e=combatFactoryBefore222(ctx),previous=e.buffer;let grunts=null;
+ e.buffer=(kind,variant=0)=>{
+  if(!kind.startsWith('death_'))return previous(kind,variant);
+  const key=kind+':'+variant;if(e.cache.has(key))return e.cache.get(key);
+  grunts??=makeEnemyAudio151(ctx);const original=grunts.buffer(kind.slice(6)),source=original.getChannelData(0),sr=original.sampleRate,duration=Math.min(.95,original.duration*.62),b=ctx.createBuffer(1,Math.ceil(sr*duration),sr),out=b.getChannelData(0),rate=1+(variant-1)*.035;
+  let peak=0;
+  for(let i=0;i<out.length;i++){
+   const t=i/sr,u=t/duration,read=(original.duration*.14+t*rate*(1-.10*u))*sr,j=Math.min(source.length-2,Math.floor(read)),f=read-Math.floor(read);
+   const breath=source[j]*(1-f)+source[j+1]*f,envelope=Math.min(1,t/.014)*Math.pow(1-u,.58);
+   out[i]=breath*envelope*1.45;peak=Math.max(peak,Math.abs(out[i]));
+  }
+  if(peak>.8)for(let i=0;i<out.length;i++)out[i]*=.8/peak;
+  e.cache.set(key,b);return b;
+ };
+ return e;
+};
+// This separate pair of square tones was still playing at the start of aiming.
+// The shooter's existing aiming pose/glint and firing delay remain its tell.
+sShooterAim=()=>{};
 
 })();
 
