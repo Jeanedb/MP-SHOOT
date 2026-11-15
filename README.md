@@ -2,7 +2,7 @@
 
 A military police FPS.
 
-[Download the latest build — V228: Crawler Hunt](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_228_CRAWLER_HUNT.html)
+[Download the latest build — V229: Crawler Attack Fix](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_229_CRAWLER_ATTACK_FIX.html)
 
 Download the HTML file and open it in your browser to play.
 
@@ -10,11 +10,11 @@ Download the HTML file and open it in your browser to play.
 
 | Version | Build |
 | --- | --- |
+| V229 | [Crawler Attack Fix](MP_SHOOT_V14_6B_229_CRAWLER_ATTACK_FIX.html) |
 | V228 | [Crawler Hunt](MP_SHOOT_V14_6B_228_CRAWLER_HUNT.html) |
 | V227 | [Crawler Bodies and Gore](MP_SHOOT_V14_6B_227_CRAWLER_BODIES_AND_GORE.html) |
 | V226 | [Cave Crawlers](MP_SHOOT_V14_6B_226_CAVE_CRAWLERS.html) |
 | V225 | [Low Fireball Whoosh](MP_SHOOT_V14_6B_225_LOW_FIREBALL_WHOOSH.html) |
-| V224 | [Fireball Whoosh](MP_SHOOT_V14_6B_224_FIREBALL_WHOOSH.html) |
 
 The current branch retains the five most recent numbered game builds. Music experiments, assets and development notes are kept separately.
 
