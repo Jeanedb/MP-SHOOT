@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MP SHOOT — V14.6B.227 Crawler Bodies and Gore</title>
+  <title>MP SHOOT — V14.6B.232 Excavation Breach</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:#05070a;font-family:Arial,Helvetica,sans-serif;color:#fff}#gl{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}#hud{position:fixed;inset:0;pointer-events:none}#status{position:absolute;left:18px;top:18px;background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:12px 15px;font-size:14px;line-height:1.45;min-width:250px}#hint{position:absolute;left:50%;top:18px;transform:translateX(-50%);background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:9px 14px;font-size:14px;white-space:nowrap}#cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%)}#cross:before,#cross:after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000}#cross:before{left:8px;top:1px;width:2px;height:16px}#cross:after{left:1px;top:8px;width:16px;height:2px}#weapon{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:500px;height:430px;image-rendering:pixelated;filter:drop-shadow(0 5px 4px #000)}#flash{position:absolute;left:50%;bottom:212px;transform:translateX(-50%);width:132px;height:100px;opacity:0;mix-blend-mode:screen;image-rendering:pixelated}.small{font-size:12px;color:#9eabbc}.obj{color:#fbbf24;font-weight:700;margin-top:5px}.keyB{color:#38bdf8}.keyR{color:#ef4444}
 #mapWrap{position:absolute;right:18px;top:86px;background:rgba(4,8,14,.80);border:1px solid #415066;border-radius:8px;padding:8px}#map{width:300px;height:190px;image-rendering:pixelated}.legend{font-size:11px;color:#b8c4d4;margin-top:4px}
@@ -310,7 +310,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
 <body>
 <canvas id="gl"></canvas>
 <div id="hud">
-  <div id="status"><b>MP SHOOT — V14.6B.227 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
+  <div id="status"><b>MP SHOOT — V14.6B.232 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
   <div id="gameHud">
     <div id="objectiveStrip"><span id="objective">PRIMARY // LOCATE BLUE ACCESS CARD</span><span id="objectiveRecallHint">O // RECALL OBJECTIVE</span></div>
     <div id="bossHud">
@@ -410,7 +410,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
     <div class="menuStatus"><span>OPS STATUS <b>ACTIVE</b></span><span>CLEARANCE <b>RED</b></span></div>
   </div>
   <div class="menuFlavor" id="menuFlavor"><span>OPS COMMENT // UNOFFICIAL</span>TO SERVE. TO PROTECT. TO COMPLETE THE APPROPRIATE PAPERWORK.</div>
-  <div class="menuVersion">MP SHOOT // V14.6B.227 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
+  <div class="menuVersion">MP SHOOT // V14.6B.232 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
 </div>
 
 <!-- Mission Select -->
@@ -8318,7 +8318,7 @@ function startV14GreyboxMission(){
   gameHud.style.display='block';uiGameStarted=true;uiPaused=false;
   simulationRemainder=0;last=performance.now();updatePresentationHud();
   canvas.requestPointerLock();
-  message('V14.6B.227 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
+  message('V14.6B.232 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
   setTimeout(()=>hudToast('AUTHORED COMBAT PASS','Eight encounters active. Patrol and O.R. are pre-staged; Mechanical has a two-contact response.','standard',4.4),700);
   setTimeout(()=>hudToast('OBJECTIVE RECALL','Press O at any time to repeat your current objective.','standard',3.2),5400);
 }
@@ -14165,7 +14165,7 @@ crBossModel172=(e,vp)=>{
 // collision index, terrain sampler, doors, inventory, renderer and navigation.
 let f5=null,f5Entry=null;
 const F5_ROOMS207=[
- ['Arrival vestibule',-26,-3,-14,3,3.9],['Dispatch / Communications',-14,-8,0,8,3.9],
+ ['Shift briefing checkpoint',-26,-3,-14,3,3.9],['Dispatch / Communications',-14,-8,0,8,3.9],
  ['Central War Room',0,-14,30,14,5.8],['Return passage',-10,8,-6,18,3.6],['Return passage',-6,14,8,18,3.6],
  ['Stabilization access',30,8,38,12,3.9],['Stabilization access',32,0,38,8,3.9],['Inspection bend',32,-4,40,2,4.2],
  ['Descending rock passage',40,-4,64,2,4.2],['West bridge approach',64,-6,74,6,20],
@@ -14193,7 +14193,7 @@ function f5Tri207(out,a,b,c,normal=null,uv=null){let u=b.map((v,i)=>v-a[i]),v=c.
 function f5Quad207(data,a,b,c,d,n){f5Tri207(data,a,b,c,n);f5Tri207(data,a,c,d,n);}
 function f5Surface207(x0,z0,x1,z1,t){const data=[];for(let x=x0;x<x1;x+=1){const end=Math.min(x+1,x1),y0=f5Floor207(x+.0001,(z0+z1)/2),y1=f5Floor207(end-.0001,(z0+z1)/2);f5Quad207(data,[x,y0,z0],[end,y1,z0],[end,y1,z1],[x,y0,z1],[0,1,0]);}const o=f5Mesh207(data,t,[.78,.81,.82,1]);o.fp112Material=1;return o;}
 function f5Light207(x,z,y=3.65,w=1.9){f5Box207(x,y+.07,z,w+.15,.15,.5,T.metal,[.15,.20,.22,1]);const o=f5Box207(x,y-.02,z,w,.035,.32,T.light,[.78,.91,.94,1],false,.9);o.f5Fixture=true;f5.lights.push({x,z,y,rad:x>=64?10:7,gain:x>=64?.48:.43});return o;}
-function f5Wall207(axis,p,lo,hi,open=[],height=3.9,rock=false){let spans=[[lo,hi]];for(const [mid,w]of open)spans=spans.flatMap(([a,b])=>[[a,Math.min(b,mid-w/2)],[Math.max(a,mid+w/2),b]].filter(([l,h])=>h>l));const a=f5Assets207();
+function f5Wall207(axis,p,lo,hi,open=[],height=3.9,rock=false){if(axis==='h'&&p===2&&lo<49.7&&hi>46.3)open=[...open,[48,3.4]];let spans=[[lo,hi]];for(const [mid,w]of open)spans=spans.flatMap(([a,b])=>[[a,Math.min(b,mid-w/2)],[Math.max(a,mid+w/2),b]].filter(([l,h])=>h>l));const a=f5Assets207();
  for(const [lo,hi]of spans)for(let q=lo;q<hi-.001;q+=2){const end=Math.min(q+2,hi),x=axis==='v'?p:(q+end)/2,z=axis==='v'?(q+end)/2:p,gy=Math.max(...[[x,z],[x-.05,z],[x+.05,z],[x,z-.05],[x,z+.05]].map(([a,b])=>f5Floor207(a,b))),y=gy,o=f5Box207(x,y+height/2,z,axis==='v'?.30:end-q,height+.15,axis==='v'?end-q:.30,rock?a.rock:a.wall,[.84,.88,.89,1],true);o.fp112Material=3;}
 }
 function f5Door207(id,x,z,axis='v',width=3.1,locked=false,label=id){const gy=f5Floor207(x-.02,z),d=door(x,z,label,null,axis==='v'?1:0);Object.assign(d,{f5id:id,y:gy+1.5,sy:3,sx:axis==='v'?.28:width-.1,sz:axis==='v'?width-.1:.28,openingWidth:width,scriptLocked:locked});f5.gates[id]=d;
@@ -14206,15 +14206,15 @@ function f5Shell207(){const rooms=F5_ROOMS207.slice(0,9),xs=[...new Set(rooms.fl
   if(room(nx,nz))continue;if(axis==='v'&&p===64)continue;const openings=axis==='v'&&p===-26?[[0,3.2]]:[];f5Wall207(axis,p,lo,hi,openings,r[5],x>=48);
  }}
  // Shared partitions frame the sequence while leaving the main room interconnected.
- f5Wall207('v',-22,-3,3,[[0,3.1]]);f5Door207('outer',-22,0,'v',3.1,false,'SECURITY AIRLOCK / OUTER');
- f5Wall207('v',-14,-3,3,[[0,3.1]]);f5Door207('inner',-14,0,'v',3.1,false,'SECURITY AIRLOCK / INNER');
+ 
+ f5Wall207('v',-14,-3,3,[[0,4.6]]);f5Door207('inner',-14,0,'v',4.6,false,'OPERATIONS DUTY SHUTTER');
  f5Wall207('v',0,-8,8,[[0,4.4]],5.8);
  f5Wall207('v',30,8,12,[[10,3.1]],5.8);f5Door207('geology',30,10,'v',3.1,true,'GEOLOGICAL STABILIZATION ACCESS');
  f5Wall207('h',8,-10,-6,[[-8,3]],3.9);f5Door207('dispatchReturn',-8,8,'h',3,true,'SERVICE RETURN / DISPATCH');
  f5Wall207('h',14,0,8,[[6,3]],5.8);f5Door207('warReturn',6,14,'h',3,true,'RESERVE DETAIL / RETURN PASSAGE');
  for(const [x,z,y]of [[-18,0,3.65],[-9,-3,3.65],[-4,3,3.65],[6,5,5.5],[14,0,5.5],[24,6,5.5],[10,-10,5.5],[25,-11,5.5],[34,10,3.65],[35,4,3.65],[36,-1,3.9]])f5Light207(x,z,y);
  for(let x=43;x<64;x+=5)f5Light207(x,-1,4.0-(x-40)/6,1.25);
- f5Sign207(-21.78,3.24,0,'POLICE OPERATIONS|SECURITY AIRLOCK','v',4,.55);f5Sign207(-13.8,3.25,0,'OPERATIONS / DISPATCH','v',3.3,.48);
+ 
  f5Sign207(.2,4.1,0,'POLICE OPERATIONS|CENTRAL WAR ROOM','v',5,1.0);
  f5Sign207(29.79,3.7,10,'GEOLOGICAL STABILIZATION SECTION|AUTHORIZED PERSONNEL ONLY','v',3.6,.62);
 }
@@ -14316,7 +14316,7 @@ const doorBefore207=doorBox;doorBox=d=>{if(activeLevel!==5||!d.f5id)return doorB
 const cardsBefore207=checkItems;checkItems=()=>{if(activeLevel!==5)cardsBefore207();};
 const nearBefore207=nearUseInteractable;nearUseInteractable=()=>{if(activeLevel!==5)return nearBefore207();let best=null,dist=1.65;for(const p of Object.values(f5.controls)){const d=Math.hypot(p.x-player.x,p.z-player.z);if(d<dist&&lineClear3D(player.x,player.y,player.z,p.x,p.y,p.z)){best=p;dist=d;}}return best;};
 const useBefore207=useWorldInteractable;useWorldInteractable=p=>activeLevel===5&&p?.id?.startsWith('f5_')?f5Use207(p):useBefore207(p);
-const interactBefore207=interact;interact=()=>{if(activeLevel!==5)return interactBefore207();if(uiPaused||missionDone||f5.map||f5.lift.mode!=='idle')return;const p=nearUseInteractable();if(p){f5Use207(p);return;}const d=nearDoor();if(!d)return;if(d.scriptLocked){hudToast('OPERATIONS HOLD',d.f5id==='geology'?'Use the War Room operations console.':'Reserve passage retained by Police Operations.','standard',3);return;}if(['outer','inner'].includes(d.f5id)&&!d.target){const other=f5.gates[d.f5id==='outer'?'inner':'outer'];if(other.target||other.open>.03){other.target=0;hudToast('AIRLOCK INTERLOCK','Opposing door closing. Retry when sealed.','standard',2);return;}}d.target=d.target?0:1;sEnvSwitch();};
+const interactBefore207=interact;interact=()=>{if(activeLevel!==5)return interactBefore207();if(uiPaused||missionDone||f5.map||f5.lift.mode!=='idle')return;const p=nearUseInteractable();if(p){f5Use207(p);return;}const d=nearDoor();if(!d)return;if(d.scriptLocked){hudToast('OPERATIONS HOLD',d.f5id==='geology'?'Use the War Room operations console.':'Reserve passage retained by Police Operations.','standard',3);return;}d.target=d.target?0:1;sEnvSwitch();};
 const hudBefore207=updatePresentationHud;updatePresentationHud=()=>{hudBefore207();if(activeLevel!==5||!f5)return;objEl.textContent=currentObjective();document.querySelector('#mapWrap .legend').textContent='GOLD: OBJECTIVE · M: FLOOR PLAN';document.getElementById('objectiveRecallHint').textContent='O: OBJECTIVE · M: MAP';const p=nearUseInteractable();if(p)hintEl.textContent='E — '+p.label;else{const d=nearDoor();if(d?.scriptLocked)hintEl.textContent='OPERATIONS HOLD / USE WAR ROOM CONSOLE';}};
 const updateBefore207=update;update=dt=>{if(activeLevel!==5)return updateBefore207(dt);if(uiPaused||missionDone||f5.map)return;const a=f5.lift;if(a.mode==='arriving'){a.time+=dt;const drop=.22*Math.max(0,1-a.time/1.15);for(const o of a.parts)o.y=o.liftBaseY+drop;player.y=1.62+drop;const v=Math.max(0,Math.min(1,a.time-1.3)),ease=v*v*(3-2*v);for(const o of a.doors)o.z=o.arrivalSide*(a.closed+(a.opened-a.closed)*ease);if(a.time>=2.3){a.mode='idle';hudToast('FLOOR 5 / POLICE OPERATIONS','Reach the War Room. Geological access remains restricted.','standard',4);}updatePresentationHud();drawMap();drawWeapon();return;}
  updateBefore207(dt);if(uiPaused||missionDone)return;f5.clock+=dt;};
@@ -14979,7 +14979,7 @@ const rayBefore226=shootRay;shootRay=(yaw=0,pitch=0)=>{
 };
 function crawlerTell226(e){if(combatAudioSync221())combatAudio221.play('crawlerTell226','shot',e,.9);}
 const audioFactoryBefore226=makeCombatAudio221;makeCombatAudio221=ctx=>{const e=audioFactoryBefore226(ctx),old=e.buffer;e.buffer=(kind,variant=0)=>{if(kind!=='crawlerTell226')return old(kind,variant);const key=kind+variant;if(e.cache.has(key))return e.cache.get(key);const b=ctx.createBuffer(1,11025,22050),a=b.getChannelData(0);let seed=226+variant,lo=0;for(let i=0;i<a.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const n=seed/2147483648-1,t=i/22050,u=t/.5;lo+=.12*(n-lo);a[i]=(n-lo)*.18*Math.sin(Math.PI*u)**1.3*(.6+.4*Math.sin(t*75)**2);}e.cache.set(key,b);return b;};return e;};
-function crawlerLanding226(e){const c=e.crawler226;if(!crawlerInside226(c,player.x,player.z))return null;const x=player.x,z=player.z,y=groundHeight(x,z)+.83;if(Math.hypot(x-e.x,z-e.z)>6.5||blocked(x,z,.34)||!lineClear3D(e.x,e.y,e.z,x,y,z))return null;return{x,y,z};}
+function crawlerLanding226(e){const x=player.x,z=player.z,g=groundHeight(x,z),y=g+.83;if(g<-20||Math.hypot(x-e.x,z-e.z)>8||Math.hypot(x-e.x,y-e.y,z-e.z)>9||blocked(x,z,.34)||!lineClear3D(e.x,e.y,e.z,x,y,z))return null;return{x,y,z};}
 function crawlerFall226(e,dt){const c=e.crawler226;c.vy-=16*dt;e.y+=c.vy*dt;const floor=groundHeight(e.x,e.z)+.83;if(e.y<=floor){e.y=floor;c.vy=0;return true;}return false;}
 function crawlerMove226(e,x,z,dt){const c=e.crawler226,ox=e.x,oz=e.z;if(!crawlerInside226(c,x,z))return false;const moved=enemyDirectMove(e,x,z,dt);if(!crawlerInside226(c,e.x,e.z)){e.x=ox;e.z=oz;}e.y=groundHeight(e.x,e.z)+.83;return moved;}
 function crawlerStep226(e,dt){
@@ -15008,12 +15008,96 @@ function crawlerStep226(e,dt){
 const enemyBefore226=updateEnemy;updateEnemy=(e,dt)=>e.kind==='crawler'?crawlerStep226(e,Math.min(.05,dt)):enemyBefore226(e,dt);
 function crawlerPlace226(id,x,z,surface,region){const e=spawn('crawler',x,z),c=e.crawler226;Object.assign(c,{phase:'perch',surface:{...surface},original:{...surface},anchor:{x,z},region,seed:id,age:id*.3});crawlerSurface226(e);c.home={x:e.x,y:e.y,z:e.z};e.encounterTag='f5_crawler_'+id;e.f5group='cave_crawlers';return e;}
 const buildBefore226=f5Build207;f5Build207=()=>{buildBefore226();f5CaveOutcrop211(117,6.5,4,2,5);
- crawlerPlace226(1,49,1.67,{type:'wall',normal:[0,0,-1],axis:'x',height:2.25},[40.4,63.4,-3.5,1.55]);
+ crawlerPlace226(1,51,1.67,{type:'wall',normal:[0,0,-1],axis:'x',height:2.25},[40.4,63.4,-3.5,1.55]);
  crawlerPlace226(2,58,-2.4,{type:'ceiling',axis:'x'},[40.4,63.4,-3.5,1.55]);
  crawlerPlace226(3,117,5.24,{type:'wall',normal:[0,0,-1],axis:'x',height:2.5},[110.5,120.5,-6,5.0]);
  crawlerPlace226(4,49,-22,{type:'ceiling',low:true,axis:'x'},[34.5,53.5,-23.5,-20.5]);
  crawlerPlace226(5,61.55,-13.5,{type:'wall',normal:[-1,0,0],axis:'z',height:2.0},[54.5,61.5,-23.5,-8.5]);
 };
+
+// Surface climbing poses and persistent, bounded cave hunting.
+const surfaceBefore228=crawlerSurface226;
+crawlerSurface226=e=>{surfaceBefore228(e);const s=e.crawler226.surface;if(s?.type==='wall'){e.x-=s.normal[0]*.38;e.z-=s.normal[2]*.38;}};
+const basisBefore228=crawlerPoseBasis226;
+crawlerPoseBasis226=e=>{const b=basisBefore228(e),s=e.crawler226.surface;if(s?.type!=='wall')return b;const sign=(s.normal[0]||s.normal[2])<0?-1:1;return{u:b.v.map(v=>-v*sign),v:b.u.map(v=>v*sign),n:b.n};};
+// Supports remain behind the rotated climbing body, ending at the rock.
+crawlerContacts227=(e,vp)=>{const s=e.crawler226.surface;if(!s||!e.alive)return;const b=crawlerPoseBasis226(e);for(const side of [-1,1])for(const top of [-1,1]){const a=[e.x,e.y,e.z].map((v,i)=>v+b.u[i]*side*.48+b.v[i]*top*.38);const end=s.type==='ceiling'?[e.x+side*.42,crawlerRoof227(e,s)-.025,e.z+top*.32]:a.map((v,i)=>v-(s.normal[i]||0)*.40);const knee=a.map((v,i)=>(v+end[i])*.5+(s.type==='wall'?(s.normal[i]||0)*.07:i===1?-.04:0));crawlerLink227(a,knee,vp,[.21,.16,.10,1],.035);crawlerLink227(knee,end,vp,[.45,.37,.24,1],.025);}};
+function crawlerNodes228(e){const c=e.crawler226,id=c.seed,nodes=[],wall=(x,z,normal,axis,height=2.05)=>nodes.push({x,z,s:{type:'wall',normal,axis,height}}),roof=(x,z,low=false)=>nodes.push({x,z,s:{type:'ceiling',axis:'x',low}});if(id<=2){for(const x of [41.5,45,49,53,57,61.5]){if(x!==49)wall(x,1.67,[0,0,-1],'x');wall(x,-3.67,[0,0,1],'x');roof(x,-1);}}else if(id===3){for(const x of [115.6,117,118.4])wall(x,5.24,[0,0,-1],'x',2.5);}else if(id===4){for(const x of [35.5,39,43,47,51.5]){wall(x,-20.25,[0,0,-1],'x',1.9);wall(x,-23.75,[0,0,1],'x',1.9);roof(x,-22,true);}}else{for(const z of [-22,-18,-14,-10])wall(61.55,z,[-1,0,0],'z',2.05);}return nodes;}
+function crawlerNodePose228(e,node){const c=e.crawler226,copy={...e,crawler226:{...c,surface:node.s,anchor:{x:node.x,z:node.z},age:0,seed:0}};crawlerSurface226(copy);return{x:copy.x,y:copy.y,z:copy.z};}
+function crawlerRelocate228(e){const c=e.crawler226;let best=null,score=-Infinity;for(const node of c.nodes228||[]){const p=crawlerNodePose228(e,node),travel=Math.hypot(p.x-e.x,p.y-e.y,p.z-e.z),distance=Math.hypot(p.x-player.x,p.z-player.z);if(travel<1.4||travel>8||distance>11||!lineClear3D(e.x,e.y,e.z,p.x,p.y,p.z))continue;const rear=((p.x-player.x)*Math.sin(player.yaw)-(p.z-player.z)*Math.cos(player.yaw))/(distance||1),value=-Math.abs(distance-3.4)*1.3-rear*2.4+(node.s.type!==c.surface?.type? .5:0)-travel*.08;if(value>score){score=value;best={node,p};}}if(!best)return false;c.move228={from:{x:e.x,y:e.y,z:e.z},to:best.p,node:best.node,t:0,duration:.55+Math.hypot(best.p.x-e.x,best.p.y-e.y,best.p.z-e.z)*.055};c.surface=null;c.phase='evade228';c.climbSign228=best.p.x<e.x||best.p.z<e.z?-1:1;return true;}
+const stepBefore228=crawlerStep226;
+crawlerStep226=(e,dt)=>{const c=e.crawler226;if(!e.alive||e.lidarDeath217||(e.cewFreeze||0)>0||(e.stun||0)>0||(e.cewPanic||0)>0||c.phase==='fall'){stepBefore228(e,dt);return;}
+ if(!c.engaged228&&(e.hp<e.maxHp||e.aware||Math.hypot(player.x-e.x,player.z-e.z)<10&&enemyCanSee(e))){if(c.surface){c.anchor={x:e.x-(c.surface.normal?.[0]||0)*.27,z:e.z-(c.surface.normal?.[2]||0)*.27};}c.engaged228=true;c.decide228=.35;}
+ if(!c.engaged228){stepBefore228(e,dt);return;}
+ if(c.phase==='evade228'){c.age+=dt;e.anim+=dt;e.pain=Math.max(0,e.pain-dt);c.cool=Math.max(0,c.cool-dt);const m=c.move228;m.t+=dt;const u=Math.min(1,m.t/m.duration),next={x:m.from.x+(m.to.x-m.from.x)*u,y:m.from.y+(m.to.y-m.from.y)*u,z:m.from.z+(m.to.z-m.from.z)*u};if(!lineClear3D(e.x,e.y,e.z,next.x,next.y,next.z)){c.phase='fall';c.vy=0;return;}Object.assign(e,next);e.facing=Math.atan2(m.to.x-m.from.x,-(m.to.z-m.from.z));if(u===1){c.surface={...m.node.s};c.anchor={x:m.node.x,z:m.node.z};c.age=0;c.seedPhase228=c.seed;c.phase='perch';c.decide228=.5;/* Keep the attack cooldown elapsed during a relocation. */}return;}
+ if(['tell','pounce','claw','recover'].includes(c.phase)){stepBefore228(e,dt);if(c.phase==='ground'){c.decide228=0;c.cool=Math.max(c.cool,1.1);
+ // One breakaway decision per completed attack/recovery, never every frame.
+ c.repositionRng230=(Math.imul(c.repositionRng230??Math.imul(c.seed,2654435761),1664525)+1013904223)>>>0;
+ if(c.repositionRng230/4294967296<.55)crawlerRelocate228(e);
+ }return;}
+ c.age+=dt;e.anim+=dt;e.pain=Math.max(0,e.pain-dt);c.cool=Math.max(0,c.cool-dt);c.decide228=(c.decide228||0)-dt;e.facing=Math.atan2(player.x-e.x,-(player.z-e.z));e.aware=true;e.combatState='engage';e.state='walk';if(c.surface)crawlerSurface226(e);
+ if(!c.surface){const x=Math.max(c.region[0]+.4,Math.min(c.region[1]-.4,player.x)),z=Math.max(c.region[2]+.4,Math.min(c.region[3]-.4,player.z));crawlerMove226(e,x,z,dt);}if(c.decide228>0)return;c.decide228=.65;
+ const target=crawlerLanding226(e);if(target&&c.cool>0)return;if(target){c.target=target;c.phase='tell';c.time=.65;crawlerTell226(e);return;}
+ if(crawlerRelocate228(e))return;
+ if(!c.surface){const x=Math.max(c.region[0]+.4,Math.min(c.region[1]-.4,player.x)),z=Math.max(c.region[2]+.4,Math.min(c.region[3]-.4,player.z));crawlerMove226(e,x,z,dt);}
+};
+// Stop patrol drift after a combat relocation: contact points stay anchored.
+const surfaceHunt228=crawlerSurface226;crawlerSurface226=e=>{const c=e.crawler226;if(!c.engaged228)return surfaceHunt228(e);const age=c.age,seed=c.seed;c.age=0;c.seed=0;surfaceHunt228(e);c.age=age;c.seed=seed;};
+const placeBefore228=crawlerPlace226;crawlerPlace226=(...args)=>{const e=placeBefore228(...args),c=e.crawler226;c.nodes228=crawlerNodes228(e);return e;};
+
+const textureBefore229=eTex;eTex=e=>{if(e.kind!=='crawler'||!e.alive||!e.crawler226.surface||!crawler226.ready)return textureBefore229(e);const c=e.crawler226,row=e.pain>0?5:['tell','claw'].includes(c.phase)?3+(Math.floor(c.age*8)%2):c.phase==='perch'?1+(Math.floor(c.age*7)%2):0;return crawler226.rows[row][0];};
+// Optional abandoned excavation: visible from the main descent, separate from progression.
+F5_ROOMS207.push(['Suspended tunnel expansion',46,2,50,15.2,3.8]);
+const floorBefore231=f5Floor207;f5Floor207=(x,z)=>{if(x>=46&&x<=50&&z>=2&&z<=15.2){const t=Math.min(1,(z-2)/3);return -(x-40)/6*(1-t)-8/6*t;}return floorBefore231(x,z);};
+function f5Tube231(out,points,r){for(let j=1;j<points.length;j++){const a=points[j-1],b=points[j],v=b.map((n,i)=>n-a[i]),l=Math.hypot(...v)||1,n=v.map(x=>x/l),ref=Math.abs(n[1])<.9?[0,1,0]:[1,0,0],u=[n[1]*ref[2]-n[2]*ref[1],n[2]*ref[0]-n[0]*ref[2],n[0]*ref[1]-n[1]*ref[0]],ul=Math.hypot(...u);for(let i=0;i<3;i++)u[i]/=ul;const w=[n[1]*u[2]-n[2]*u[1],n[2]*u[0]-n[0]*u[2],n[0]*u[1]-n[1]*u[0]],p=(center,q)=>center.map((x,i)=>x+r*(u[i]*Math.cos(q)+w[i]*Math.sin(q)));for(let k=0;k<6;k++){const q=k*Math.PI/3,qq=(k+1)*Math.PI/3;f5Quad207(out,p(a,q),p(b,q),p(b,qq),p(a,qq));}}}
+function f5Growth231(out,x,y,z,rx,ry,rz){const p=(a,b)=>{const noise=1+.15*Math.sin(a*3+b*5+x*4)+.09*Math.sin(a*7-b*3+z*2);return[x+Math.cos(a)*Math.sin(b)*rx*noise,y+Math.cos(b)*ry*noise,z+Math.sin(a)*Math.sin(b)*rz*noise];};for(let i=0;i<12;i++)for(let j=0;j<8;j++){const A=p(i*Math.PI/6,j*Math.PI/8),B=p((i+1)*Math.PI/6,j*Math.PI/8),C=p((i+1)*Math.PI/6,(j+1)*Math.PI/8),D=p(i*Math.PI/6,(j+1)*Math.PI/8),normal=[(A[0]+B[0]+C[0]+D[0])/4-x,(A[1]+B[1]+C[1]+D[1])/4-y,(A[2]+B[2]+C[2]+D[2])/4-z];f5Quad207(out,A,B,C,D,normal);}}
+function f5Excavation231(){const a=f5Assets207(),g=-8/6,rock=[],roof=[];
+ f5Surface209(46,2,50,9.5,a.concrete);f5Surface209(46,9.5,50,15.2,a.rock);
+ for(let z=2;z<15;z+=1){const zz=Math.min(z+1,15.2),rough=z>7?.12*Math.sin(z*2.1):0;for(const [x,dir]of [[46,1],[50,-1]]){const x0=x+rough*dir,x1=x+.12*Math.sin(zz*2.1)*dir*(z>7),y0=f5Floor207(x,z),y1=f5Floor207(x,zz);f5Quad207(rock,[x0,y0-.12,z],[x1,y1-.12,zz],[x1,y1+3.8,zz],[x0,y0+3.8,z],[dir,0,0]);}
+ const h=z<7?3.8:3.45+.15*Math.sin(z);f5Quad207(roof,[46,f5Floor207(46,z)+h,z],[50,f5Floor207(50,z)+h,z],[50,f5Floor207(50,zz)+h,zz],[46,f5Floor207(46,zz)+h,zz],[0,-1,0]);}
+ f5Mesh207(rock,a.rock,[.53,.54,.51,1]);f5Mesh207(roof,a.rock,[.49,.50,.48,1]);
+ for(const x of [45.93,50.07])f5Box207(x,g+1.9,8.6,.16,4.5,13.2,a.rock,[.45,.47,.44,1],true);
+ f5Box207(48,g+1.8,15,4.2,4,.4,a.rock,[.31,.29,.28,1],true);
+ for(const z of [3.2,6.5,9.5]){const gy=f5Floor207(48,z);for(const x of [46.24,49.76]){f5Box207(x,gy+1.7,z,.18,3.4,.2,T.metal,[.42,.36,.25,1],true);f5Box207(x,gy+.09,z,.38,.18,.42,a.concrete,[.49,.48,.41,1]);}f5Box207(48,gy+3.36,z,3.65,.2,.2,T.metal,[.42,.36,.25,1]);}
+ f5Light207(48,3.8,g+3.45,1.1);f5.lights.at(-1).gain=.26;const workLamp=f5Light207(48,8.1,g+3.15,1.2);workLamp.tint=[1,.77,.48,1];f5.lights.at(-1).gain=.38;f5.lights.push({x:48,z:13,y:g+1.5,rad:5,gain:.32});
+ // Work lamp and abandoned drilling carriage leave the centre aisle open.
+ f5Box207(49.23,g+.4,6.5,.9,.8,1.3,T.metal,[.53,.43,.16,1],true);f5Box207(49.23,g+.93,6.5,.55,.28,.8,T.metal,[.29,.32,.31,1]);f5Box207(49.23,g+1.08,7.15,.14,.14,1.3,T.metal,[.59,.58,.48,1]);
+ for(const z of [5.2,7.6])f5Box207(46.65,g+.22,z,.55,.44,.8,T.crate,[.38,.34,.25,1],true);
+ f5Sign207(47.9,g+2.75,2.25,'TUNNEL EXPANSION / SECTOR 05-E|TEMPORARY WORKS / ACCESS SUSPENDED','h',3.5,.7);
+ // Full-width low barrier: the stopped face remains visible behind it.
+ for(const x of [46.35,49.65])f5Box207(x,g+.63,9.55,.13,1.26,.22,T.metal,[.63,.50,.18,1],true);
+ f5Box207(48,g+.65,9.55,3.4,.2,.18,T.metal,[.68,.51,.18,1],true);f5Box207(48,g+.28,9.55,3.4,.14,.18,T.metal,[.25,.27,.23,1],true);
+ f5Sign207(49.48,g+1.65,7.9,'TUNNEL EXPANSION / WORK SUSPENDED|Unscheduled biological infrastructure encountered.|Awaiting determination of departmental ownership.|Do not resume excavation without a revised scope of work.','v',2.15,1.0);
+ const flesh=tex(tc(128,(c,n)=>{let seed=232;const rnd=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);c.fillStyle='#39282d';c.fillRect(0,0,n,n);for(let i=0;i<1300;i++){const v=rnd();c.fillStyle=v<.3?'#221d24':v<.65?'#62383b':'#80504a';c.globalAlpha=.13+rnd()*.2;c.beginPath();c.ellipse(rnd()*n,rnd()*n,1+rnd()*9,1+rnd()*4,rnd()*6.28,0,7);c.fill();}c.globalAlpha=1;for(let i=0;i<24;i++){c.strokeStyle=i%3?'#211a21':'#a16a59';c.lineWidth=i%3?1.1:.6;c.beginPath();let x=rnd()*n,y=rnd()*n;c.moveTo(x,y);for(let j=0;j<7;j++){x+=rnd()*13-6;y+=rnd()*9;c.lineTo(x,y);}c.stroke();}})),mass=[],stone=[],roots=[],embers=[],cables=[],rubble=[];
+ // A jagged rock breach with tissue fused into its rim, rather than separate balls.
+ f5Box207(48.1,g+1.65,14.72,2.5,3.1,.12,T.metal,[.025,.018,.024,1],false,.03);
+ for(const [x,y,z,rx,ry,rz]of [[46.35,g+.65,14,.65,.8,.65],[46.65,g+2,14.3,.65,1,.55],[47.1,g+3.1,14.15,.8,.55,.6],[48.25,g+3.1,14.25,.8,.48,.6],[49.4,g+2.8,14,.8,.85,.7],[49.8,g+1.2,14.1,.55,.9,.65],[48.9,g+.2,14,.9,.35,.6],[47.2,g+.1,13.7,.7,.32,.7]])f5Growth231(stone,x,y,z,rx,ry,rz);
+ f5Mesh207(stone,a.rock,[.59,.55,.51,1],.14);
+ for(const [x,y,z,rx,ry,rz]of [[46.8,g+1.7,13.9,.28,.85,.35],[47.3,g+2.7,14.1,.6,.22,.4],[49.15,g+2,13.9,.3,.7,.45],[48.5,g+.35,13.9,.65,.2,.45],[49.6,g+1.0,12.8,.23,.45,.4],[46.3,g+.7,12,.18,.5,.3]])f5Growth231(mass,x,y,z,rx,ry,rz);
+ f5Mesh207(mass,flesh,[.93,.77,.73,1],.42);
+ // Tapered, branching roots stay against rock and floor; only their fissures glow.
+ const branch=(points,r)=>{for(let j=1;j<points.length;j++)f5Tube231(roots,[points[j-1],points[j]],r*(1-j/(points.length+1))+.008);};
+ for(const side of [46.1,49.9])for(let i=0;i<3;i++){const h=.45+i*.85,points=[];for(let j=0;j<9;j++){const z=14.1-j*.42;points.push([side+(side<48?1:-1)*(.08+.055*Math.sin(j*1.7+i)),g+h+.12*Math.sin(j*.9+i),z]);}branch(points,.085-i*.013);const q=points[4];branch([q,[q[0]+(side<48?.07:-.07),q[1]-.3,q[2]-.28],[q[0]+(side<48?.05:-.05),q[1]-.5,q[2]-.7]],.035);}
+ for(let i=0;i<5;i++){const x=46.7+i*.62;branch([[x,g+.2,14],[x+.1,g+.085,13],[x-.12,g+.045,11.9],[x+.09,g+.035,10.65+i*.17]],.09);}
+ for(let i=0;i<5;i++)branch([[47.35+(i%2)*1.25,g+.5+i*.38,14.28],[47.9,g+.7+i*.23,14.36],[48.55-(i%2)*1.15,g+1.0+i*.3,14.3]],.025);f5Mesh207(roots,flesh,[.65,.48,.44,1],.2);
+ for(const [x,y]of [[47.1,1.5],[48.9,2.15],[48.45,.6]])f5Tube231(embers,[[x,g+y,14.01],[x+.08,g+y+.24,13.99],[x-.03,g+y+.4,14.06]],.013);
+ const glow=f5Mesh207(embers,T.light,[.58,.12,.055,1],.4);glow.f5Moving=true;f5.corruption231=glow;
+ for(let i=0;i<24;i++){const x=46.35+(i*1.373%3.3),z=10.3+(i*.731%3.4),r=.08+(i%4)*.035;f5Growth231(rubble,x,g+r*.5,z,r*1.7,r*.6,r);}
+ f5Mesh207(rubble,a.rock,[.54,.50,.44,1],.12);
+ f5Tube231(cables,[[49.35,g+.05,5],[49.25,g+.05,8],[49.5,g+.08,11],[49.1,g+.4,13.5]],.035);f5Mesh207(cables,T.metal,[.12,.13,.11,1]);
+ // A buckled final support is caught inside the growth, with a fallen crossmember below.
+ const broken=[];f5Tube231(broken,[[46.4,g+.05,12.9],[46.55,g+1.4,12.9],[46.9,g+2.6,13.2]],.09);f5Tube231(broken,[[46.9,g+2.6,13.2],[48,g+2.85,13.45],[49.55,g+2.55,13.1]],.08);f5Tube231(broken,[[47,g+.16,11.7],[48.8,g+.25,12.25]],.09);f5Mesh207(broken,T.metal,[.43,.35,.24,1],.1);
+
+}
+function f5Briefing231(){const a=f5Assets207();f5Work207(-19.1,-1.85);f5Sign207(-19.5,2.65,-2.8,'SHIFT BRIEFING / POLICE OPERATIONS|RELIEF STATUS: OVERDUE|LOWER SECTORS: NO RESPONSE|REPORT TO THE WAR ROOM','h',5.5,1.35);
+ // Open mesh equipment cages along the opposite wall.
+ for(const x of [-23.3,-21.4]){f5Box207(x,1.15,2.43,1.55,2.3,.8,T.metal,[.15,.21,.20,1],true);f5Box207(x,1.16,2.005,1.42,2.12,.035,a.bridge,[.49,.54,.45,1]);f5Sign207(x,2.55,2,'FIELD EQUIPMENT|ISSUE HELD','h',1.55,.42);}
+ f5Sign207(-25.1,2.8,0,'POLICE OPERATIONS|SHIFT BRIEFING CHECKPOINT','v',4,.65);
+ for(const x of [-22.5,-20.5,-18.5,-16.5])f5Box207(x,.013,.8,1.0,.025,.06,T.light,[.72,.60,.25,1],false,.16);
+ f5Sign207(-14.25,3.35,0,'OPERATIONS / DUTY SHUTTER|PROCEED TO THE WAR ROOM','v',4.5,.6);
+}
+const buildBefore231=f5Build207;f5Build207=()=>{buildBefore231();f5Briefing231();f5Excavation231();};
+const updateBefore231=update;update=dt=>{updateBefore231(dt);if(activeLevel===5&&f5?.corruption231&&!uiPaused){const o=f5.corruption231;o.em=.32+.08*Math.sin(performance.now()*.0017);}};
 
 })();
 
