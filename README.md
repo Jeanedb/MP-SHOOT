@@ -2,7 +2,7 @@
 
 A military police FPS.
 
-[Download the latest build — V232: Excavation Breach](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_232_EXCAVATION_BREACH.html)
+[Download the latest build — V233: Police Operations Identity](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_233_POLICE_OPERATIONS_IDENTITY.html)
 
 Download the HTML file and open it in your browser to play.
 
@@ -10,11 +10,11 @@ Download the HTML file and open it in your browser to play.
 
 | Version | Build |
 | --- | --- |
+| V233 | [Police Operations Identity](MP_SHOOT_V14_6B_233_POLICE_OPERATIONS_IDENTITY.html) |
 | V232 | [Excavation Breach](MP_SHOOT_V14_6B_232_EXCAVATION_BREACH.html) |
 | V231 | [Briefing and Excavation](MP_SHOOT_V14_6B_231_BRIEFING_AND_EXCAVATION.html) |
 | V230 | [Crawler Reattack](MP_SHOOT_V14_6B_230_CRAWLER_REATTACK.html) |
 | V229 | [Crawler Attack Fix](MP_SHOOT_V14_6B_229_CRAWLER_ATTACK_FIX.html) |
-| V228 | [Crawler Hunt](MP_SHOOT_V14_6B_228_CRAWLER_HUNT.html) |
 
 The current branch retains the five most recent numbered game builds. Music experiments, assets and development notes are kept separately.
 
