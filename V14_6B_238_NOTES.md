@@ -1,0 +1,11 @@
+# V14.6B.238 — Logistics Circulation and Rack Hardware
+
+Replaced the twenty server towers' large display fronts with physical blade/drive units, perforated grilles, handles, rails, small rack labels and individual status LEDs. Rear fan panels and overhead cable trays establish hardware and servicing access. Kept the dark lighting, existing rack collision footprints/cross-aisles, blue-authority links and authored encounter. Hardware textures are cached and static details use the existing batching.
+
+Widened the staff-facility hall from two to four metres and its entrance from 1.6 to 3.2 metres. Shifted the breakroom and Training two metres outward with their furnishings and lights. The former cramped corner becomes a Logistics Service Junction: the Workshop service partition and doorway move from z18 to z20, redundant corner walls are cut back, and a side wall separates the junction from the workshop. Added signs above the actual doorways on the hallway-facing side.
+
+Closed the two-metre gap between the cage and Stores Service wall, while preserving the actual Stores Service door. Replaced the coarse green cage mesh with finer neutral steel chain-link so stock enclosure, service hall and departmental entrances are easier to distinguish. Original secrets remain accessible.
+
+Crawler ground speed increases from 2.05 to 2.55 units/s (about 24%). Relocation duration is 20% shorter and pounce travel changes from .62 to .52 seconds. Warning time, damage, health, cooldown rules, evasive choices and surface-facing behavior are unchanged.
+
+Validation: browser checks cover the four-metre corridor across its width, enlarged entrance, relocated Workshop doorway and navigation to the issue counter; sealed cage/storage gap and working Stores Service doorway; server rack aisles, authored encounter and blue-access gating; original IDs/secrets, wall/blast cover and barrel behavior. Crawler checks verify ground travel speed, shorter relocation time, the unchanged .65-second warning and a single 11-point pounce hit outside the cave boundary. Reviewed server, annex and junction captures. All five floors render without browser/WebGL errors; replay does not duplicate department records.
