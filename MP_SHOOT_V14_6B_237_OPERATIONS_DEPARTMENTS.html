@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MP SHOOT — V14.6B.232 Excavation Breach</title>
+  <title>MP SHOOT — V14.6B.237 Operations Departments</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:#05070a;font-family:Arial,Helvetica,sans-serif;color:#fff}#gl{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}#hud{position:fixed;inset:0;pointer-events:none}#status{position:absolute;left:18px;top:18px;background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:12px 15px;font-size:14px;line-height:1.45;min-width:250px}#hint{position:absolute;left:50%;top:18px;transform:translateX(-50%);background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:9px 14px;font-size:14px;white-space:nowrap}#cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%)}#cross:before,#cross:after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000}#cross:before{left:8px;top:1px;width:2px;height:16px}#cross:after{left:1px;top:8px;width:16px;height:2px}#weapon{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:500px;height:430px;image-rendering:pixelated;filter:drop-shadow(0 5px 4px #000)}#flash{position:absolute;left:50%;bottom:212px;transform:translateX(-50%);width:132px;height:100px;opacity:0;mix-blend-mode:screen;image-rendering:pixelated}.small{font-size:12px;color:#9eabbc}.obj{color:#fbbf24;font-weight:700;margin-top:5px}.keyB{color:#38bdf8}.keyR{color:#ef4444}
 #mapWrap{position:absolute;right:18px;top:86px;background:rgba(4,8,14,.80);border:1px solid #415066;border-radius:8px;padding:8px}#map{width:300px;height:190px;image-rendering:pixelated}.legend{font-size:11px;color:#b8c4d4;margin-top:4px}
@@ -310,7 +310,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
 <body>
 <canvas id="gl"></canvas>
 <div id="hud">
-  <div id="status"><b>MP SHOOT — V14.6B.232 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
+  <div id="status"><b>MP SHOOT — V14.6B.237 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
   <div id="gameHud">
     <div id="objectiveStrip"><span id="objective">PRIMARY // LOCATE BLUE ACCESS CARD</span><span id="objectiveRecallHint">O // RECALL OBJECTIVE</span></div>
     <div id="bossHud">
@@ -410,7 +410,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
     <div class="menuStatus"><span>OPS STATUS <b>ACTIVE</b></span><span>CLEARANCE <b>RED</b></span></div>
   </div>
   <div class="menuFlavor" id="menuFlavor"><span>OPS COMMENT // UNOFFICIAL</span>TO SERVE. TO PROTECT. TO COMPLETE THE APPROPRIATE PAPERWORK.</div>
-  <div class="menuVersion">MP SHOOT // V14.6B.232 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
+  <div class="menuVersion">MP SHOOT // V14.6B.237 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
 </div>
 
 <!-- Mission Select -->
@@ -624,7 +624,7 @@ function updatePresentationHud(){
   const ds=document.getElementById('debugStats');if(ds){const live=enemies.filter(e=>e.alive).sort((a,b)=>Math.hypot(a.x-player.x,a.z-player.z)-Math.hypot(b.x-player.x,b.z-player.z))[0];ds.innerHTML=`POS ${player.x.toFixed(1)}, ${player.z.toFixed(1)}<br>YAW ${player.yaw.toFixed(2)} // HP ${Math.ceil(hp)} // ARM ${Math.ceil(armor)}<br>WEAPON ${currentWeapon==='smg'?'C8 CARBINE':currentWeapon==='lmg'?'C6 GPMG':currentWeapon==='launcher'?'CARL GUSTAF':currentWeapon==='lidar'?'LIDAR ENFORCEMENT':currentWeapon.toUpperCase()}${currentWeapon==='smg'&&adsAmount>.65?' // ADS':''}${currentWeapon==='lmg'&&c6MoveSlow>0?' // BRACED':''}${currentWeapon==='launcher'&&cgReload>0?' // RELOADING':''} // SCORE ${score}<br>NEAREST ${live?live.kind.toUpperCase()+' // '+(live.combatState||live.state).toUpperCase():'NONE'}<br>POINTER ${document.pointerLockElement===canvas?'LOCKED':'FREE'}`;}
 }
 
-const VS=`attribute vec3 aPos;attribute vec2 aUV;attribute vec3 aNormal;uniform mat4 uMVP,uModel;varying vec2 vUV;varying vec3 vNormal;varying vec3 vWorld;void main(){vec4 w=uModel*vec4(aPos,1.0);vWorld=w.xyz;vUV=aUV;vNormal=mat3(uModel)*aNormal;gl_Position=uMVP*vec4(aPos,1.0);}`;const FS=`precision mediump float;varying vec2 vUV;varying vec3 vNormal;varying vec3 vWorld;uniform sampler2D uTex;uniform vec4 uTint;uniform vec4 uLightPos[4];uniform vec3 uLightColor[4];uniform vec4 uLidarHole217;uniform float uEmissive;uniform float uExteriorEnabled;uniform vec4 uArchive143;uniform vec4 uArchiveScare170;uniform float uGallery112;uniform float uMaterial112;uniform float uVisual115;uniform sampler2D uLightMap115;uniform vec4 uLightBounds115;void main(){vec2 uv=vUV;if(uMaterial112>0.5){if(uMaterial112>7.5)uv=(abs(vNormal.y)>.5?vWorld.xz:abs(vNormal.x)>.5?vWorld.zy:vWorld.xy)/1.6;else if(uMaterial112>6.5)uv=vec2(abs(vNormal.x)>.5?vWorld.z:vWorld.x,vWorld.y)/vec2(.6,2.4);else if(uMaterial112>5.5)uv=vWorld.xz/4.0;else if(uMaterial112>4.5)uv=vWorld.xz/vec2(.6,2.4);else if(uMaterial112>3.5)uv=vWorld.xz/.64;else if(uMaterial112<2.5)uv=vWorld.xz/(uMaterial112<1.5?1.2:1.2);else uv=vec2(abs(vNormal.x)>.5?vWorld.z:vWorld.x,vWorld.y)/vec2(2.4,3.85);}vec4 t=texture2D(uTex,uv)*uTint;if(t.a<.05)discard;if(uLidarHole217.z>0.0){float hole=length((vUV-uLidarHole217.xy)/uLidarHole217.zw);if(hole<1.0)discard;float rim=(1.0-smoothstep(1.0,1.35,hole))*.90;t.rgb=mix(t.rgb,vec3(.32,1.0,.85),rim);}vec3 n=normalize(vNormal);float amb=.22;vec3 light=vec3(amb);for(int i=0;i<4;i++){vec3 d=uLightPos[i].xyz-vWorld;float dist=length(d);float nd=max(0.0,dot(n,normalize(d)));float att=max(0.0,1.0-dist/uLightPos[i].w);light+=uLightColor[i]*(.18+nd*.82)*att*att;}if(uVisual115>.5 && !(uGallery112>.5 && vWorld.x>=-20.09 && vWorld.x<=15.89 && vWorld.z>=-18.0 && vWorld.z<=-.31)){vec2 luv=(vWorld.xz-uLightBounds115.xy)/uLightBounds115.zw;light=texture2D(uLightMap115,luv).rgb*(.87+.13*abs(n.y));}float archive143=uArchive143.w*step(-65.90,vWorld.x)*step(vWorld.x,-8.10)*step(-17.90,vWorld.z)*step(vWorld.z,15.90);if(archive143>.5){vec2 cell144=floor((vWorld.xz-vec2(-66.0,-18.0))/vec2(4.833333,4.857143));vec2 center144=vec2(-66.0,-18.0)+(cell144+.5)*vec2(4.833333,4.857143);float phase144=dot(cell144,vec2(.73,1.37));float id144=cell144.x+12.0*cell144.y;float stable144=step(abs(id144-11.0),.1)+step(abs(id144-26.0),.1)+step(abs(id144-72.0),.1)+step(abs(id144-81.0),.1);float pool=max(0.0,1.0-distance(vWorld.xz,center144)/4.2);float failure=smoothstep(.20,.42,sin(uArchive143.z*2.1+phase144)+.45*sin(uArchive143.z*4.7+phase144));light*=mix(1.0,.32+.68*failure,pool*(1.0-min(1.0,stable144)));light*=vec3(.92,1.0,.91);light=max(light,vec3(.30,.34,.27)*max(0.0,1.0-distance(vWorld.xz,uArchive143.xy)/5.0));}float parking=step(35.52,vWorld.z)*step(vWorld.x,-16.64);float yard=step(30.4,vWorld.z)*step(22.24,vWorld.x);float impound=step(31.04,vWorld.z)*step(10.08,vWorld.x)*step(vWorld.x,22.24);float serviceApron=step(45.92,vWorld.z)*step(-16.64,vWorld.x)*step(vWorld.x,10.08);float outdoor=uExteriorEnabled*max(max(parking,yard),max(impound,serviceApron));vec3 daylight=vec3(.49,.55,.60)+vec3(.35,.34,.29)*max(0.0,dot(n,normalize(vec3(-.5,.9,-.35))));light=mix(light,daylight,outdoor);float gallery=uGallery112*step(-20.09,vWorld.x)*step(vWorld.x,15.89)*step(-18.0,vWorld.z)*step(vWorld.z,-.31);if(gallery>.5){vec3 lp=vec3(clamp(floor((vWorld.x+14.0)/11.0+.5)*11.0-14.0,-14.0,8.0),3.65,vWorld.z<-9.0?-14.0:-4.0);vec3 gd=lp-vWorld;float ga=max(0.0,1.0-dot(gd,gd)/90.25);float gn=.45+.55*max(0.0,n.y);light=vec3(.30,.315,.33)+vec3(.59,.57,.51)*ga*ga*(.3+.7*gn);light+=vec3(.055,.06,.065)*max(0.0,-n.y);}light=max(light,vec3(uEmissive));if(archive143>.5&&uArchiveScare170.w>0.0){float dip170=max(0.0,1.0-distance(vWorld.xz,uArchiveScare170.xy)/max(.1,uArchiveScare170.z));light*=1.0-dip170*uArchiveScare170.w;}vec3 final143=t.rgb*light;if(archive143>.5){float haze=clamp((distance(vWorld.xz,uArchive143.xy)-5.0)/20.0,0.0,.40);final143=mix(final143,vec3(.025,.034,.027),haze);}gl_FragColor=vec4(final143,t.a);}`;
+const VS=`attribute vec3 aPos;attribute vec2 aUV;attribute vec3 aNormal;uniform mat4 uMVP,uModel;varying vec2 vUV;varying vec3 vNormal;varying vec3 vWorld;void main(){vec4 w=uModel*vec4(aPos,1.0);vWorld=w.xyz;vUV=aUV;vNormal=mat3(uModel)*aNormal;gl_Position=uMVP*vec4(aPos,1.0);}`;const FS=`precision mediump float;varying vec2 vUV;varying vec3 vNormal;varying vec3 vWorld;uniform sampler2D uTex;uniform vec4 uTint;uniform vec4 uLightPos[4];uniform vec3 uLightColor[4];uniform vec4 uLidarHole217;uniform vec4 uOpsFlicker234[2];uniform float uLavaTime235;uniform float uEmissive;uniform float uExteriorEnabled;uniform vec4 uArchive143;uniform vec4 uArchiveScare170;uniform float uGallery112;uniform float uMaterial112;uniform float uVisual115;uniform sampler2D uLightMap115;uniform vec4 uLightBounds115;void main(){vec2 uv=vUV;if(uMaterial112>0.5){if(uMaterial112>9.5)uv=vWorld.xz*.22+vec2(0.0,uLavaTime235*.035);else if(uMaterial112>7.5)uv=(abs(vNormal.y)>.5?vWorld.xz:abs(vNormal.x)>.5?vWorld.zy:vWorld.xy)/1.6;else if(uMaterial112>6.5)uv=vec2(abs(vNormal.x)>.5?vWorld.z:vWorld.x,vWorld.y)/vec2(.6,2.4);else if(uMaterial112>5.5)uv=vWorld.xz/4.0;else if(uMaterial112>4.5)uv=vWorld.xz/vec2(.6,2.4);else if(uMaterial112>3.5)uv=vWorld.xz/.64;else if(uMaterial112<2.5)uv=vWorld.xz/(uMaterial112<1.5?1.2:1.2);else uv=vec2(abs(vNormal.x)>.5?vWorld.z:vWorld.x,vWorld.y)/vec2(2.4,3.85);}vec4 t=texture2D(uTex,uv)*uTint;if(t.a<.05)discard;if(uLidarHole217.z>0.0){float hole=length((vUV-uLidarHole217.xy)/uLidarHole217.zw);if(hole<1.0)discard;float rim=(1.0-smoothstep(1.0,1.35,hole))*.90;t.rgb=mix(t.rgb,vec3(.32,1.0,.85),rim);}vec3 n=normalize(vNormal);float amb=.22;vec3 light=vec3(amb);for(int i=0;i<4;i++){vec3 d=uLightPos[i].xyz-vWorld;float dist=length(d);float nd=max(0.0,dot(n,normalize(d)));float att=max(0.0,1.0-dist/uLightPos[i].w);light+=uLightColor[i]*(.18+nd*.82)*att*att;}if(uVisual115>.5 && !(uGallery112>.5 && vWorld.x>=-20.09 && vWorld.x<=15.89 && vWorld.z>=-18.0 && vWorld.z<=-.31)){vec2 luv=(vWorld.xz-uLightBounds115.xy)/uLightBounds115.zw;light=texture2D(uLightMap115,luv).rgb*(.87+.13*abs(n.y));}for(int ops234=0;ops234<2;ops234++){vec4 f=uOpsFlicker234[ops234];if(f.w>.001){float pool=max(0.0,1.0-distance(vWorld.xz,f.xy)/max(.01,f.z));light*=1.0-f.w*pool*pool;}}float archive143=uArchive143.w*step(-65.90,vWorld.x)*step(vWorld.x,-8.10)*step(-17.90,vWorld.z)*step(vWorld.z,15.90);if(archive143>.5){vec2 cell144=floor((vWorld.xz-vec2(-66.0,-18.0))/vec2(4.833333,4.857143));vec2 center144=vec2(-66.0,-18.0)+(cell144+.5)*vec2(4.833333,4.857143);float phase144=dot(cell144,vec2(.73,1.37));float id144=cell144.x+12.0*cell144.y;float stable144=step(abs(id144-11.0),.1)+step(abs(id144-26.0),.1)+step(abs(id144-72.0),.1)+step(abs(id144-81.0),.1);float pool=max(0.0,1.0-distance(vWorld.xz,center144)/4.2);float failure=smoothstep(.20,.42,sin(uArchive143.z*2.1+phase144)+.45*sin(uArchive143.z*4.7+phase144));light*=mix(1.0,.32+.68*failure,pool*(1.0-min(1.0,stable144)));light*=vec3(.92,1.0,.91);light=max(light,vec3(.30,.34,.27)*max(0.0,1.0-distance(vWorld.xz,uArchive143.xy)/5.0));}float parking=step(35.52,vWorld.z)*step(vWorld.x,-16.64);float yard=step(30.4,vWorld.z)*step(22.24,vWorld.x);float impound=step(31.04,vWorld.z)*step(10.08,vWorld.x)*step(vWorld.x,22.24);float serviceApron=step(45.92,vWorld.z)*step(-16.64,vWorld.x)*step(vWorld.x,10.08);float outdoor=uExteriorEnabled*max(max(parking,yard),max(impound,serviceApron));vec3 daylight=vec3(.49,.55,.60)+vec3(.35,.34,.29)*max(0.0,dot(n,normalize(vec3(-.5,.9,-.35))));light=mix(light,daylight,outdoor);float gallery=uGallery112*step(-20.09,vWorld.x)*step(vWorld.x,15.89)*step(-18.0,vWorld.z)*step(vWorld.z,-.31);if(gallery>.5){vec3 lp=vec3(clamp(floor((vWorld.x+14.0)/11.0+.5)*11.0-14.0,-14.0,8.0),3.65,vWorld.z<-9.0?-14.0:-4.0);vec3 gd=lp-vWorld;float ga=max(0.0,1.0-dot(gd,gd)/90.25);float gn=.45+.55*max(0.0,n.y);light=vec3(.30,.315,.33)+vec3(.59,.57,.51)*ga*ga*(.3+.7*gn);light+=vec3(.055,.06,.065)*max(0.0,-n.y);}light=max(light,vec3(uEmissive));if(archive143>.5&&uArchiveScare170.w>0.0){float dip170=max(0.0,1.0-distance(vWorld.xz,uArchiveScare170.xy)/max(.1,uArchiveScare170.z));light*=1.0-dip170*uArchiveScare170.w;}vec3 final143=t.rgb*light;if(archive143>.5){float haze=clamp((distance(vWorld.xz,uArchive143.xy)-5.0)/20.0,0.0,.40);final143=mix(final143,vec3(.025,.034,.027),haze);}gl_FragColor=vec4(final143,t.a);}`;
 function sh(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw gl.getShaderInfoLog(s);return s}const prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);const A={pos:gl.getAttribLocation(prog,'aPos'),uv:gl.getAttribLocation(prog,'aUV'),normal:gl.getAttribLocation(prog,'aNormal')};const U={mvp:gl.getUniformLocation(prog,'uMVP'),model:gl.getUniformLocation(prog,'uModel'),tint:gl.getUniformLocation(prog,'uTint'),emissive:gl.getUniformLocation(prog,'uEmissive'),exterior:gl.getUniformLocation(prog,'uExteriorEnabled'),lightPos:[0,1,2,3].map(i=>gl.getUniformLocation(prog,`uLightPos[${i}]`)),lightColor:[0,1,2,3].map(i=>gl.getUniformLocation(prog,`uLightColor[${i}]`))};gl.uniform1i(gl.getUniformLocation(prog,'uTex'),0);gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 
 
@@ -8318,7 +8318,7 @@ function startV14GreyboxMission(){
   gameHud.style.display='block';uiGameStarted=true;uiPaused=false;
   simulationRemainder=0;last=performance.now();updatePresentationHud();
   canvas.requestPointerLock();
-  message('V14.6B.232 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
+  message('V14.6B.237 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
   setTimeout(()=>hudToast('AUTHORED COMBAT PASS','Eight encounters active. Patrol and O.R. are pre-staged; Mechanical has a two-contact response.','standard',4.4),700);
   setTimeout(()=>hudToast('OBJECTIVE RECALL','Press O at any time to repeat your current objective.','standard',3.2),5400);
 }
@@ -14200,7 +14200,7 @@ function f5Door207(id,x,z,axis='v',width=3.1,locked=false,label=id){const gy=f5F
  const height=x>=0&&x<30?5.8:3.9;f5Box207(x,gy+(3+height)/2,z,axis==='v'?.32:width,height-3,axis==='v'?width:.32,f5Assets207().wall,[.8,.85,.87,1]);for(const side of [-1,1])f5Box207(x+(axis==='v'?0:side*width/2),gy+1.53,z+(axis==='v'?side*width/2:0),axis==='v'?.45:.1,3.06,axis==='v'?.1:.45,T.metal,[.21,.27,.28,1]);return d;}
 function f5Shell207(){const rooms=F5_ROOMS207.slice(0,9),xs=[...new Set(rooms.flatMap(r=>[r[1],r[3]]))].sort((a,b)=>a-b),zs=[...new Set(rooms.flatMap(r=>[r[2],r[4]]))].sort((a,b)=>a-b),room=(x,z)=>rooms.find(r=>x>r[1]&&x<r[3]&&z>r[2]&&z<r[4]);
  for(const r of rooms){if(r[0]==='Descending rock passage'){f5Surface207(r[1],r[2],r[3],r[4],f5Assets207().concrete);const d=[];for(let x=40;x<64;x+=2){const y0=f5Floor207(x+.01,-1)+4.2,y1=f5Floor207(x+1.99,-1)+4.2;f5Quad207(d,[x,y0,-4],[x,y0,2],[x+2,y1,2],[x+2,y1,-4],[0,-1,0]);}f5Mesh207(d,f5Assets207().rock);}
- else{const w=r[3]-r[1],d=r[4]-r[2],x=(r[1]+r[3])/2,z=(r[2]+r[4])/2;const floor=f5Box207(x,-.12,z,w,.24,d,f5Assets207().floor,[.82,.85,.86,1]);floor.fp112Material=1;const ceil=f5Box207(x,r[5]+.1,z,w,.2,d,f5Assets207().ceiling,[.75,.79,.80,1]);ceil.fp112Material=2;}
+ else{const w=r[3]-r[1],d=r[4]-r[2],x=(r[1]+r[3])/2,z=(r[2]+r[4])/2;const floor=f5Box207(x,-.12,z,w,.24,d,f5Assets207().floor,[.82,.85,.86,1]);floor.fp112Material=1;if(r[0]==='Central War Room')f5DamagedCeiling235(x,r[5]+.1,z,w,d,f5Assets207().ceiling,[.75,.79,.80,1]);else{const ceil=f5Box207(x,r[5]+.1,z,w,.2,d,f5Assets207().ceiling,[.75,.79,.80,1]);ceil.fp112Material=2;}}
  }
  for(let i=0;i<xs.length-1;i++)for(let j=0;j<zs.length-1;j++){const x=(xs[i]+xs[i+1])/2,z=(zs[j]+zs[j+1])/2,r=room(x,z);if(!r)continue;for(const [axis,p,lo,hi,nx,nz]of [['v',xs[i],zs[j],zs[j+1],xs[i]-.01,z],['v',xs[i+1],zs[j],zs[j+1],xs[i+1]+.01,z],['h',zs[j],xs[i],xs[i+1],x,zs[j]-.01],['h',zs[j+1],xs[i],xs[i+1],x,zs[j+1]+.01]]){
   if(room(nx,nz))continue;if(axis==='v'&&p===64)continue;const openings=axis==='v'&&p===-26?[[0,3.2]]:[];f5Wall207(axis,p,lo,hi,openings,r[5],x>=48);
@@ -14228,15 +14228,15 @@ function f5Control207(id,x,z,label,screen,y=null){const p={id:'f5_'+id,type:'f5c
 function f5Rail207(x0,z0,x1,z1,y){const length=Math.hypot(x1-x0,z1-z0),q=-Math.atan2(z1-z0,x1-x0),x=(x0+x1)/2,z=(z0+z1)/2;for(const h of [.18,.65,1.12]){const o=f5Box207(x,y+h,z,length,.08,.075,T.metal,h===1.12?[.66,.57,.27,1]:[.23,.29,.32,1],h===.65);o.rot=q;if(o.solid)o.collisionRot=q;}
  for(let i=0;i<=Math.ceil(length/2.8);i++){const t=i/Math.ceil(length/2.8);f5Box207(x0+(x1-x0)*t,y+.56,z0+(z1-z0)*t,.10,1.16,.10,T.metal,[.30,.35,.37,1]);}}
 function f5Dress207(){const a=f5Assets207();
- for(const [x,z,q]of [[-10,-5,0],[-5,-5,0],[-4,5,Math.PI],[4,-4,-Math.PI/2],[26,-4,Math.PI/2],[24,10,Math.PI],[24,-11,0]])f5Work207(x,z,q);
+ for(const [x,z,q]of [[-10,-5,0],[-5,-5,0],[-4,5,Math.PI],[4,-4,-Math.PI/2],[26,-4,Math.PI/2],[24,10,Math.PI]])f5Work207(x,z,q);
  f5Sign207(-9,2.8,-7.82,'DISPATCH / COMMUNICATIONS|OPS NET: DEGRADED / LOWER SECTORS: NO RESPONSE','h',6.4,1.1);f5Sign207(-.19,2.5,5,'DUTY ROSTER|ALL RELIEF PERSONNEL: OVERDUE','v',3.6,1.2);
  for(const x of [-12,-10.8]){f5Box207(x,1.3,6.8,.85,2.6,.7,T.metal,[.25,.31,.30,1],true);for(let y=.4;y<2.5;y+=.45)f5Box207(x,y,6.43,.65,.22,.035,a.radio,[1,1,1,1],false,.25);}
  // Large map table, open combat circuits on all sides, raised observation gallery.
- f5Box207(15,.55,0,6.6,1.1,4.0,T.metal,[.18,.25,.25,1],true);f5Box207(15,1.18,0,7,.16,4.5,T.desk,[.36,.34,.26,1]);f5Box207(15,1.272,0,6.6,.025,4.1,a.map,[1,1,1,1],false,.38);
- for(const x of [11.45,18.55])f5Box207(x,1.28,0,.11,.12,4.6,T.metal,[.43,.47,.39,1]);
+ f5Box207(15,.35,0,5.4,.70,3.3,T.metal,[.18,.25,.3,1],true);f5Box207(15,.76,0,5.8,.12,3.8,T.metal,[.35,.43,.47,1]);const plot233=f5Box207(15,.829,0,5.5,.018,3.5,a.map,[1,1,1,1],false,.48);plot233.opsPlot233=true;
+ for(const x of [12.13,17.87])f5Box207(x,.82,0,.06,.06,3.8,T.metal,[.53,.59,.59,1]);
  for(const x of [7,23])for(const z of [-6,6]){f5Box207(x,2.9,z,.55,5.8,.55,a.concrete,[.62,.66,.66,1],true);f5Box207(x,.17,z,.8,.34,.8,T.metal,[.24,.29,.29,1],true);}
  f5Sign207(15,4.5,-13.8,'POLICE OPERATIONS / THE WAR ROOM|WATCH 05 / OPERATIONAL PRIORITIES AMENDED','h',10,1.05);
- f5Box207(24,3.8,-13.75,6.1,1.7,.09,a.map,[1,1,1,1],false,.5);
+ f5Box207(16,3.3,-13.75,5.5,1.2,.09,a.map,[1,1,1,1],false,.5);
  f5Surface207(2,-14,12,-9,a.concrete);const gallery=f5Box207(21,1.46,-11.4,18,.28,4.8,T.metal,[.28,.35,.36,1]);gallery.fp112Material=1;
  f5Gallery208();
  f5Sign207(3,1.2,-13.78,'OBSERVATION GALLERY / RAMP ACCESS','h',4,.55);
@@ -14429,8 +14429,8 @@ function f5Dress209(){const a=f5Assets207();
  f5Sign207(174,-.55,-7.8,'OPERATIONAL BRIEFING|DEPLOYMENT TO LOWER SECTORS / PENDING','h',8,1);f5Sign207(183.8,-1.45,0,'CHAIN OF COMMAND|POLICE OPS WO / AUTHORITY RETAINED|NEXT WATCH / NO RESPONSE','v',4.8,1.6);
  f5Sign207(168.5,-1.2,-15.8,'ADMINISTRATIVE STATUS|NO DEFICIENCIES IDENTIFIED','h',5.7,1);f5Papers209(167.2,-12.7,-3.0,.4,.3);
  const mug=f5Box207(168.8,-2.95,-12.8,.16,.23,.16,a.plain,[.85,.81,.70,1]);mug.mesh=a.cylY;f5Box207(168.9,-2.94,-12.8,.06,.12,.04,a.plain,[.85,.81,.7,1]);
- f5Sign207(178.5,-1.25,-15.8,'GEOLOGICAL INSPECTION|NO FURTHER ACTION REQUIRED','h',6,1.1);for(const [x,z]of [[176,-14],[182.5,-11]]){f5Box207(x,-2.1,z,.32,3.8,.32,T.metal,[.30,.34,.30,1]);const o=f5Box207(x,-3.7,z-1.0,2.2,.20,.35,T.metal,[.33,.35,.30,1]);o.rot=.24;}
- for(const x of [175.5,181.5])f5Box207(x,-1.9,-15.77,1.0,2.4,.025,f4Assets().rift,[.65,.68,.65,1],false,.18);
+ f5Sign207(178.5,-.75,-15.8,'GEOLOGICAL INSPECTION|NO FURTHER ACTION REQUIRED','h',6,.55);for(const [x,z]of [[176,-14],[182.5,-11]]){f5Box207(x,-2.1,z,.32,3.8,.32,T.metal,[.30,.34,.30,1]);const o=f5Box207(x,-3.7,z-1.0,2.2,.20,.35,T.metal,[.33,.35,.30,1]);o.rot=.24;}
+ // Structural monitoring replaces the overlapping wall decoration.
  f5Sign207(174,-.7,15.8,'DEPLOYMENT SCHEDULE|SECTOR 06 / ACCESS SUSPENDED|UNAUTHORIZED DEMONIC ACTIVITY / REPORT THROUGH CHAIN','h',8,1.2);
  f5Box207(177,-3.47,13.7,1.6,1.06,.9,T.metal,[.21,.29,.28,1],true);const auth=f5Sign207(177,-2.45,13.2,'COMMAND RELEASE|AUTHORIZATION / NOT VALIDATED','h',1.5,.6);f5Control207('authorization',177,12.2,'PLANNING / RECOVER RESTRICTED OPERATIONS AUTHORITY',auth,-2.6);
  // Deliberately functional military control room, not another boss throne.
@@ -14489,9 +14489,9 @@ const restartBefore209=restartCurrentMission;restartCurrentMission=()=>activeLev
 const interactBefore209=interact;interact=()=>{if(activeLevel===5&&!uiPaused&&!missionDone&&!f5.map&&f5.lift.mode==='idle'&&!nearUseInteractable()){const d=nearDoor();if(d?.scriptLocked&&d.lockReason209){hudToast('ACCESS HELD',d.lockReason209,'standard',4);return;}}return interactBefore209();};
 const buildWithGates209=f5Build207;f5Build207=()=>{buildWithGates209();for(const [id,msg]of Object.entries({logistics:'Establish the field link to release Logistics.',planning:'Obtain blue movement authority at the Logistics issue desk.',serviceEast:'Recover Restricted Operations authority in Deployment Planning.',serviceWest:'Recover Restricted Operations authority in Deployment Planning.',restricted:'Report Restricted Operations authority at the War Room console.',controlEntry:'Authority transfer in progress. Secure the response detail.',descent:'Complete the Restricted Operations descent override.'}))f5.gates[id].lockReason209=msg;};
 // Shared lighting atlas extended over the new wings; original cavern colors retained.
-f5LightMap207=()=>{const N=256,bounds=[-36,-42,226,100],pixels=new Uint8Array(N*N*4);for(let j=0;j<N;j++)for(let i=0;i<N;i++){const x=bounds[0]+(i+.5)*bounds[2]/N,z=bounds[1]+(j+.5)*bounds[3]/N,r=f5Room207(x,z),name=r?.[0]||'',cave=x>=64&&x<120||/catwalk|ledge|Field service return/.test(name),base=f5InCave211(x,z)?.23:cave?.38:r?/Restricted Operations/.test(name)?.26:/Pristine/.test(name)?.38:/ramp|descent|Inspection/.test(name)?.28:.32:.10;let v=base;for(const l of f5.lights){const dx=x-l.x;if(Math.abs(dx)>l.rad)continue;const q=(dx*dx+(z-l.z)**2)/(l.rad*l.rad);if(q<1)v+=l.gain*(1-q)**2;}const k=(j*N+i)*4;pixels[k]=Math.min(215,v*(cave?.83:.98)*255);pixels[k+1]=Math.min(225,v*255);pixels[k+2]=Math.min(235,v*1.06*255);pixels[k+3]=255;}
+f5LightMap207=()=>{const N=256,bounds=[-36,-52,232,110],pixels=new Uint8Array(N*N*4);for(let j=0;j<N;j++)for(let i=0;i<N;i++){const x=bounds[0]+(i+.5)*bounds[2]/N,z=bounds[1]+(j+.5)*bounds[3]/N,r=f5Room207(x,z),name=r?.[0]||'',cave=x>=64&&x<120||/catwalk|ledge|Field service return/.test(name),base=r?.[0]==='Server Farm' ? .055 : f5InCave211(x,z)?.23:cave?.38:r?/Restricted Operations/.test(name)?.26:/Pristine/.test(name)?.38:/ramp|descent|Inspection/.test(name)?.28:.32:.10;let v=base;for(const l of f5.lights){const dx=x-l.x;if(Math.abs(dx)>l.rad)continue;const q=(dx*dx+(z-l.z)**2)/(l.rad*l.rad);if(q<1)v+=l.gain*(1-q)**2;}const k=(j*N+i)*4;pixels[k]=Math.min(215,v*(cave?.83:.98)*255);pixels[k+1]=Math.min(225,v*255);pixels[k+2]=Math.min(235,v*1.06*255);pixels[k+3]=255;}
  if(fp115LightTexture)gl.deleteTexture(fp115LightTexture);fp115LightTexture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,fp115LightTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,N,N,0,gl.RGBA,gl.UNSIGNED_BYTE,pixels);for(const [k,v]of [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]])gl.texParameteri(gl.TEXTURE_2D,k,v);fp115Stats={floor:5,bounds,lightMapSize:N,fixtures:f5.lights.length};};
-f5Map207=(ctx,W,H,full=false)=>{ctx.fillStyle='#122127';ctx.fillRect(0,0,W,H);const view=full?[-34,-40,222,98]:[player.x-34,player.z-21,68,42],s=Math.min((W-24)/view[2],(H-(full?100:34))/view[3]),ox=(W-view[2]*s)/2-view[0]*s,oy=(H-view[3]*s)/2-view[1]*s,X=x=>ox+x*s,Z=z=>oy+z*s;ctx.save();ctx.beginPath();ctx.rect(6,full?42:20,W-12,H-(full?100:30));ctx.clip();ctx.fillStyle='#283b40';ctx.beginPath();ctx.ellipse(X(96),Z(0),39*s,29*s,0,0,7);ctx.fill();for(const r of F5_ROOMS207){ctx.fillStyle=/catwalk|bridge/.test(r[0])?'#847647':/Restricted|response/.test(r[0])?'#5c5553':/Pristine/.test(r[0])?'#7a806e':'#4b6365';ctx.fillRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);ctx.strokeStyle='#a1b2a8';ctx.lineWidth=1;ctx.strokeRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);}for(const d of Object.values(f5.gates)){ctx.strokeStyle=d.scriptLocked?'#a65245':'#d1ac52';ctx.lineWidth=2;ctx.beginPath();if(d.rot){ctx.moveTo(X(d.x),Z(d.z-1.5));ctx.lineTo(X(d.x),Z(d.z+1.5));}else{ctx.moveTo(X(d.x-1.5),Z(d.z));ctx.lineTo(X(d.x+1.5),Z(d.z));}ctx.stroke();}for(const p of gameplayPickups)if(!p.taken&&p.type==='health_large'){ctx.fillStyle='#7db996';ctx.fillRect(X(p.x)-2,Z(p.z)-2,4,4);}ctx.restore();const t=f5Target207(),tx=Math.max(10,Math.min(W-10,X(t[0]))),tz=Math.max(full?46:24,Math.min(H-(full?65:12),Z(t[1])));ctx.fillStyle='#efc65e';ctx.fillRect(tx-3,tz-3,6,6);ctx.save();ctx.translate(X(player.x),Z(player.z));ctx.rotate(player.yaw);ctx.fillStyle='#9bdfdf';ctx.beginPath();ctx.moveTo(0,-5);ctx.lineTo(3,4);ctx.lineTo(0,2);ctx.lineTo(-3,4);ctx.closePath();ctx.fill();ctx.restore();ctx.fillStyle='#e8d99d';ctx.font=full?'bold 17px monospace':'bold 8px monospace';ctx.fillText('FLOOR 5 / POLICE OPERATIONS',12,full?28:12);if(full){ctx.font='12px monospace';for(const [text,x,z]of [['OPS WING',-15,-34],['WORKSHOP',148,30],['TEMP CAVE',42,-22],['ARRIVAL',-30,-5],['WAR ROOM',5,6],['CAVERN / BRIDGE',77,8],['SERVICE RETURN',77,-18],['LOGISTICS',135,4],['PLANNING',165,2],['CONTROL',16,46],['06',45,51]])ctx.fillText(text,X(x),Z(z));ctx.fillText(f5Objective207(),12,H-32);ctx.fillText('M / ESC: CLOSE · GOLD: OBJECTIVE · RED: ACCESS HELD',12,H-12);}};
+f5Map207=(ctx,W,H,full=false)=>{ctx.fillStyle='#122127';ctx.fillRect(0,0,W,H);const view=full?[-34,-52,230,110]:[player.x-34,player.z-21,68,42],s=Math.min((W-24)/view[2],(H-(full?100:34))/view[3]),ox=(W-view[2]*s)/2-view[0]*s,oy=(H-view[3]*s)/2-view[1]*s,X=x=>ox+x*s,Z=z=>oy+z*s;ctx.save();ctx.beginPath();ctx.rect(6,full?42:20,W-12,H-(full?100:30));ctx.clip();ctx.fillStyle='#283b40';ctx.beginPath();ctx.ellipse(X(96),Z(0),39*s,29*s,0,0,7);ctx.fill();for(const r of F5_ROOMS207){ctx.fillStyle=/catwalk|bridge/.test(r[0])?'#847647':/Restricted|response/.test(r[0])?'#5c5553':/Pristine/.test(r[0])?'#7a806e':'#4b6365';ctx.fillRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);ctx.strokeStyle='#a1b2a8';ctx.lineWidth=1;ctx.strokeRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);}for(const d of Object.values(f5.gates)){ctx.strokeStyle=d.scriptLocked?'#a65245':'#d1ac52';ctx.lineWidth=2;ctx.beginPath();if(d.rot){ctx.moveTo(X(d.x),Z(d.z-1.5));ctx.lineTo(X(d.x),Z(d.z+1.5));}else{ctx.moveTo(X(d.x-1.5),Z(d.z));ctx.lineTo(X(d.x+1.5),Z(d.z));}ctx.stroke();}for(const p of gameplayPickups)if(!p.taken&&p.type==='health_large'){ctx.fillStyle='#7db996';ctx.fillRect(X(p.x)-2,Z(p.z)-2,4,4);}ctx.restore();const t=f5Target207(),tx=Math.max(10,Math.min(W-10,X(t[0]))),tz=Math.max(full?46:24,Math.min(H-(full?65:12),Z(t[1])));ctx.fillStyle='#efc65e';ctx.fillRect(tx-3,tz-3,6,6);ctx.save();ctx.translate(X(player.x),Z(player.z));ctx.rotate(player.yaw);ctx.fillStyle='#9bdfdf';ctx.beginPath();ctx.moveTo(0,-5);ctx.lineTo(3,4);ctx.lineTo(0,2);ctx.lineTo(-3,4);ctx.closePath();ctx.fill();ctx.restore();ctx.fillStyle='#e8d99d';ctx.font=full?'bold 17px monospace':'bold 8px monospace';ctx.fillText('FLOOR 5 / POLICE OPERATIONS',12,full?28:12);if(full){ctx.font='12px monospace';for(const [text,x,z]of [['TRIAGE',7,-45],['PERSONNEL',9,18],['DELEGATION',9,27],['SERVER FARM',147,-28],['WELFARE',167,25],['TRAINING',179,28],['OPS WING',-15,-34],['WORKSHOP',148,30],['TEMP CAVE',42,-22],['ARRIVAL',-30,-5],['WAR ROOM',5,6],['CAVERN / BRIDGE',77,8],['SERVICE RETURN',77,-18],['LOGISTICS',135,4],['PLANNING',165,2],['CONTROL',16,46],['06',45,51]])ctx.fillText(text,X(x),Z(z));ctx.fillText(f5Objective207(),12,H-32);ctx.fillText('M / ESC: CLOSE · GOLD: OBJECTIVE · RED: ACCESS HELD',12,H-12);}};
 // Promote the completed route to normal campaign play, without exposing an unbuilt Floor 6.
 FLOOR_NAMES191.push('Police Operations');const floors209=[1,2,3,4,5];
 const inferredBefore209=inferredFloor191;inferredFloor191=()=>{const f=inferredBefore209();return campaign.levels.floor4?.completed||campaign.levels.floor5?.completed||campaign.levels.floor5?.ndi20Ids?.length?5:f;};
@@ -15098,6 +15098,191 @@ function f5Briefing231(){const a=f5Assets207();f5Work207(-19.1,-1.85);f5Sign207(
 }
 const buildBefore231=f5Build207;f5Build207=()=>{buildBefore231();f5Briefing231();f5Excavation231();};
 const updateBefore231=update;update=dt=>{updateBefore231(dt);if(activeLevel===5&&f5?.corruption231&&!uiPaused){const o=f5.corruption231;o.em=.32+.08*Math.sin(performance.now()*.0017);}};
+
+// Materials belong to the Floor 5 asset object, without changing other floors.
+const assetsBefore233=f5Assets207;f5Assets207=()=>{const a=assetsBefore233();if(a.police233)return a;a.police233=true;
+ const material=(kind)=>tex(tc(256,(c,n)=>{let seed=233;const rnd=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);c.fillStyle=kind==='wall'?'#748792':kind==='ceiling'?'#424e59':'#35434f';c.fillRect(0,0,n,n);for(let i=0;i<1800;i++){c.fillStyle=i%2?'rgba(255,255,255,.035)':'rgba(0,0,0,.045)';c.fillRect(rnd()*n,rnd()*n,1+rnd()*2,1+rnd()*2);}if(kind==='wall'){c.fillStyle='#293e52';c.fillRect(0,150,n,106);c.fillStyle='#adb9bd';c.fillRect(0,146,n,4);c.fillStyle='#ba9e54';c.fillRect(0,154,n,2);c.fillStyle='#1d2934';c.fillRect(0,244,n,12);c.strokeStyle='#536673';c.lineWidth=2;for(const x of [0,128,256]){c.beginPath();c.moveTo(x,0);c.lineTo(x,256);c.stroke();}}else{c.strokeStyle=kind==='ceiling'?'#26343f':'#202e3b';c.lineWidth=3;c.strokeRect(1,1,254,254);if(kind!=='ceiling'){for(let x=8;x<256;x+=16)for(let y=8;y<256;y+=16){c.fillStyle='#40515e';c.fillRect(x,y,2,2);}}else{c.strokeStyle='#59656d';c.lineWidth=1;c.strokeRect(5,5,246,246);}}}));
+ a.wall=material('wall');a.floor=material('floor');a.concrete=material('floor');a.ceiling=material('ceiling');
+ a.map=tex(f4Flip(tc(512,(c,n)=>{c.fillStyle='#173a48';c.fillRect(0,0,n,n);c.strokeStyle='#315965';c.lineWidth=1;for(let i=16;i<n;i+=24){c.beginPath();c.moveTo(i,0);c.lineTo(i,n);c.moveTo(0,i);c.lineTo(n,i);c.stroke();}c.strokeStyle='#b2c6c5';c.lineWidth=4;for(const [x,y,w,h]of [[55,120,150,190],[220,130,80,80],[360,130,100,110],[335,310,115,90],[65,360,155,70]])c.strokeRect(x,y,w,h);c.strokeStyle='#c8a858';c.lineWidth=7;c.beginPath();c.moveTo(130,210);c.lineTo(260,170);c.lineTo(405,180);c.lineTo(385,350);c.lineTo(140,390);c.stroke();c.font='bold 23px monospace';c.fillStyle='#dce5dc';c.fillText('05 / POLICE OPERATIONS',26,40);c.font='15px monospace';for(const [t,x,y]of [['WAR ROOM',70,150],['CAVE',230,155],['FIELD',375,160],['LOGISTICS',345,335],['CONTROL',80,385]])c.fillText(t,x,y);for(const [x,y]of [[130,210],[260,170],[405,180],[385,350]]){c.fillStyle='#da8355';c.beginPath();c.arc(x,y,8,0,7);c.fill();}c.fillStyle='#a9bfbd';c.fillText('OPS NET / INCIDENT OVERLAY',25,485);})));return a;};
+function opsScreen233(title,index){return tex(f4Flip(tc(256,(c,n)=>{c.fillStyle='#0c202d';c.fillRect(0,0,n,n);c.fillStyle='#6eb3be';c.font='bold 17px monospace';c.fillText(title,12,25);c.fillStyle='#334d5b';c.fillRect(12,37,232,2);for(let i=0;i<7;i++){c.fillStyle=i===index%7?'#d3a953':'#577c89';c.fillRect(15,55+i*25,65+(i*31+index*13)%135,7);c.fillStyle='#243e4d';c.fillRect(15,65+i*25,205,3);}c.fillStyle='#b6c9c7';c.font='13px monospace';c.fillText(index%2?'LOWER SECTORS / NO LINK':'NIGHT WATCH / ACTIVE',12,244);})));}
+function opsStation233(x,z,q,title,index){const start=objects.length;f5Work207(x,z,q);for(const o of objects.slice(start))if(o.sx===.72&&o.sy===.47)o.t=opsScreen233(title,index);}
+function f5WarRoom233(){const a=f5Assets207();
+ // Staff work faces the plot from the perimeter, leaving the main combat circuit open.
+ for(const [x,title,i]of [[10,'PATROL / TASKING',0],[15,'INCIDENT CONTROL',1],[20,'RESOURCE STATUS',2]])opsStation233(x,11.2,Math.PI,title,i);
+ // Observation gallery kept clear of workstations.
+ f5Sign207(15,4.45,13.8,'POLICE OPERATIONS / WATCHFLOOR|COMMAND / TASKING / RESPONSE','h',11,.85);
+ // Incident boards and grouped live status displays fill previously blank walls.
+ const status=f5Sign207(13.5,2.95,13.73,'INCIDENT PRIORITIES|01 / RESTORE OPS NET|02 / VERIFY FIELD LINK|03 / CONFIRM LOWER AUTHORITY|RELIEF DETAIL: NO RESPONSE','h',4.2,1.9);status.em=.42;
+ for(const [x,title,i]of [[18,'SECTOR STATUS',5],[21.2,'RESPONSE NET',6]]){f5Box207(x,3.05,13.65,2.9,1.75,.16,T.metal,[.11,.16,.21,1]);f5Box207(x,3.05,13.54,2.67,1.52,.025,opsScreen233(title,i),[1,1,1,1],false,.6);}
+ f5Sign207(.22,3.15,-3.2,'OPS NET / COMMS STATUS|SECTOR 05: LOCAL ONLY|SECTOR 06: NO RESPONSE','v',3.8,1.4);
+ // Radio equipment sits against the wall, clear of exits and terminal standing points.
+ for(const z of [2.4,4]){f5Box207(1.05,1.25,z,.85,2.5,1.15,T.metal,[.18,.24,.3,1],true);for(let y=.45;y<2.4;y+=.38){f5Box207(1.5,y,z,.035,.23,.91,opsScreen233('NET 05',Math.round(y*10)),[1,1,1,1],false,.35);}}
+ // Low map markers, document clips and a field handset add purpose without hiding the map.
+ for(const [x,z,color]of [[13.4,-.7,[.82,.63,.27,1]],[15.1,-.3,[.39,.68,.75,1]],[16.4,.55,[.8,.36,.23,1]]]){f5Box207(x,.87,z,.16,.09,.16,T.metal,color);f5Box207(x,.92,z,.06,.04,.06,T.light,color,false,.18);}
+ f5Papers209(12.7,1.25,.84,.35,.24);f5Box207(17.3,-.0+.91,1.15,.25,.15,.46,T.metal,[.16,.22,.24,1]);
+ for(const z of [-2.65,2.65])for(const x of [11,19])f5Box207(x,.012,z,1.25,.024,.05,T.light,[.69,.60,.35,1],false,.1);
+ for(const x of [11,19])for(const z of [-2.2,2.2])f5Box207(x,.012,z,.05,.024,.9,T.light,[.69,.60,.35,1],false,.1);
+ const floorMark=tex(f4Flip(tc(256,(c,n)=>{c.fillStyle='#35434f';c.fillRect(0,0,n,n);c.fillStyle='#a1b3b8';c.font='bold 26px monospace';c.textAlign='center';c.fillText('05 / OPS PLOT',128,120);c.font='15px monospace';c.fillText('KEEP ACCESS CLEAR',128,150);})));f5Box207(15,.015,4.2,4.5,.025,1.35,floorMark,[1,1,1,1],false,.16);
+ f5Light207(15,0,4.8,2.8);f5.lights.at(-1).gain=.28;
+}
+const buildBefore233=f5Build207;f5Build207=()=>{buildBefore233();f5WarRoom233();};
+
+function opsWallScreen234(x,y,z,w,h,title,index,axis='h'){const v=axis==='v';f5Box207(x,y,z,v?.15:w,h,v?w:.15,T.metal,[.10,.16,.21,1]);const screen=f5Box207(x+(v?(x<15?.10:-.10):0),y,z+(v?0:.10),v?.025:w-.18,h-.16,v?w-.18:.025,opsScreen233(title,index),[1,1,1,1],false,.52);screen.opsWall234=true;return screen;}
+const buildBefore234=f5Build207;f5Build207=()=>{buildBefore234();
+ // Screens occupy blank wall spans, away from door apertures.
+ opsWallScreen234(7.1,3.25,-13.75,3.3,1.5,'FIELD CAM / WEST',2);
+ opsWallScreen234(11.0,3.25,-13.75,3.3,1.5,'CAVERN / LINK',3);
+ opsWallScreen234(.2,3.45,3.9,3.5,1.6,'PATROL / TASKING',1,'v');
+ opsWallScreen234(.2,3.45,-5.5,3.5,1.6,'INCIDENT / QUEUE',4,'v');
+ opsWallScreen234(29.8,3.45,1.5,3.7,1.65,'LOGISTICS / STATUS',5,'v');
+ // Only these two light faces leave static batching; all other fixtures stay steady.
+ f5.flicker234=[];for(const [x,z,period,offset]of [[6,5,12.7,2],[25,-11,17.3,7]]){const o=objects.find(o=>o.f5Fixture&&Math.abs(o.x-x)<.05&&Math.abs(o.z-z)<.05);if(o){o.f5Moving=true;f5.flicker234.push({o,base:o.em,tint:[...o.tint],period,offset,x,z});}}
+ f5.clock234=0;
+};
+function opsFlicker234(t,period,offset){const q=(t+offset)%period;return q>8.1&&q<8.24?.22:q>=8.24&&q<8.43?.74:q>=8.43&&q<8.54?.35:1;}
+const updateBefore234=update;update=dt=>{updateBefore234(dt);if(activeLevel!==5||!f5?.flicker234||uiPaused)return;f5.clock234+=Math.min(dt,.05);for(const f of f5.flicker234){const value=opsFlicker234(f5.clock234,f.period,f.offset);f.o.em=f.base*value;for(let i=0;i<3;i++)f.o.tint[i]=f.tint[i]*(.35+.65*value);}};
+const flickerUniform234=gl.getUniformLocation(prog,'uOpsFlicker234[0]'),flickerData234=new Float32Array(8);
+const renderBefore234=render;render=()=>{flickerData234.fill(0);if(activeLevel===5&&f5?.flicker234)for(let i=0;i<f5.flicker234.length;i++){const f=f5.flicker234[i],v=opsFlicker234(f5.clock234,f.period,f.offset);flickerData234.set([f.x,f.z,4.5,(1-v)*.55],i*4);}gl.uniform4fv(flickerUniform234,flickerData234);return renderBefore234();};
+
+function f5DamagedCeiling235(x,y,z,w,d,t,tint){for(const [cx,cz,cw,cd]of [[9,-0,18,28],[27,0,6,28],[21,-7,6,14],[21,10,6,8]]){const o=f5Box207(cx,y,cz,cw,.2,cd,t,tint);o.fp112Material=2;}}
+function f5Damage235(){const a=f5Assets207(),rim=[[18,0],[21,0],[24,0],[24,3],[24,6],[21,6],[18,6],[18,3]],rock=[],edges=[],metal=[],wires=[],copper=[],debris=[];
+ for(let i=0;i<8;i++){const j=(i+1)%8,A=[rim[i][0],5.87,rim[i][1]],B=[rim[j][0],5.87,rim[j][1]],C=[21+(rim[j][0]-21)*.55,7.1+.25*Math.sin(j),3+(rim[j][1]-3)*.55],D=[21+(rim[i][0]-21)*.55,7.1+.25*Math.sin(i),3+(rim[i][1]-3)*.55];f5Quad207(rock,A,B,C,D,[0,-1,0]);f5Tri207(rock,D,C,[21,7.8,3],[0,-1,0]);
+ const mx=(A[0]+B[0])/2,mz=(A[2]+B[2])/2,tip=[mx+(21-mx)*(.09+.035*(i%3)),5.6-.12*(i%3),mz+(3-mz)*.12];f5Tri207(edges,A,B,tip,[0,-1,0]);}
+ f5Mesh207(rock,a.rock,[.65,.61,.55,1],.19);f5Mesh207(edges,a.ceiling,[.65,.68,.65,1],.12);
+ const beam=objects.find(o=>o.f5&&o.x===21&&o.y===5.12&&o.sz===27&&o.sx===.16);if(beam){beam.z=-6.75;beam.sz=13.5;f5Box207(21,5.12,9.75,.16,.16,7.5,T.metal,[.20,.26,.27,1]);}
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(o.f5&&o.x===21&&o.y===5.35&&o.z===3&&o.sx===4)objects.splice(i,1);}
+ f5Tube231(metal,[[21,5.12,0],[21.1,4.95,.65],[21.65,4.7,1.15]],.085);f5Tube231(metal,[[21,5.12,6],[20.9,4.9,5.45]],.085);f5Mesh207(metal,T.metal,[.34,.33,.29,1],.08);
+ const ends=[[19.2,3.65,1.4],[22.75,3.9,4.65],[23.25,4.4,1.7]];
+ for(const [i,end]of ends.entries()){const start=[end[0]-.4,6.15,end[2]-.35];f5Tube231(wires,[start,[start[0]+.1,5.35,start[2]+.2],[end[0]-.15,4.55,end[2]+.06],end],.028);f5Tube231(copper,[end,[end[0]+.06,end[1]-.10,end[2]+.02]],.018);}
+ f5Mesh207(wires,T.metal,[.08,.10,.11,1]);f5Mesh207(copper,T.metal,[.65,.36,.15,1],.25);
+ for(let i=0;i<19;i++){const xx=19.2+(i*1.13%3.8),zz=.5+(i*.83%4.7),r=.09+(i%4)*.045;f5Growth231(debris,xx,r*.4,zz,r*1.4,r*.45,r);}
+ f5Mesh207(debris,a.concrete,[.62,.61,.55,1],.03);
+ f5.sparks235=ends.slice(0,2);f5.clock235=0;
+}
+function f5Lava235(){const a=f5Assets207(),flow=[],banks=[],warm=[],path=[];for(let z=-27;z<=27;z+=2){const x=98+2.5*Math.sin(z*.14)+.6*Math.sin(z*.43),w=1.65+.24*Math.sin(z*.7);path.push([x,z,w]);}
+ for(let i=1;i<path.length;i++){const [x0,z0,w0]=path[i-1],[x1,z1,w1]=path[i];f5Quad207(flow,[x0-w0,-22,z0],[x1-w1,-22,z1],[x1+w1,-22,z1],[x0+w0,-22,z0],[0,1,0]);for(const side of [-1,1]){f5Quad207(banks,[x0+side*w0,-22.1,z0],[x1+side*w1,-22.1,z1],[x1+side*(w1+1.5),-21.55,z1],[x0+side*(w0+1.5),-21.55,z0],[0,1,0]);f5Quad207(warm,[x0+side*(w0+1.5),-21.54,z0],[x1+side*(w1+1.5),-21.54,z1],[x1+side*(w1+2.8),-22.2,z1],[x0+side*(w0+2.8),-22.2,z0],[0,1,0]);}}
+ const lava=tex(tc(256,(c,n)=>{let seed=235;const rnd=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);c.fillStyle='#dc6319';c.fillRect(0,0,n,n);for(let i=0;i<140;i++){const x=rnd()*n,y=rnd()*n,r=4+rnd()*17;c.fillStyle=i%4?'#48251a':'#792e12';c.beginPath();for(let j=0;j<7;j++){const q=j*Math.PI*2/7,rr=r*(.65+rnd()*.4);j?c.lineTo(x+Math.cos(q)*rr,y+Math.sin(q)*rr*.65):c.moveTo(x+Math.cos(q)*rr,y+Math.sin(q)*rr*.65);}c.closePath();c.fill();}for(let i=0;i<70;i++){c.fillStyle=i%3?'#f8a52a':'#ffce59';c.fillRect(rnd()*n,rnd()*n,1+rnd()*5,1+rnd()*2);}}));
+ const river=f5Mesh207(flow,lava,[1,.84,.65,1],.95);river.fp112Material=10;river.lava235=true;f5Mesh207(banks,a.rock,[.29,.16,.11,1],.22);f5Mesh207(warm,a.rock,[.38,.22,.13,1],.25);f5.lava235=river;
+}
+const buildBefore235=f5Build207;f5Build207=()=>{buildBefore235();f5Damage235();f5Lava235();};
+const updateBefore235=update;update=dt=>{updateBefore235(dt);if(activeLevel===5&&f5&&!uiPaused)f5.clock235=(f5.clock235||0)+Math.min(dt,.05);};
+const lavaTime235=gl.getUniformLocation(prog,'uLavaTime235');const renderBefore235=render;render=()=>{gl.uniform1f(lavaTime235,activeLevel===5?f5?.clock235||0:0);return renderBefore235();};
+const effectsBefore235=renderBlastEffects;renderBlastEffects=vp=>{effectsBefore235(vp);if(activeLevel!==5||!f5?.sparks235)return;const t=f5.clock235,depth=renderDepth220,blend=renderBlend220;for(let j=0;j<2;j++){const age=(t+j*1.67)%4.9;if(age>.24)continue;const p=f5.sparks235[j];for(let i=0;i<6;i++){const q=i*2.399,x=p[0]+Math.cos(q)*age*(.7+i*.1),z=p[2]+Math.sin(q)*age*.8,y=p[1]+age*(.5-i*.16)-5*age*age;renderGlowBill(x,y,z,.025,.065,T.bossAura,vp,[1,.67,.24,(1-age/.24)*.9],1.3);}}gl.depthMask(depth);if(blend)gl.enable(gl.BLEND);else gl.disable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);};
+
+// Match the decorative cave shell with closed, two-sided solid wall backing.
+function caveBacking236(axis,p,lo,hi,dir){const a=f5Assets207();for(let q=lo;q<hi;q+=1){const end=Math.min(hi,q+1),sample=u=>axis==='v'?f5Floor207(p+dir*.06,u):f5Floor207(u,p+dir*.06),g0=sample(q+.01),g1=sample(end-.01),bottom=Math.min(g0,g1)-.12,top=Math.max(g0,g1)+4.2,x=axis==='v'?p:(q+end)/2,z=axis==='v'?(q+end)/2:p,o=f5Box207(x,(bottom+top)/2,z,axis==='v'?.36:end-q,top-bottom,axis==='v'?end-q:.36,a.rock,[.60,.65,.63,1],true);o.caveBacking236=true;o.fp112Material=8;}}
+function f5ShellRepair236(){const a=f5Assets207();for(const spec of [['v',54,-20,-8,1],['v',62,-24,-12,-1],['h',-24,54,62,1],['h',-24,34,54,1],['h',-20,34,54,-1]])caveBacking236(...spec);
+ // Keep the existing gated north entrance and the west service ledge intact.
+ f5Wall207('h',18,146,156,[],3.8);f5Wall207('v',164,4,12,[],4);
+ for(const x of [146,156]){f5Box207(x,-.75,15,.16,1.10,6,a.wall,[.80,.85,.88,1],true);f5Box207(x,-3.83,15,.18,.30,6,T.metal,[.23,.30,.35,1],true);}
+ f5Sign207(151,-1.15,17.78,'RESERVE / UNALLOCATED|STOCK RECONCILIATION: PENDING','h',3.7,.62);
+ f5Sign207(163.8,-.7,7,'SERVICE PARTITION|PLANNING ACCESS VIA MARKED DOOR','v',3.8,.55);
+}
+function f5Geology236(){const a=f5Assets207(),g=-4;
+ // Core drilling / compression rig, with a base, guide rails, ram and sample tray.
+ f5Box207(175.35,g+.25,-11.8,2.1,.5,2.25,T.metal,[.23,.31,.35,1],true);
+ for(const x of [174.55,176.15])f5Box207(x,g+1.5,-12.2,.15,2.4,.2,T.metal,[.56,.48,.27,1],true);
+ f5Box207(175.35,g+2.65,-12.2,1.9,.25,.5,T.metal,[.42,.48,.48,1]);
+ const ram=f5Box207(175.35,g+1.95,-12.2,.45,1.25,.45,T.metal,[.47,.54,.55,1]);ram.mesh=a.cylY;
+ f5Box207(175.35,g+.7,-11.45,1.5,.15,1.1,T.metal,[.45,.49,.47,1]);
+ const core=f5Box207(175.35,g+.95,-11.45,.25,.45,.25,a.rock,[.67,.62,.53,1]);core.mesh=a.cylY;
+ f5Sign207(175.35,g+2.98,-12.25,'CORE ANALYSIS / 05|SAMPLE PRESSURE: ABNORMAL','h',2.15,.55);
+ // Seismic recording bench beneath the structural report display.
+ f5Box207(180,g+.43,-14.6,4.3,.86,1.15,T.metal,[.22,.30,.35,1],true);f5Box207(180,g+.9,-14.6,4.5,.12,1.3,T.metal,[.43,.50,.51,1]);
+ for(const [x,name,i]of [[178.7,'SEISMIC / TRACE',2],[180.2,'STRESS / LOAD',4]]){f5Box207(x,g+1.28,-14.7,1.12,.61,.2,T.metal,[.10,.17,.21,1]);f5Box207(x,g+1.28,-14.57,.98,.47,.025,opsScreen233(name,i),[1,1,1,1],false,.55);}
+ for(let i=0;i<5;i++)f5Box207(181.2+i*.18,g+1.02,-14.4,.08,.08,.13,T.light,i===3?[.75,.28,.16,1]:[.30,.66,.58,1],false,.45);
+ f5Sign207(180,g+2.25,-15.73,'SUBSURFACE MONITORING|VIBRATION: OUTSIDE TOLERANCE|REPORT DISPOSITION: NO ACTION','h',4.2,1.1);
+ // Pump/cooling skid along the east side, leaving the door-to-bench aisle open.
+ f5Box207(182.65,g+.25,-10.5,1.55,.5,2.05,T.metal,[.25,.32,.35,1],true);
+ const motor=f5Box207(182.65,g+.95,-10.5,.95,1.1,1.2,T.metal,[.39,.46,.44,1]);motor.mesh=a.cylX;
+ for(const z of [-11.15,-9.85])f5Box207(182.65,g+.65,z,1.15,.12,.12,T.metal,[.53,.51,.38,1]);
+ const pipes=[];f5Tube231(pipes,[[182.9,g+1.25,-10.5],[183.5,g+1.25,-10.5],[183.5,g+2.6,-10.5],[183.5,g+2.6,-14.2]],.08);f5Mesh207(pipes,T.metal,[.45,.48,.43,1],.08);
+ f5Sign207(183.65,g+2.15,-10.5,'GROUNDWATER / PUMP 05|MAINTENANCE: DEFERRED','v',2.5,.55);const id=ndi20s.find(p=>p.id==='floor5_ndi_08');if(id)Object.assign(id,{x:181,z:-13.2,y:g+.12});
+}
+function f5Barrels236(){const specs=[[35.5,10.7],[70,4.5],[112.5,-2.6],[141,0],[142.7,0],[151,30.5],[175,-4.5],[39,46]];for(const [i,[x,z]]of specs.entries()){const p=addWorldInteractable('barrel',x,z,{id:'f5_fuel236_'+i,label:'FUEL / PRESSURIZED — EXPLOSIVE',hp:2,explosionRadius:3.5,explosionDamage:14});p.f5Fuel236=true;}}
+const buildBefore236=f5Build207;f5Build207=()=>{buildBefore236();f5ShellRepair236();f5Geology236();f5Barrels236();};
+
+// Department layout pass. Existing rooms build first so their exterior shell is preserved.
+const F5_DEPARTMENTS237=[
+ ['Personnel Allocation',8,14,20,23,3.8,0],['Delegation / WO Tasking',8,23,20,30,3.8,0],
+ ['Welfare and Training Hall',164,16,190,18,3.8,-4],
+ ['Morale and Welfare',166,18,176,28,3.8,-4],['Training and Readiness',178,18,190,30,3.8,-4],
+ ['Server Intake',152,-12,156,-10,4.0,-4],['Server Farm',146,-30,164,-12,4.4,-4],
+ ['Server Planning Link',158,-12,164,-4,4.0,-4],['Incident Triage',6,-49,20,-38,4.4,1.6]
+];
+let departmentsActive237=false;
+const floorBefore237=f5Floor207;f5Floor207=(x,z)=>{if(departmentsActive237){const r=F5_DEPARTMENTS237.find(r=>x>r[1]-.001&&x<r[3]+.001&&z>r[2]-.001&&z<r[4]+.001);if(r)return r[6];}return floorBefore237(x,z);};
+function roomWall237(axis,p,lo,hi,g,h,open=[]){let spans=[[lo,hi]];for(const [mid,w]of open)spans=spans.flatMap(([a,b])=>[[a,Math.min(b,mid-w/2)],[Math.max(a,mid+w/2),b]].filter(([a,b])=>b>a));for(const [a,b]of spans){const o=f5Box207(axis==='v'?p:(a+b)/2,g+h/2,axis==='v'?(a+b)/2:p,axis==='v'?.24:b-a,h,axis==='v'?b-a:.24,f5Assets207().wall,[.84,.88,.89,1],true);o.fp112Material=3;o.departmentWall237=true;}}
+function roomShell237(r){const [name,x0,z0,x1,z1,h,g]=r,a=f5Assets207(),x=(x0+x1)/2,z=(z0+z1)/2;const f=f5Box207(x,g-.12,z,x1-x0,.24,z1-z0,a.floor,[.82,.85,.86,1]);f.fp112Material=1;f.department237=name;const c=f5Box207(x,g+h+.1,z,x1-x0,.2,z1-z0,a.ceiling,[.75,.79,.80,1]);c.fp112Material=2;}
+function departmentDoor237(id,x,z,axis,w,label,g,h,locked=false){const first=objects.length,d=f5Door207(id,x,z,axis,w,locked,label),header=objects[first];d.y=g+1.5;header.y=g+(3+h)/2;header.sy=h-3;d.department237=true;return d;}
+function departmentLight237(x,z,y,width=1.7){f5Light207(x,z,y,width);f5.lights.at(-1).gain=.28;}
+function departmentsShell237(){for(const r of F5_DEPARTMENTS237)roomShell237(r);
+ // Personnel/Delegation suite: retain and cut the War Room's existing south wall.
+ f5Cut209('h',14,11.9,15.1);departmentDoor237('personnel237',13.5,14,'h',3.2,'PERSONNEL / ALLOCATION AND SCHEDULING',0,5.8);
+ roomWall237('v',8,18,23,0,3.8);roomWall237('v',20,14,23,0,3.8);roomWall237('h',23,8,20,0,3.8,[[13.5,3]]);departmentDoor237('delegation237',13.5,23,'h',3,'DELEGATION / POL OPS WO',0,3.8);
+ roomWall237('v',8.04,23,30,0,3.8);roomWall237('v',19.96,23,30,0,3.8);roomWall237('h',29.96,8,20,0,3.8);
+ // Logistics annex: a short hall with separate doors to the two departments.
+ f5Cut209('v',164,16.2,17.8);departmentDoor237('welfareHall237',164,17,'v',1.6,'MORALE / TRAINING ANNEX',-4,3.8);
+ roomWall237('h',16.04,164,190,-4,3.8);roomWall237('h',18,164,190,-4,3.8,[[171,3],[184,3]]);roomWall237('v',190,16,18,-4,3.8);
+ for(const [id,x,label]of [['welfare237',171,'MORALE AND WELFARE'],['training237',184,'TRAINING AND READINESS']])departmentDoor237(id,x,18,'h',3,label,-4,3.8);
+ for(const [x0,x1,z1]of [[166,176,28],[178,190,30]]){roomWall237('v',x0+.04,18,z1,-4,3.8);roomWall237('v',x1-.04,18,z1,-4,3.8);roomWall237('h',z1,x0,x1,-4,3.8);}
+ // Blue-gated alternate route: Logistics -> server aisles -> Planning lobby.
+ f5Cut209('h',-10,152.5,155.5);const entry=departmentDoor237('serverIn237',154,-10,'h',3,'SERVER FARM / BLUE MOVEMENT AUTHORITY',-4,4.4,true);entry.server237=true;
+ roomWall237('v',152,-12,-10,-4,4);roomWall237('v',156,-12,-10,-4,4);
+ roomWall237('h',-12,146,164,-4,4.4,[[154,3],[161,3]]);roomWall237('v',146,-30,-12,-4,4.4);roomWall237('v',164,-30,-12,-4,4.4);roomWall237('h',-30,146,164,-4,4.4);
+ departmentDoor237('serverAisles237',154,-12,'h',3,'SERVER FARM / RACK AISLES',-4,4.4);
+ const exit=departmentDoor237('serverOut237',161,-12,'h',3,'SERVER FARM / PLANNING LINK',-4,4.4,true);exit.server237=true;
+ roomWall237('v',158.04,-12,-4,-4,4);roomWall237('v',163.96,-12,-4,-4,4);
+ f5Cut209('h',-4,159.5,162.5);departmentDoor237('serverPlanning237',161,-4,'h',3,'OPERATIONAL PLANNING / SERVER LINK',-4,4);
+ // Triage is reached from the Operations cross-passage, near Communications.
+ f5Cut209('h',-38,11.5,14.5);departmentDoor237('triage237',13,-38,'h',3,'INCIDENT TRIAGE / REQUESTS',1.6,4.4);
+ roomWall237('v',6.04,-49,-38,1.6,4.4);roomWall237('v',19.96,-49,-38,1.6,4.4);roomWall237('h',-49,6,20,1.6,4.4);
+ for(const [x,z,y]of [[13.5,18.5,3.5],[13.5,26.5,3.5],[171,22.5,-.5],[171,26,-.5],[184,22,-.5],[184,27,-.5],[173,17,-.5],[185,17,-.5],[13,-42,5.7],[13,-46.5,5.7]])departmentLight237(x,z,y);
+}
+function rosterTexture237(){if(rosterTexture237.cache)return rosterTexture237.cache;return rosterTexture237.cache=tex(f4Flip(tc(512,(c,n)=>{c.fillStyle='#172d3b';c.fillRect(0,0,n,n);c.fillStyle='#d6dfd6';c.font='bold 27px monospace';c.fillText('PERSONNEL / DUTY ROSTER',20,40);c.font='18px monospace';c.fillText('ENTIRE UNDERGROUND FACILITY',20,78);for(const [i,time]of ['0000 - 0800','0800 - 1600','1600 - 0000'].entries()){const y=125+i*80;c.fillStyle='#3c5561';c.fillRect(18,y-22,476,65);c.fillStyle='#c0d0cb';c.fillText(time,30,y);c.font='17px monospace';c.fillText('CPL THOMPSON + CPL FRASER',30,y+26);c.font='18px monospace';}c.fillStyle='#7dba83';c.font='bold 27px monospace';c.fillText('MINIMUM MANNING',26,415);c.fillText('ACHIEVED',26,451);c.font='16px monospace';c.fillStyle='#d1bd79';c.fillText('ASSIGNED STRENGTH: 2',26,488);})));}
+function departmentsFurnish237(){const a=f5Assets207();
+ // The same two members appear on the roster and the WO's task allocations.
+ const roster=f5Box207(17.4,2.25,22.78,4.4,2.3,.06,rosterTexture237(),[1,1,1,1],false,.42);roster.roster237=true;
+ f5Sign207(18.6,.65,22.7,'Additional personnel|unavailable due to|mandatory training','h',1.15,.75).t=f5Label207('Additional personnel|unavailable due to|mandatory training','#c7b66b','#252b28');
+ f5Work207(10.4,20.3,Math.PI);f5Sign207(13.5,3.3,14.22,'PERSONNEL ALLOCATION / SCHEDULING','h',7,.45);
+ f5Box207(8.8,1.15,17,.8,2.3,1.2,T.metal,[.24,.32,.38,1],true);
+ f5Work207(17.5,27,Math.PI);f5Sign207(13.6,2.45,29.75,'POL OPS WO / TASK ALLOCATION|RESTORE POWER: CPL THOMPSON|CONTAIN INCIDENT: CPL FRASER|COVER ALL SHIFTS: BOTH MEMBERS|WO: MONITOR PROGRESS','h',7.4,2.2);
+ for(const z of [25,27.5]){f5Box207(9.1,.47,z,1.4,.94,1.15,T.metal,[.24,.31,.36,1],true);f5Papers209(9.1,z,.97,.8,.5);}f5Sign207(13.5,3.3,23.22,'DELEGATION / TASKING OFFICE','h',7,.45);
+ // Ordinary coffee room: functional counter, fridge, microwave, mugs and a table.
+ f5Box207(171,-3.55,26.9,7.5,.9,1.25,T.metal,[.29,.36,.38,1],true);f5Box207(171,-3.04,26.9,7.7,.12,1.4,T.desk,[.48,.39,.28,1]);
+ f5Box207(168.5,-2.66,26.85,.8,.68,.7,T.metal,[.16,.19,.20,1]);const pot=f5Box207(168.5,-2.45,26.7,.33,.43,.33,T.metal,[.34,.24,.14,1]);pot.mesh=a.cylY;
+ f5Box207(173,-2.65,26.85,1.25,.6,.72,T.metal,[.61,.65,.62,1]);f5Box207(173,-2.65,26.46,.85,.37,.025,T.metal,[.10,.16,.18,1]);
+ f5Box207(174.8,-2.9,25.1,.95,2.2,.95,T.metal,[.65,.69,.66,1],true);f5Box207(174.25,-2.75,25.1,.05,.4,.06,T.metal,[.18,.23,.25,1]);
+ const lunch=f5Table209(171,22.5,3.3,1.9);lunch.t=T.desk;lunch.tint=[.54,.43,.30,1];f5Mug210(170.3,22.5,-2.86);f5Mug210(171.6,22.7,-2.86);for(const x of [168.6,173.4]){f5Box207(x,-3.5,22.5,.7,.17,.7,T.metal,[.27,.33,.35,1],true);f5Box207(x,-3.15,22.85,.7,.7,.1,T.metal,[.27,.33,.35,1]);for(const dx of [-.25,.25])for(const dz of [-.25,.25])f5Box207(x+dx,-3.8,22.5+dz,.06,.4,.06,T.metal,[.22,.28,.30,1]);}
+ f5Sign207(171,-1.05,27.8,'MORALE AND WELFARE|BREAKS REMAIN SUBJECT TO|OPERATIONAL REQUIREMENTS','h',5.7,1.2);
+ // Empty training places explain the personnel note, without another combat wave.
+ for(const x of [181,186.5])for(const z of [23,26.6])opsStation233(x,z,Math.PI,'MANDATORY TRAINING',3);
+ f5Sign207(184,-1.05,29.78,'TRAINING AND READINESS|MANDATORY ONLINE INSTRUCTION|ATTENDANCE: 0 / COMPLIANCE: 100%','h',8,1.5);
+ f5Sign207(184,-.65,18.24,'TRAINING IN PROGRESS / DO NOT DISTURB','h',7,.4);
+ // Incoming incidents feed the operations department from a quieter side office.
+ f5Work207(9.2,-45,0);f5Work207(16.4,-45,0);f5Sign207(13,4.4,-48.78,'INCIDENT TRIAGE / INCOMING REQUESTS|LOSS OF CONTACT: ROUTINE|SUBSURFACE MOVEMENT: ROUTINE|STRUCTURAL BREACH: ROUTINE|PRIORITY: NO FURTHER ACTION','h',9,2);
+ for(const z of [-41,-43]){f5Box207(18.6,2.1,z,.7,.17,.7,T.metal,[.22,.30,.35,1],true);f5Box207(18.6,2.5,z+.3,.7,.7,.1,T.metal,[.22,.30,.35,1]);}
+ f5Sign207(13,5.25,-38.24,'INCIDENT TRIAGE / OPERATIONS REQUESTS','h',8,.5);
+ // Department wayfinding at the actual entry points.
+ f5Sign207(13.5,3.35,13.74,'PERSONNEL / DELEGATION','h',5.5,.5);
+ f5Sign207(163.74,-.7,17,'MORALE / TRAINING ANNEX','v',2.6,.45);
+ f5Sign207(171,-.7,18.22,'MORALE AND WELFARE','h',4.8,.45);f5Sign207(184,-.7,18.22,'TRAINING / READINESS','h',4.8,.45);
+}
+function serverFarm237(){const a=f5Assets207(),textures=serverFarm237.textures||(serverFarm237.textures=[0,1,2,3].map(i=>opsScreen233('SERVER / NODE 0'+(i+1),i)));
+ for(const [bank,x]of [149,153,157,161].entries())for(const z of [-16,-18,-22,-24,-26]){f5Box207(x,-2.75,z,1.1,2.5,1.15,T.metal,[.10,.14,.18,1],true);f5Box207(x,-1.25,z,1.14,.15,1.2,T.metal,[.18,.24,.27,1]);f5Box207(x,-2.72,z+.59,.88,1.96,.025,textures[bank],[.61,.88,.86,1],false,.7);for(const h of [-3.45,-3.25,-3.05])f5Box207(x+.34,h,z+.61,.06,.055,.02,T.light,bank%2?[.36,.67,.74,1]:[.42,.72,.43,1],false,.85);f5.lights.push({x,z:z+.8,y:-2.7,rad:2.8,gain:.10});}
+ f5Sign207(154,-.65,-12.24,'SERVER FARM / OPS NET BACKUP|RACK AISLES / KEEP ACCESS CLEAR','h',8,.55);
+ f5Sign207(161,-.65,-12.26,'PLANNING LINK / BLUE AUTHORITY','h',4,.45);
+ for(const [x,z]of [[154,-13.3],[161,-10],[161,-5.2]]){f5Box207(x,-.8,z,1.0,.05,.22,T.light,[.26,.53,.61,1],false,.45);f5.lights.push({x,z,y:-.8,rad:3.5,gain:.13});}
+ for(const [kind,x,z]of [['shooter',151,-23],['shooter',159,-25],['flanker',155,-18]]){const e=spawn(kind,x,z);e.y=groundHeight(x,z)+1.08;e.f5group='server237';e.encounterTag='f5_server237';e.facing=Math.PI;}
+ addGameplayPickup('ammo_smg',147.2,-28.5,{authored:true,tag:'F5_SERVER_BACKUP_AMMO'});addGameplayPickup('health_small',162.5,-28.5,{authored:true,tag:'F5_SERVER_FIRST_AID'});
+}
+const buildBefore237=f5Build207;f5Build207=()=>{departmentsActive237=false;for(let i=F5_ROOMS207.length-1;i>=0;i--)if(F5_ROOMS207[i].department237)F5_ROOMS207.splice(i,1);buildBefore237();departmentsActive237=true;for(const r of F5_DEPARTMENTS237){const copy=r.slice(0,6);copy.department237=true;F5_ROOMS207.push(copy);}departmentsShell237();departmentsFurnish237();serverFarm237();};
+const startBefore237=startLevel5;startLevel5=(...args)=>{const r=startBefore237(...args);navigationBounds={minX:-34,maxX:196,minZ:-52,maxZ:56};return r;};
+const useBefore237=f5Use207;f5Use207=p=>{const r=useBefore237(p);if(f5.issued)for(const id of ['serverIn237','serverOut237'])f5.gates[id].scriptLocked=false;return r;};
+const interactBefore237=interact;interact=()=>{if(activeLevel===5&&!uiPaused){const d=nearDoor();if(d?.server237&&d.scriptLocked){hudToast('BLUE MOVEMENT AUTHORITY REQUIRED','Obtain movement authority at the workshop issue counter.','key',3);return;}}return interactBefore237();};
+const flowBefore237=f5Flow207;f5Flow207=()=>{flowBefore237();if(activeLevel!==5||!f5)return;if(player.x>146&&player.x<164&&player.z< -12&&player.z> -30)f5Wake207('server237');};
+const targetBefore237=f5Target207;f5Target207=()=>f5.issued&&!f5.authority&&player.x>=146&&player.x<=164&&player.z< -4&&player.z> -30?[161,-4.8]:targetBefore237();
+const objectiveBefore237=f5Objective207;f5Objective207=()=>f5.issued&&!f5.authority&&player.x>=146&&player.x<=164&&player.z< -4&&player.z> -30?'SERVER FARM / CROSS TO OPERATIONAL PLANNING':objectiveBefore237();
 
 })();
 
