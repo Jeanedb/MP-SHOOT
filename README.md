@@ -2,7 +2,7 @@
 
 A military police FPS.
 
-[Download the latest build — V235: Compromised Operations](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_235_COMPROMISED_OPERATIONS.html)
+[Download the latest build — V236: Service Route Repairs](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_236_SERVICE_ROUTE_REPAIRS.html)
 
 Download the HTML file and open it in your browser to play.
 
@@ -10,11 +10,11 @@ Download the HTML file and open it in your browser to play.
 
 | Version | Build |
 | --- | --- |
+| V236 | [Service Route Repairs](MP_SHOOT_V14_6B_236_SERVICE_ROUTE_REPAIRS.html) |
 | V235 | [Compromised Operations](MP_SHOOT_V14_6B_235_COMPROMISED_OPERATIONS.html) |
 | V234 | [Watchfloor Atmosphere](MP_SHOOT_V14_6B_234_WATCHFLOOR_ATMOSPHERE.html) |
 | V233 | [Police Operations Identity](MP_SHOOT_V14_6B_233_POLICE_OPERATIONS_IDENTITY.html) |
 | V232 | [Excavation Breach](MP_SHOOT_V14_6B_232_EXCAVATION_BREACH.html) |
-| V231 | [Briefing and Excavation](MP_SHOOT_V14_6B_231_BRIEFING_AND_EXCAVATION.html) |
 
 The current branch retains the five most recent numbered game builds. Music experiments, assets and development notes are kept separately.
 
