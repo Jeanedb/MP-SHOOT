@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MP SHOOT — V14.6B.237 Operations Departments</title>
+  <title>MP SHOOT — V14.6B.242 Visible Bridge Collapse</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:#05070a;font-family:Arial,Helvetica,sans-serif;color:#fff}#gl{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated}#hud{position:fixed;inset:0;pointer-events:none}#status{position:absolute;left:18px;top:18px;background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:12px 15px;font-size:14px;line-height:1.45;min-width:250px}#hint{position:absolute;left:50%;top:18px;transform:translateX(-50%);background:rgba(4,8,14,.84);border:1px solid #415066;border-radius:8px;padding:9px 14px;font-size:14px;white-space:nowrap}#cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%)}#cross:before,#cross:after{content:"";position:absolute;background:#fff;box-shadow:0 0 2px #000}#cross:before{left:8px;top:1px;width:2px;height:16px}#cross:after{left:1px;top:8px;width:16px;height:2px}#weapon{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:500px;height:430px;image-rendering:pixelated;filter:drop-shadow(0 5px 4px #000)}#flash{position:absolute;left:50%;bottom:212px;transform:translateX(-50%);width:132px;height:100px;opacity:0;mix-blend-mode:screen;image-rendering:pixelated}.small{font-size:12px;color:#9eabbc}.obj{color:#fbbf24;font-weight:700;margin-top:5px}.keyB{color:#38bdf8}.keyR{color:#ef4444}
 #mapWrap{position:absolute;right:18px;top:86px;background:rgba(4,8,14,.80);border:1px solid #415066;border-radius:8px;padding:8px}#map{width:300px;height:190px;image-rendering:pixelated}.legend{font-size:11px;color:#b8c4d4;margin-top:4px}
@@ -310,7 +310,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
 <body>
 <canvas id="gl"></canvas>
 <div id="hud">
-  <div id="status"><b>MP SHOOT — V14.6B.237 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
+  <div id="status"><b>MP SHOOT — V14.6B.242 DEBUG</b><div id="debugStats">PRESENTATION LAYER ACTIVE</div></div>
   <div id="gameHud">
     <div id="objectiveStrip"><span id="objective">PRIMARY // LOCATE BLUE ACCESS CARD</span><span id="objectiveRecallHint">O // RECALL OBJECTIVE</span></div>
     <div id="bossHud">
@@ -410,7 +410,7 @@ body.noScanlines #mainMenu:after,body.noScanlines .scanlineLayer:after{display:n
     <div class="menuStatus"><span>OPS STATUS <b>ACTIVE</b></span><span>CLEARANCE <b>RED</b></span></div>
   </div>
   <div class="menuFlavor" id="menuFlavor"><span>OPS COMMENT // UNOFFICIAL</span>TO SERVE. TO PROTECT. TO COMPLETE THE APPROPRIATE PAPERWORK.</div>
-  <div class="menuVersion">MP SHOOT // V14.6B.237 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
+  <div class="menuVersion">MP SHOOT // V14.6B.242 FINAL REVIEW TRIBUNAL // AUTHORIZED PERSONNEL ONLY</div>
 </div>
 
 <!-- Mission Select -->
@@ -8318,7 +8318,7 @@ function startV14GreyboxMission(){
   gameHud.style.display='block';uiGameStarted=true;uiPaused=false;
   simulationRemainder=0;last=performance.now();updatePresentationHud();
   canvas.requestPointerLock();
-  message('V14.6B.237 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
+  message('V14.6B.242 // THE DETACHMENT','FLOOR 1 · RECOVER ACCESS · RESTORE THE COMMAND LIFT',4.5);
   setTimeout(()=>hudToast('AUTHORED COMBAT PASS','Eight encounters active. Patrol and O.R. are pre-staged; Mechanical has a two-contact response.','standard',4.4),700);
   setTimeout(()=>hudToast('OBJECTIVE RECALL','Press O at any time to repeat your current objective.','standard',3.2),5400);
 }
@@ -14376,7 +14376,7 @@ const F5_EXTENSION209=[
  ['Logistics / Equipment Storage',134,-10,158,12,4.4],['Equipment Issue Cage',146,12,156,18,3.8],
  ['Planning access',158,-4,164,4,4.0],['Operational Briefing',164,-8,184,8,4.4],
  ['Pristine Administrative Office',164,-16,173,-8,3.8],['Geological Inspection Hall',173,-16,184,-8,3.8],['Deployment / Planning Office',164,8,184,16,3.8],
- ['Service return ramp',30,-8,54,-4.5,4.0],['Service return tunnel',54,-8,66,-4.5,4.0],['West service ledge',62,-12,66,-8,20],
+ ['Service return ramp',30,-8,54,-4.5,4.0],['Service return tunnel',54,-8,62,-4.5,4.0],['West service ledge',62,-12,66,-8,20],
  ['Cavern service catwalk',62,-16,128,-12,24],['Field service return',124,-12,128,-7,20],
  ['Restricted access descent',22,14,28,30,4.2],['Restricted Operations Control',10,30,42,54,5.6],
  ['West response bay',6,42,10,48,4.0],['East response bay',42,34,47,40,4.0],['Descent elevator 06',42,46,50,54,4.1]
@@ -14491,7 +14491,7 @@ const buildWithGates209=f5Build207;f5Build207=()=>{buildWithGates209();for(const
 // Shared lighting atlas extended over the new wings; original cavern colors retained.
 f5LightMap207=()=>{const N=256,bounds=[-36,-52,232,110],pixels=new Uint8Array(N*N*4);for(let j=0;j<N;j++)for(let i=0;i<N;i++){const x=bounds[0]+(i+.5)*bounds[2]/N,z=bounds[1]+(j+.5)*bounds[3]/N,r=f5Room207(x,z),name=r?.[0]||'',cave=x>=64&&x<120||/catwalk|ledge|Field service return/.test(name),base=r?.[0]==='Server Farm' ? .055 : f5InCave211(x,z)?.23:cave?.38:r?/Restricted Operations/.test(name)?.26:/Pristine/.test(name)?.38:/ramp|descent|Inspection/.test(name)?.28:.32:.10;let v=base;for(const l of f5.lights){const dx=x-l.x;if(Math.abs(dx)>l.rad)continue;const q=(dx*dx+(z-l.z)**2)/(l.rad*l.rad);if(q<1)v+=l.gain*(1-q)**2;}const k=(j*N+i)*4;pixels[k]=Math.min(215,v*(cave?.83:.98)*255);pixels[k+1]=Math.min(225,v*255);pixels[k+2]=Math.min(235,v*1.06*255);pixels[k+3]=255;}
  if(fp115LightTexture)gl.deleteTexture(fp115LightTexture);fp115LightTexture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,fp115LightTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,N,N,0,gl.RGBA,gl.UNSIGNED_BYTE,pixels);for(const [k,v]of [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]])gl.texParameteri(gl.TEXTURE_2D,k,v);fp115Stats={floor:5,bounds,lightMapSize:N,fixtures:f5.lights.length};};
-f5Map207=(ctx,W,H,full=false)=>{ctx.fillStyle='#122127';ctx.fillRect(0,0,W,H);const view=full?[-34,-52,230,110]:[player.x-34,player.z-21,68,42],s=Math.min((W-24)/view[2],(H-(full?100:34))/view[3]),ox=(W-view[2]*s)/2-view[0]*s,oy=(H-view[3]*s)/2-view[1]*s,X=x=>ox+x*s,Z=z=>oy+z*s;ctx.save();ctx.beginPath();ctx.rect(6,full?42:20,W-12,H-(full?100:30));ctx.clip();ctx.fillStyle='#283b40';ctx.beginPath();ctx.ellipse(X(96),Z(0),39*s,29*s,0,0,7);ctx.fill();for(const r of F5_ROOMS207){ctx.fillStyle=/catwalk|bridge/.test(r[0])?'#847647':/Restricted|response/.test(r[0])?'#5c5553':/Pristine/.test(r[0])?'#7a806e':'#4b6365';ctx.fillRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);ctx.strokeStyle='#a1b2a8';ctx.lineWidth=1;ctx.strokeRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);}for(const d of Object.values(f5.gates)){ctx.strokeStyle=d.scriptLocked?'#a65245':'#d1ac52';ctx.lineWidth=2;ctx.beginPath();if(d.rot){ctx.moveTo(X(d.x),Z(d.z-1.5));ctx.lineTo(X(d.x),Z(d.z+1.5));}else{ctx.moveTo(X(d.x-1.5),Z(d.z));ctx.lineTo(X(d.x+1.5),Z(d.z));}ctx.stroke();}for(const p of gameplayPickups)if(!p.taken&&p.type==='health_large'){ctx.fillStyle='#7db996';ctx.fillRect(X(p.x)-2,Z(p.z)-2,4,4);}ctx.restore();const t=f5Target207(),tx=Math.max(10,Math.min(W-10,X(t[0]))),tz=Math.max(full?46:24,Math.min(H-(full?65:12),Z(t[1])));ctx.fillStyle='#efc65e';ctx.fillRect(tx-3,tz-3,6,6);ctx.save();ctx.translate(X(player.x),Z(player.z));ctx.rotate(player.yaw);ctx.fillStyle='#9bdfdf';ctx.beginPath();ctx.moveTo(0,-5);ctx.lineTo(3,4);ctx.lineTo(0,2);ctx.lineTo(-3,4);ctx.closePath();ctx.fill();ctx.restore();ctx.fillStyle='#e8d99d';ctx.font=full?'bold 17px monospace':'bold 8px monospace';ctx.fillText('FLOOR 5 / POLICE OPERATIONS',12,full?28:12);if(full){ctx.font='12px monospace';for(const [text,x,z]of [['TRIAGE',7,-45],['PERSONNEL',9,18],['DELEGATION',9,27],['SERVER FARM',147,-28],['WELFARE',167,25],['TRAINING',179,28],['OPS WING',-15,-34],['WORKSHOP',148,30],['TEMP CAVE',42,-22],['ARRIVAL',-30,-5],['WAR ROOM',5,6],['CAVERN / BRIDGE',77,8],['SERVICE RETURN',77,-18],['LOGISTICS',135,4],['PLANNING',165,2],['CONTROL',16,46],['06',45,51]])ctx.fillText(text,X(x),Z(z));ctx.fillText(f5Objective207(),12,H-32);ctx.fillText('M / ESC: CLOSE · GOLD: OBJECTIVE · RED: ACCESS HELD',12,H-12);}};
+f5Map207=(ctx,W,H,full=false)=>{ctx.fillStyle='#122127';ctx.fillRect(0,0,W,H);const view=full?[-34,-52,230,110]:[player.x-34,player.z-21,68,42],s=Math.min((W-24)/view[2],(H-(full?100:34))/view[3]),ox=(W-view[2]*s)/2-view[0]*s,oy=(H-view[3]*s)/2-view[1]*s,X=x=>ox+x*s,Z=z=>oy+z*s;ctx.save();ctx.beginPath();ctx.rect(6,full?42:20,W-12,H-(full?100:30));ctx.clip();ctx.fillStyle='#283b40';ctx.beginPath();ctx.ellipse(X(96),Z(0),39*s,29*s,0,0,7);ctx.fill();for(const r of F5_ROOMS207){ctx.fillStyle=/catwalk|bridge/.test(r[0])?'#847647':/Restricted|response/.test(r[0])?'#5c5553':/Pristine/.test(r[0])?'#7a806e':'#4b6365';ctx.fillRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);ctx.strokeStyle='#a1b2a8';ctx.lineWidth=1;ctx.strokeRect(X(r[1]),Z(r[2]),(r[3]-r[1])*s,(r[4]-r[2])*s);}for(const d of Object.values(f5.gates)){ctx.strokeStyle=d.scriptLocked?'#a65245':'#d1ac52';ctx.lineWidth=2;ctx.beginPath();if(d.rot){ctx.moveTo(X(d.x),Z(d.z-1.5));ctx.lineTo(X(d.x),Z(d.z+1.5));}else{ctx.moveTo(X(d.x-1.5),Z(d.z));ctx.lineTo(X(d.x+1.5),Z(d.z));}ctx.stroke();}for(const p of gameplayPickups)if(!p.taken&&p.type==='health_large'){ctx.fillStyle='#7db996';ctx.fillRect(X(p.x)-2,Z(p.z)-2,4,4);}ctx.restore();const t=f5Target207(),tx=Math.max(10,Math.min(W-10,X(t[0]))),tz=Math.max(full?46:24,Math.min(H-(full?65:12),Z(t[1])));ctx.fillStyle='#efc65e';ctx.fillRect(tx-3,tz-3,6,6);ctx.save();ctx.translate(X(player.x),Z(player.z));ctx.rotate(player.yaw);ctx.fillStyle='#9bdfdf';ctx.beginPath();ctx.moveTo(0,-5);ctx.lineTo(3,4);ctx.lineTo(0,2);ctx.lineTo(-3,4);ctx.closePath();ctx.fill();ctx.restore();ctx.fillStyle='#e8d99d';ctx.font=full?'bold 17px monospace':'bold 8px monospace';ctx.fillText('FLOOR 5 / POLICE OPERATIONS',12,full?28:12);if(full){ctx.font='12px monospace';for(const [text,x,z]of [['TRIAGE',7,-45],['PERSONNEL',9,18],['DELEGATION',23,-45],['SERVER FARM',147,-28],['WELFARE',167,25],['TRAINING',179,28],['OPS WING',-15,-34],['WORKSHOP',148,30],['TEMP CAVE',42,-22],['ARRIVAL',-30,-5],['WAR ROOM',5,6],['CAVERN / BRIDGE',77,8],['SERVICE RETURN',77,-18],['LOGISTICS',135,4],['PLANNING',165,2],['CONTROL',16,46],['06',45,51]])ctx.fillText(text,X(x),Z(z));ctx.fillText(f5Objective207(),12,H-32);ctx.fillText('M / ESC: CLOSE · GOLD: OBJECTIVE · RED: ACCESS HELD',12,H-12);}};
 // Promote the completed route to normal campaign play, without exposing an unbuilt Floor 6.
 FLOOR_NAMES191.push('Police Operations');const floors209=[1,2,3,4,5];
 const inferredBefore209=inferredFloor191;inferredFloor191=()=>{const f=inferredBefore209();return campaign.levels.floor4?.completed||campaign.levels.floor5?.completed||campaign.levels.floor5?.ndi20Ids?.length?5:f;};
@@ -14555,7 +14555,7 @@ function f5Dress210(){const a=f5Assets207();
  // Logistics now feeds a loading bay and workshop, forming a second circulation loop.
  f5Partition210('h',12,134,146,[[138,3.4]],5.2);f5Gate210('loading',138,12,'h',3.4,false,'LOADING / STORES',5.2);
  f5Partition210('v',146,18,36,[[27,4]],5.2);f5Gate210('workshop',146,27,'v',4,false,'EQUIPMENT MAINTENANCE',5.2);
- f5Partition210('h',18,156,164,[[160,3.2]],4.8);f5Gate210('workshopService',160,18,'h',3.2,false,'ISSUE / PLANNING SERVICE LINK',4.8);
+ f5Partition210('h',20,156,166,[[160,3.2]],4.8);f5Gate210('workshopService',160,20,'h',3.2,false,'ISSUE / PLANNING SERVICE LINK',4.8);
  f5Partition210('v',164,12,16,[[14,3.2]],3.8);f5Gate210('planningService',164,14,'v',3.2,true,'PLANNING / BLUE AUTHORITY',3.8);
  for(const x of [146,156]){f5Box207(x,-2.6,15,.10,2.8,6,f5Cage209.texture,[.8,.9,.8,1],true);for(const z of [12,18])f5Box207(x,-2.5,z,.14,3,.14,T.metal,[.3,.38,.33,1]);}
  // Seal the short old Logistics side bypass with a normal doorway.
@@ -14603,7 +14603,7 @@ const useBefore210=f5Use207;f5Use207=p=>{
  if(p.id==='f5_authorization'&&f5.authority)for(const id of ['maintenanceWest','maintenanceEast','maintenanceEntry']){f5.gates[id].scriptLocked=false;f5.gates[id].target=1;}
  return result;
 };
-const flowBefore210=f5Flow207;f5Flow207=()=>{flowBefore210();if(player.z<-14&&player.x<34)f5Wake207('operations');if(f5.field&&player.x>=130&&player.z>12)f5Wake207('stores');if(f5.authority&&player.x<65&&player.z<-8&&!f5.maintenanceOpened){f5.maintenanceOpened=true;f5Wake207('maintenance');hudToast('MAINTENANCE ACCESS RELEASED','The west service door is open. Maintenance connects to the Operations wing; the original service return remains available.','standard',6);}};
+const flowBefore210=f5Flow207;f5Flow207=()=>{flowBefore210();if(player.z<-14&&player.x<34)f5Wake207('operations');if(f5.field&&player.x>=130&&player.z>12)f5Wake207('stores');if(f5.authority&&player.x<65&&player.z<-8&&!f5.maintenanceOpened){f5.maintenanceOpened=true;f5Wake207('maintenance');hudToast('MAINTENANCE ACCESS RELEASED','Maintenance is released. Cross the service bridge and enter the temporary cave; the finished service tunnel has collapsed.','standard',6);}};
 const objectiveBefore210=f5Objective207;f5Objective207=()=>{if(!f5.authorized&&!f5.communications)return 'OPERATIONS NET OFFLINE / RESTORE COMMUNICATIONS';if(f5.field&&!f5.issued)return f5Alive207('logistics')||f5Alive207('stores')?'LOGISTICS / SECURE STORES AND EQUIPMENT MAINTENANCE':'WORKSHOP ISSUE / OBTAIN BLUE MOVEMENT AUTHORITY';return objectiveBefore210();};
 const targetBefore210=f5Target207;f5Target207=()=>{if(!f5.authorized&&!f5.communications)return player.x>=0&&player.z>-14?[26,-15.5]:[13,-26.2];if(f5.field&&!f5.issued)return [161,31];if(f5.authority&&!f5.reported&&player.x>=34&&player.x<65&&player.z<-8)return player.x<54?[33,-22]:player.z>-19?[58,-22]:[52,-22];if(f5.authority&&!f5.reported&&player.z<-14&&player.x<38)return [26,-15.5];return targetBefore210();};
 
@@ -14613,7 +14613,7 @@ function f5CaveShell211(r){const a=f5Assets207(),ramp=r[0].includes('ramp');f5Su
  const roof=[],rise=(x,z)=>f5Floor207(Math.max(r[1]+.001,Math.min(r[3]-.001,x)),Math.max(r[2]+.001,Math.min(r[4]-.001,z))),height=(x,z)=>{const across=(z-r[2])/(r[4]-r[2]);return 2.85+.48*Math.sin(across*Math.PI)+.14*Math.sin(x*1.7+z*.6);};
  for(let x=r[1];x<r[3];x+=2)for(let z=r[2];z<r[4];z+=2){const xx=Math.min(x+2,r[3]),zz=Math.min(z+2,r[4]),p=(x,z)=>[x,rise(x,z)+height(x,z),z];f5Quad207(roof,p(x,z),p(xx,z),p(xx,zz),p(x,zz),[0,-1,0]);}f5Mesh207(roof,a.rock,[.61,.66,.65,1],.025);
  // Irregular shoulders conceal the rectangular structural collision behind the rock.
- const walls=[],sides=ramp?[['h',-24,34,54,1],['h',-20,34,54,-1]]:[['v',54,-20,-8,1],['v',62,-24,-8,-1],['h',-24,54,62,1]];
+ const walls=[],sides=ramp?[['h',-24,34,54,1],['h',-20,34,54,-1]]:[['v',54,-20,-8,1],['v',62,-24,-12,-1],['h',-24,54,62,1]];
  for(const [axis,p,lo,hi,dir]of sides)for(let t=lo;t<hi;t+=2){const end=Math.min(t+2,hi),shift=.18+.16*(.5+.5*Math.sin(t*2.3)),pos=(u,y,inset)=>axis==='h'?[u,y,p+dir*inset]:[p+dir*inset,y,u],g=u=>axis==='h'?rise(u,p):rise(p,u);const A=pos(t,g(t)-.15,0),B=pos(end,g(end)-.15,0),C=pos(end,g(end)+1.7,shift),D=pos(t,g(t)+1.55,shift*.8),E=pos(t,g(t)+4,0),F=pos(end,g(end)+4,0),n=axis==='h'?[0,0,dir]:[dir,0,0];f5Quad207(walls,A,B,C,D,n);f5Quad207(walls,D,C,F,E,n);}
  f5Mesh207(walls,a.rock,[.66,.70,.68,1],.02);
  const lights=ramp?[[38,-22],[45,-22],[51,-22]]:[[58,-11],[59,-19]];for(const [x,z]of lights){const o=f5Light207(x,z,rise(x,z)+2.55,1.0);o.tint=[.94,.81,.58,1];f5.lights.at(-1).gain=.22;}
@@ -14632,7 +14632,7 @@ const buildBefore211=f5Build207;f5Build207=()=>{buildBefore211();const a=f5Asset
  f5Sign207(35.4,3.25,-23.7,'DUTY BRIEFING / WAR ROOM|RETURN TO CONSTRUCTED ACCESS','h',2.6,.5);
  for(const l of f5.lights)if(f5InCave211(l.x,l.z))l.gain=.22;f5.caveVisited211=false;
 };
-const flowBefore211=f5Flow207;f5Flow207=()=>{flowBefore211();if(f5.authority&&!f5.caveVisited211&&f5InCave211(player.x,player.z)){f5.caveVisited211=true;hudToast('APPROVED TEMPORARY ACCESS','The corridor ends here. Follow the service cables back to Operations.','standard',4);}};
+const flowBefore211=f5Flow207;f5Flow207=()=>{flowBefore211();if(f5.authority&&!f5.caveVisited211&&f5InCave211(player.x,player.z)){f5.caveVisited211=true;hudToast('APPROVED TEMPORARY ACCESS','Follow the service cables through the temporary cave to Operations. The finished tunnel is blocked.','standard',4);}};
 
 // C8 ADS presentation. Ballistics, permanent recoil, ammunition, and fire modes stay in fireSMG.
 let c8AdsAge212=1,c8AdsScene212=null,c8AdsFiring212=false;
@@ -14956,7 +14956,7 @@ const crawler226={ready:false,rows:[]};
 enemyTex.crawler={...enemyTex.flanker};
 (()=>{const im=new Image();im.onload=()=>{for(let r=0;r<10;r++){const row=[];for(let d=0;d<8;d++){const c=document.createElement('canvas');c.width=128;c.height=112;const x=c.getContext('2d');x.imageSmoothingEnabled=false;x.drawImage(im,d*128,r*112,128,112,0,0,128,112);row.push(tex(c));}crawler226.rows.push(row);}crawler226.ready=true;enemyTex.crawler={idle:crawler226.rows[0],walk:[crawler226.rows[1],crawler226.rows[2]],fire:crawler226.rows[3],pain:crawler226.rows[5],death:crawler226.rows[9][0],deathFrames:crawler226.rows.slice(6)};};im.src=CRAWLER_ATLAS226;})();
 ENEMY_DROP_TABLES.crawler=[['nothing',60],['health_small',20],['ammo_smg',20]];
-const spawnBefore226=spawn;spawn=(kind,...args)=>{const e=spawnBefore226(kind==='crawler'?'flanker':kind,...args);if(kind==='crawler'){e.kind=kind;e.hp=e.maxHp=7;e.speed=2.05;e.crawler226={phase:'ground',time:0,cool:1,age:0,vy:0,surface:null,region:[-1e4,1e4,-1e4,1e4]};e.y=groundHeight(e.x,e.z)+.83;}return e;};
+const spawnBefore226=spawn;spawn=(kind,...args)=>{const e=spawnBefore226(kind==='crawler'?'flanker':kind,...args);if(kind==='crawler'){e.kind=kind;e.hp=e.maxHp=7;e.speed=2.55;e.crawler226={phase:'ground',time:0,cool:1,age:0,vy:0,surface:null,region:[-1e4,1e4,-1e4,1e4]};e.y=groundHeight(e.x,e.z)+.83;}return e;};
 const eyeBefore226=enemyEyeY;enemyEyeY=e=>e.kind==='crawler'?e.y+.18:eyeBefore226(e);
 function crawlerRoof227(e,s){return groundHeight(e.x,e.z)+(s.low?3.33+.14*Math.sin(e.x*1.7+e.z*.6):4.2);}
 function crawlerSurface226(e){const c=e.crawler226,s=c.surface;if(!s)return;const t=Math.sin(c.age*.60+c.seed)*.70;e.x=c.anchor.x+(s.axis==='x'?t:0)+(s.normal?.[0]||0)*.65;e.z=c.anchor.z+(s.axis==='z'?t:0)+(s.normal?.[2]||0)*.65;e.y=s.type==='ceiling'?crawlerRoof227(e,s)-.85:groundHeight(e.x,e.z)+s.height;}
@@ -14991,7 +14991,7 @@ function crawlerStep226(e,dt){
  if(c.phase==='perch'){
   crawlerSurface226(e);e.state='walk';if(d<11&&crawlerInside226(c,player.x,player.z)&&enemyCanSee(e)){e.aware=true;e.combatState='engage';if(c.cool<=0){const target=crawlerLanding226(e);if(target){c.target=target;c.phase='tell';c.time=.78;crawlerTell226(e);}}}return;
  }
- if(c.phase==='tell'){e.state='idle';c.time-=dt;if(c.time<=0){if(!lineClear3D(e.x,e.y,e.z,c.target.x,c.target.y,c.target.z)){c.phase=c.surface?'perch':'ground';c.cool=.9;return;}c.from={x:e.x,y:e.y,z:e.z};c.surface=null;c.phase='pounce';c.time=0;c.duration=.62;c.hit=false;}return;}
+ if(c.phase==='tell'){e.state='idle';c.time-=dt;if(c.time<=0){if(!lineClear3D(e.x,e.y,e.z,c.target.x,c.target.y,c.target.z)){c.phase=c.surface?'perch':'ground';c.cool=.9;return;}c.from={x:e.x,y:e.y,z:e.z};c.surface=null;c.phase='pounce';c.time=0;c.duration=.52;c.hit=false;}return;}
  if(c.phase==='pounce'){
   const prev={x:e.x,y:e.y,z:e.z};c.time+=dt;const u=Math.min(1,c.time/c.duration),x=c.from.x+(c.target.x-c.from.x)*u,z=c.from.z+(c.target.z-c.from.z)*u,y=c.from.y+(c.target.y-c.from.y)*u+Math.sin(Math.PI*u)*.35;
   if(!lineClear3D(prev.x,prev.y,prev.z,x,y,z)){c.phase='fall';c.vy=0;return;}e.x=x;e.y=y;e.z=z;e.state='walk';
@@ -15024,7 +15024,7 @@ crawlerPoseBasis226=e=>{const b=basisBefore228(e),s=e.crawler226.surface;if(s?.t
 crawlerContacts227=(e,vp)=>{const s=e.crawler226.surface;if(!s||!e.alive)return;const b=crawlerPoseBasis226(e);for(const side of [-1,1])for(const top of [-1,1]){const a=[e.x,e.y,e.z].map((v,i)=>v+b.u[i]*side*.48+b.v[i]*top*.38);const end=s.type==='ceiling'?[e.x+side*.42,crawlerRoof227(e,s)-.025,e.z+top*.32]:a.map((v,i)=>v-(s.normal[i]||0)*.40);const knee=a.map((v,i)=>(v+end[i])*.5+(s.type==='wall'?(s.normal[i]||0)*.07:i===1?-.04:0));crawlerLink227(a,knee,vp,[.21,.16,.10,1],.035);crawlerLink227(knee,end,vp,[.45,.37,.24,1],.025);}};
 function crawlerNodes228(e){const c=e.crawler226,id=c.seed,nodes=[],wall=(x,z,normal,axis,height=2.05)=>nodes.push({x,z,s:{type:'wall',normal,axis,height}}),roof=(x,z,low=false)=>nodes.push({x,z,s:{type:'ceiling',axis:'x',low}});if(id<=2){for(const x of [41.5,45,49,53,57,61.5]){if(x!==49)wall(x,1.67,[0,0,-1],'x');wall(x,-3.67,[0,0,1],'x');roof(x,-1);}}else if(id===3){for(const x of [115.6,117,118.4])wall(x,5.24,[0,0,-1],'x',2.5);}else if(id===4){for(const x of [35.5,39,43,47,51.5]){wall(x,-20.25,[0,0,-1],'x',1.9);wall(x,-23.75,[0,0,1],'x',1.9);roof(x,-22,true);}}else{for(const z of [-22,-18,-14,-10])wall(61.55,z,[-1,0,0],'z',2.05);}return nodes;}
 function crawlerNodePose228(e,node){const c=e.crawler226,copy={...e,crawler226:{...c,surface:node.s,anchor:{x:node.x,z:node.z},age:0,seed:0}};crawlerSurface226(copy);return{x:copy.x,y:copy.y,z:copy.z};}
-function crawlerRelocate228(e){const c=e.crawler226;let best=null,score=-Infinity;for(const node of c.nodes228||[]){const p=crawlerNodePose228(e,node),travel=Math.hypot(p.x-e.x,p.y-e.y,p.z-e.z),distance=Math.hypot(p.x-player.x,p.z-player.z);if(travel<1.4||travel>8||distance>11||!lineClear3D(e.x,e.y,e.z,p.x,p.y,p.z))continue;const rear=((p.x-player.x)*Math.sin(player.yaw)-(p.z-player.z)*Math.cos(player.yaw))/(distance||1),value=-Math.abs(distance-3.4)*1.3-rear*2.4+(node.s.type!==c.surface?.type? .5:0)-travel*.08;if(value>score){score=value;best={node,p};}}if(!best)return false;c.move228={from:{x:e.x,y:e.y,z:e.z},to:best.p,node:best.node,t:0,duration:.55+Math.hypot(best.p.x-e.x,best.p.y-e.y,best.p.z-e.z)*.055};c.surface=null;c.phase='evade228';c.climbSign228=best.p.x<e.x||best.p.z<e.z?-1:1;return true;}
+function crawlerRelocate228(e){const c=e.crawler226;let best=null,score=-Infinity;for(const node of c.nodes228||[]){const p=crawlerNodePose228(e,node),travel=Math.hypot(p.x-e.x,p.y-e.y,p.z-e.z),distance=Math.hypot(p.x-player.x,p.z-player.z);if(travel<1.4||travel>8||distance>11||!lineClear3D(e.x,e.y,e.z,p.x,p.y,p.z))continue;const rear=((p.x-player.x)*Math.sin(player.yaw)-(p.z-player.z)*Math.cos(player.yaw))/(distance||1),value=-Math.abs(distance-3.4)*1.3-rear*2.4+(node.s.type!==c.surface?.type? .5:0)-travel*.08;if(value>score){score=value;best={node,p};}}if(!best)return false;c.move228={from:{x:e.x,y:e.y,z:e.z},to:best.p,node:best.node,t:0,duration:.44+Math.hypot(best.p.x-e.x,best.p.y-e.y,best.p.z-e.z)*.044};c.surface=null;c.phase='evade228';c.climbSign228=best.p.x<e.x||best.p.z<e.z?-1:1;return true;}
 const stepBefore228=crawlerStep226;
 crawlerStep226=(e,dt)=>{const c=e.crawler226;if(!e.alive||e.lidarDeath217||(e.cewFreeze||0)>0||(e.stun||0)>0||(e.cewPanic||0)>0||c.phase==='fall'){stepBefore228(e,dt);return;}
  if(!c.engaged228&&(e.hp<e.maxHp||e.aware||Math.hypot(player.x-e.x,player.z-e.z)<10&&enemyCanSee(e))){if(c.surface){c.anchor={x:e.x-(c.surface.normal?.[0]||0)*.27,z:e.z-(c.surface.normal?.[2]||0)*.27};}c.engaged228=true;c.decide228=.35;}
@@ -15204,28 +15204,29 @@ const buildBefore236=f5Build207;f5Build207=()=>{buildBefore236();f5ShellRepair23
 
 // Department layout pass. Existing rooms build first so their exterior shell is preserved.
 const F5_DEPARTMENTS237=[
- ['Personnel Allocation',8,14,20,23,3.8,0],['Delegation / WO Tasking',8,23,20,30,3.8,0],
- ['Welfare and Training Hall',164,16,190,18,3.8,-4],
- ['Morale and Welfare',166,18,176,28,3.8,-4],['Training and Readiness',178,18,190,30,3.8,-4],
+ ['Personnel Allocation',8,14,20,30,3.8,0],['Delegation / WO Tasking',22,-49,36,-38,4.4,1.6],
+ ['Welfare and Training Hall',164,16,190,20,3.8,-4],['Logistics Service Junction',156,18,164,20,4.8,-4],
+ ['Morale and Welfare',166,20,176,30,3.8,-4],['Training and Readiness',178,20,190,32,3.8,-4],
  ['Server Intake',152,-12,156,-10,4.0,-4],['Server Farm',146,-30,164,-12,4.4,-4],
  ['Server Planning Link',158,-12,164,-4,4.0,-4],['Incident Triage',6,-49,20,-38,4.4,1.6]
 ];
 let departmentsActive237=false;
 const floorBefore237=f5Floor207;f5Floor207=(x,z)=>{if(departmentsActive237){const r=F5_DEPARTMENTS237.find(r=>x>r[1]-.001&&x<r[3]+.001&&z>r[2]-.001&&z<r[4]+.001);if(r)return r[6];}return floorBefore237(x,z);};
 function roomWall237(axis,p,lo,hi,g,h,open=[]){let spans=[[lo,hi]];for(const [mid,w]of open)spans=spans.flatMap(([a,b])=>[[a,Math.min(b,mid-w/2)],[Math.max(a,mid+w/2),b]].filter(([a,b])=>b>a));for(const [a,b]of spans){const o=f5Box207(axis==='v'?p:(a+b)/2,g+h/2,axis==='v'?(a+b)/2:p,axis==='v'?.24:b-a,h,axis==='v'?b-a:.24,f5Assets207().wall,[.84,.88,.89,1],true);o.fp112Material=3;o.departmentWall237=true;}}
-function roomShell237(r){const [name,x0,z0,x1,z1,h,g]=r,a=f5Assets207(),x=(x0+x1)/2,z=(z0+z1)/2;const f=f5Box207(x,g-.12,z,x1-x0,.24,z1-z0,a.floor,[.82,.85,.86,1]);f.fp112Material=1;f.department237=name;const c=f5Box207(x,g+h+.1,z,x1-x0,.2,z1-z0,a.ceiling,[.75,.79,.80,1]);c.fp112Material=2;}
+function roomShell237(r){if(r[0]==='Logistics Service Junction')return;const [name,x0,z0,x1,z1,h,g]=r,a=f5Assets207(),x=(x0+x1)/2,z=(z0+z1)/2;const f=f5Box207(x,g-.12,z,x1-x0,.24,z1-z0,a.floor,[.82,.85,.86,1]);f.fp112Material=1;f.department237=name;const c=f5Box207(x,g+h+.1,z,x1-x0,.2,z1-z0,a.ceiling,[.75,.79,.80,1]);c.fp112Material=2;}
 function departmentDoor237(id,x,z,axis,w,label,g,h,locked=false){const first=objects.length,d=f5Door207(id,x,z,axis,w,locked,label),header=objects[first];d.y=g+1.5;header.y=g+(3+h)/2;header.sy=h-3;d.department237=true;return d;}
 function departmentLight237(x,z,y,width=1.7){f5Light207(x,z,y,width);f5.lights.at(-1).gain=.28;}
 function departmentsShell237(){for(const r of F5_DEPARTMENTS237)roomShell237(r);
  // Personnel/Delegation suite: retain and cut the War Room's existing south wall.
  f5Cut209('h',14,11.9,15.1);departmentDoor237('personnel237',13.5,14,'h',3.2,'PERSONNEL / ALLOCATION AND SCHEDULING',0,5.8);
- roomWall237('v',8,18,23,0,3.8);roomWall237('v',20,14,23,0,3.8);roomWall237('h',23,8,20,0,3.8,[[13.5,3]]);departmentDoor237('delegation237',13.5,23,'h',3,'DELEGATION / POL OPS WO',0,3.8);
- roomWall237('v',8.04,23,30,0,3.8);roomWall237('v',19.96,23,30,0,3.8);roomWall237('h',29.96,8,20,0,3.8);
+ roomWall237('v',8,18,30,0,3.8);roomWall237('v',20,14,30,0,3.8);roomWall237('h',29.96,8,20,0,3.8);
+ f5Cut209('h',-38,27.5,30.5);departmentDoor237('delegation237',29,-38,'h',3,'DELEGATION / POL OPS WO',1.6,4.4);
+ roomWall237('v',22.04,-49,-38,1.6,4.4);roomWall237('v',35.96,-49,-38,1.6,4.4);roomWall237('h',-49,22,36,1.6,4.4);
  // Logistics annex: a short hall with separate doors to the two departments.
- f5Cut209('v',164,16.2,17.8);departmentDoor237('welfareHall237',164,17,'v',1.6,'MORALE / TRAINING ANNEX',-4,3.8);
- roomWall237('h',16.04,164,190,-4,3.8);roomWall237('h',18,164,190,-4,3.8,[[171,3],[184,3]]);roomWall237('v',190,16,18,-4,3.8);
- for(const [id,x,label]of [['welfare237',171,'MORALE AND WELFARE'],['training237',184,'TRAINING AND READINESS']])departmentDoor237(id,x,18,'h',3,label,-4,3.8);
- for(const [x0,x1,z1]of [[166,176,28],[178,190,30]]){roomWall237('v',x0+.04,18,z1,-4,3.8);roomWall237('v',x1-.04,18,z1,-4,3.8);roomWall237('h',z1,x0,x1,-4,3.8);}
+ f5Cut209('v',164,16.4,19.6);departmentDoor237('welfareHall237',164,18,'v',3.2,'MORALE / TRAINING ANNEX',-4,3.8);
+ roomWall237('h',16.04,164,190,-4,3.8);roomWall237('h',20,164,190,-4,3.8,[[171,3],[184,3]]);roomWall237('v',190,16,20,-4,3.8);
+ for(const [id,x,label]of [['welfare237',171,'MORALE AND WELFARE'],['training237',184,'TRAINING AND READINESS']])departmentDoor237(id,x,20,'h',3,label,-4,3.8);
+ for(const [x0,x1,z1]of [[166,176,30],[178,190,32]]){roomWall237('v',x0+.04,20,z1,-4,3.8);roomWall237('v',x1-.04,20,z1,-4,3.8);roomWall237('h',z1,x0,x1,-4,3.8);}
  // Blue-gated alternate route: Logistics -> server aisles -> Planning lobby.
  f5Cut209('h',-10,152.5,155.5);const entry=departmentDoor237('serverIn237',154,-10,'h',3,'SERVER FARM / BLUE MOVEMENT AUTHORITY',-4,4.4,true);entry.server237=true;
  roomWall237('v',152,-12,-10,-4,4);roomWall237('v',156,-12,-10,-4,4);
@@ -15237,17 +15238,22 @@ function departmentsShell237(){for(const r of F5_DEPARTMENTS237)roomShell237(r);
  // Triage is reached from the Operations cross-passage, near Communications.
  f5Cut209('h',-38,11.5,14.5);departmentDoor237('triage237',13,-38,'h',3,'INCIDENT TRIAGE / REQUESTS',1.6,4.4);
  roomWall237('v',6.04,-49,-38,1.6,4.4);roomWall237('v',19.96,-49,-38,1.6,4.4);roomWall237('h',-49,6,20,1.6,4.4);
- for(const [x,z,y]of [[13.5,18.5,3.5],[13.5,26.5,3.5],[171,22.5,-.5],[171,26,-.5],[184,22,-.5],[184,27,-.5],[173,17,-.5],[185,17,-.5],[13,-42,5.7],[13,-46.5,5.7]])departmentLight237(x,z,y);
+ for(const [x,z,y]of [[13.5,18.5,3.5],[29,-43,5.7],[171,24.5,-.5],[171,28,-.5],[184,24,-.5],[184,29,-.5],[173,18,-.5],[185,18,-.5],[13,-42,5.7],[13,-46.5,5.7]])departmentLight237(x,z,y);
 }
 function rosterTexture237(){if(rosterTexture237.cache)return rosterTexture237.cache;return rosterTexture237.cache=tex(f4Flip(tc(512,(c,n)=>{c.fillStyle='#172d3b';c.fillRect(0,0,n,n);c.fillStyle='#d6dfd6';c.font='bold 27px monospace';c.fillText('PERSONNEL / DUTY ROSTER',20,40);c.font='18px monospace';c.fillText('ENTIRE UNDERGROUND FACILITY',20,78);for(const [i,time]of ['0000 - 0800','0800 - 1600','1600 - 0000'].entries()){const y=125+i*80;c.fillStyle='#3c5561';c.fillRect(18,y-22,476,65);c.fillStyle='#c0d0cb';c.fillText(time,30,y);c.font='17px monospace';c.fillText('CPL THOMPSON + CPL FRASER',30,y+26);c.font='18px monospace';}c.fillStyle='#7dba83';c.font='bold 27px monospace';c.fillText('MINIMUM MANNING',26,415);c.fillText('ACHIEVED',26,451);c.font='16px monospace';c.fillStyle='#d1bd79';c.fillText('ASSIGNED STRENGTH: 2',26,488);})));}
 function departmentsFurnish237(){const a=f5Assets207();
  // The same two members appear on the roster and the WO's task allocations.
- const roster=f5Box207(17.4,2.25,22.78,4.4,2.3,.06,rosterTexture237(),[1,1,1,1],false,.42);roster.roster237=true;
- f5Sign207(18.6,.65,22.7,'Additional personnel|unavailable due to|mandatory training','h',1.15,.75).t=f5Label207('Additional personnel|unavailable due to|mandatory training','#c7b66b','#252b28');
+ const roster=f5Box207(17.4,2.25,29.78,4.4,2.3,.06,rosterTexture237(),[1,1,1,1],false,.42);roster.roster237=true;
+ f5Sign207(18.6,.65,29.7,'Additional personnel|unavailable due to|mandatory training','h',1.15,.75).t=f5Label207('Additional personnel|unavailable due to|mandatory training','#c7b66b','#252b28');
  f5Work207(10.4,20.3,Math.PI);f5Sign207(13.5,3.3,14.22,'PERSONNEL ALLOCATION / SCHEDULING','h',7,.45);
  f5Box207(8.8,1.15,17,.8,2.3,1.2,T.metal,[.24,.32,.38,1],true);
- f5Work207(17.5,27,Math.PI);f5Sign207(13.6,2.45,29.75,'POL OPS WO / TASK ALLOCATION|RESTORE POWER: CPL THOMPSON|CONTAIN INCIDENT: CPL FRASER|COVER ALL SHIFTS: BOTH MEMBERS|WO: MONITOR PROGRESS','h',7.4,2.2);
- for(const z of [25,27.5]){f5Box207(9.1,.47,z,1.4,.94,1.15,T.metal,[.24,.31,.36,1],true);f5Papers209(9.1,z,.97,.8,.5);}f5Sign207(13.5,3.3,23.22,'DELEGATION / TASKING OFFICE','h',7,.45);
+ const delegationStart239=objects.length;
+ f5Work207(17.5,27,Math.PI);f5Sign207(13.6,2.45,24.25,'POL OPS WO / TASK ALLOCATION|RESTORE POWER: CPL THOMPSON|CONTAIN INCIDENT: CPL FRASER|COVER ALL SHIFTS: BOTH MEMBERS|WO: MONITOR PROGRESS','h',7.4,2.2);
+ for(const z of [25,27.5]){f5Box207(9.1,.47,z,1.4,.94,1.15,T.metal,[.24,.31,.36,1],true);f5Papers209(9.1,z,.97,.8,.5);}f5Sign207(13.5,3.3,34.76,'DELEGATION / TASKING OFFICE','h',7,.45);
+ for(const o of objects.slice(delegationStart239)){o.x+=15.5;o.z-=73;o.y+=1.6;}
+ f5Sign207(29,5.25,-38.24,'DELEGATION / POL OPS WO','h',8,.5);
+ f5Work207(13.5,27,Math.PI);f5Sign207(13.5,2.4,29.74,'PERSONNEL RECORDS|RELIEF REQUESTS: PENDING|ASSIGNED STRENGTH: TWO','h',7,1.4);
+ const staffStart238=objects.length;
  // Ordinary coffee room: functional counter, fridge, microwave, mugs and a table.
  f5Box207(171,-3.55,26.9,7.5,.9,1.25,T.metal,[.29,.36,.38,1],true);f5Box207(171,-3.04,26.9,7.7,.12,1.4,T.desk,[.48,.39,.28,1]);
  f5Box207(168.5,-2.66,26.85,.8,.68,.7,T.metal,[.16,.19,.20,1]);const pot=f5Box207(168.5,-2.45,26.7,.33,.43,.33,T.metal,[.34,.24,.14,1]);pot.mesh=a.cylY;
@@ -15259,23 +15265,35 @@ function departmentsFurnish237(){const a=f5Assets207();
  for(const x of [181,186.5])for(const z of [23,26.6])opsStation233(x,z,Math.PI,'MANDATORY TRAINING',3);
  f5Sign207(184,-1.05,29.78,'TRAINING AND READINESS|MANDATORY ONLINE INSTRUCTION|ATTENDANCE: 0 / COMPLIANCE: 100%','h',8,1.5);
  f5Sign207(184,-.65,18.24,'TRAINING IN PROGRESS / DO NOT DISTURB','h',7,.4);
+ for(const o of objects.slice(staffStart238))if(o.x>=166&&o.z>=18)o.z+=2;
  // Incoming incidents feed the operations department from a quieter side office.
  f5Work207(9.2,-45,0);f5Work207(16.4,-45,0);f5Sign207(13,4.4,-48.78,'INCIDENT TRIAGE / INCOMING REQUESTS|LOSS OF CONTACT: ROUTINE|SUBSURFACE MOVEMENT: ROUTINE|STRUCTURAL BREACH: ROUTINE|PRIORITY: NO FURTHER ACTION','h',9,2);
  for(const z of [-41,-43]){f5Box207(18.6,2.1,z,.7,.17,.7,T.metal,[.22,.30,.35,1],true);f5Box207(18.6,2.5,z+.3,.7,.7,.1,T.metal,[.22,.30,.35,1]);}
  f5Sign207(13,5.25,-38.24,'INCIDENT TRIAGE / OPERATIONS REQUESTS','h',8,.5);
  // Department wayfinding at the actual entry points.
- f5Sign207(13.5,3.35,13.74,'PERSONNEL / DELEGATION','h',5.5,.5);
- f5Sign207(163.74,-.7,17,'MORALE / TRAINING ANNEX','v',2.6,.45);
- f5Sign207(171,-.7,18.22,'MORALE AND WELFARE','h',4.8,.45);f5Sign207(184,-.7,18.22,'TRAINING / READINESS','h',4.8,.45);
+ f5Sign207(13.5,3.35,13.74,'PERSONNEL / DUTY ROSTER','h',5.5,.5);
+ f5Sign207(163.74,-.7,18,'STAFF FACILITIES / ANNEX','v',2.6,.45);
+ f5Sign207(171,-.7,19.76,'MORALE AND WELFARE','h',4.8,.45);f5Sign207(184,-.7,19.76,'TRAINING / READINESS','h',4.8,.45);
 }
-function serverFarm237(){const a=f5Assets207(),textures=serverFarm237.textures||(serverFarm237.textures=[0,1,2,3].map(i=>opsScreen233('SERVER / NODE 0'+(i+1),i)));
- for(const [bank,x]of [149,153,157,161].entries())for(const z of [-16,-18,-22,-24,-26]){f5Box207(x,-2.75,z,1.1,2.5,1.15,T.metal,[.10,.14,.18,1],true);f5Box207(x,-1.25,z,1.14,.15,1.2,T.metal,[.18,.24,.27,1]);f5Box207(x,-2.72,z+.59,.88,1.96,.025,textures[bank],[.61,.88,.86,1],false,.7);for(const h of [-3.45,-3.25,-3.05])f5Box207(x+.34,h,z+.61,.06,.055,.02,T.light,bank%2?[.36,.67,.74,1]:[.42,.72,.43,1],false,.85);f5.lights.push({x,z:z+.8,y:-2.7,rad:2.8,gain:.10});}
- f5Sign207(154,-.65,-12.24,'SERVER FARM / OPS NET BACKUP|RACK AISLES / KEEP ACCESS CLEAR','h',8,.55);
- f5Sign207(161,-.65,-12.26,'PLANNING LINK / BLUE AUTHORITY','h',4,.45);
- for(const [x,z]of [[154,-13.3],[161,-10],[161,-5.2]]){f5Box207(x,-.8,z,1.0,.05,.22,T.light,[.26,.53,.61,1],false,.45);f5.lights.push({x,z,y:-.8,rad:3.5,gain:.13});}
+function rackHardware238(){if(rackHardware238.cache)return rackHardware238.cache;const vent=tex(tc(128,(c,n)=>{c.fillStyle='#242e34';c.fillRect(0,0,n,n);c.fillStyle='#111b21';for(let y=10;y<120;y+=8)for(let x=8;x<116;x+=10)c.fillRect(x,y,6,3);c.fillStyle='#76848a';for(const x of [4,122])for(const y of [6,120])c.fillRect(x,y,2,2);}));const fan=tex(tc(128,(c,n)=>{c.fillStyle='#141d23';c.fillRect(0,0,n,n);for(const x of [34,94]){c.strokeStyle='#4d5c64';c.lineWidth=2;c.beginPath();c.arc(x,64,24,0,7);c.stroke();for(let i=0;i<6;i++){const q=i*Math.PI/3;c.fillStyle='#293740';c.beginPath();c.ellipse(x+Math.cos(q)*11,64+Math.sin(q)*11,13,5,q,0,7);c.fill();}c.fillStyle='#65757d';c.beginPath();c.arc(x,64,5,0,7);c.fill();}c.strokeStyle='#10191e';c.lineWidth=1;for(let y=6;y<128;y+=7){c.beginPath();c.moveTo(0,y);c.lineTo(128,y);c.stroke();}}));return rackHardware238.cache={vent,fan,labels:[0,1,2,3].map(i=>f5Label207('RACK '+String.fromCharCode(65+i)+' / OPS NET','#26343d','#b8c6c7'))};}
+function serverFarm237(){const a=f5Assets207(),h=rackHardware238(),cables=[];
+ for(const [bank,x]of [149,153,157,161].entries())for(const z of [-16,-18,-22,-24,-26]){
+  f5Box207(x,-2.75,z,1.1,2.5,1.15,T.metal,[.13,.18,.22,1],true);
+  for(const side of [-1,1])f5Box207(x+side*.49,-2.75,z+.61,.045,2.43,.07,T.metal,[.46,.53,.56,1]);
+  for(let unit=0;unit<7;unit++){const y=-3.65+unit*.31;f5Box207(x,y,z+.62,.91,.255,.10,T.metal,[.42,.49,.53,1],false,.18);f5Box207(x-.07,y,z+.68,.65,.18,.018,h.vent,[1,1,1,1],false,.20);f5Box207(x+.30,y,z+.70,.035,.04,.02,T.light,unit===bank?[.72,.43,.16,1]:[.30,.68,.42,1],false,.8);for(const side of [-1,1])f5Box207(x+side*.41,y,z+.69,.026,.14,.025,T.metal,[.57,.61,.59,1]);}
+  f5Box207(x,-1.38,z+.66,.82,.12,.025,h.labels[bank],[1,1,1,1],false,.15);
+  f5Box207(x,-2.55,z-.60,.88,1.8,.025,T.metal,[.15,.22,.27,1]);f5Box207(x,-2.15,z-.63,.78,.55,.025,h.fan,[1,1,1,1],false,.1);
+  f5Box207(x,-3.88,z,1.18,.15,1.24,T.metal,[.10,.15,.19,1]);
+  f5.lights.push({x,z:z+.8,y:-2.7,rad:2.8,gain:.10});
+  if(z===-18||z===-24)f5Tube231(cables,[[x,-1.45,z],[x+.12,-.75,z],[x+.2,-.47,z+(z===-18?-2:4)]],.025);
+ }
+ f5Box207(155,-.45,-20,17,.12,.48,T.metal,[.20,.27,.31,1]);for(const x of [149,157,163])f5Box207(x,-.05,-20,.07,.7,.07,T.metal,[.25,.32,.35,1]);f5Mesh207(cables,T.metal,[.13,.18,.21,1],.08);
+ f5Sign207(154,-.65,-12.24,'SERVER FARM / OPS NET BACKUP|RACK AISLES / KEEP ACCESS CLEAR','h',8,.55);f5Sign207(161,-.65,-12.26,'PLANNING LINK / BLUE AUTHORITY','h',4,.45);
+ for(const [x,z]of [[154,-13.3],[161,-10],[161,-5.2]]){f5Box207(x,-.8,z,1,.05,.22,T.light,[.26,.53,.61,1],false,.45);f5.lights.push({x,z,y:-.8,rad:3.5,gain:.13});}
  for(const [kind,x,z]of [['shooter',151,-23],['shooter',159,-25],['flanker',155,-18]]){const e=spawn(kind,x,z);e.y=groundHeight(x,z)+1.08;e.f5group='server237';e.encounterTag='f5_server237';e.facing=Math.PI;}
  addGameplayPickup('ammo_smg',147.2,-28.5,{authored:true,tag:'F5_SERVER_BACKUP_AMMO'});addGameplayPickup('health_small',162.5,-28.5,{authored:true,tag:'F5_SERVER_FIRST_AID'});
 }
+
 const buildBefore237=f5Build207;f5Build207=()=>{departmentsActive237=false;for(let i=F5_ROOMS207.length-1;i>=0;i--)if(F5_ROOMS207[i].department237)F5_ROOMS207.splice(i,1);buildBefore237();departmentsActive237=true;for(const r of F5_DEPARTMENTS237){const copy=r.slice(0,6);copy.department237=true;F5_ROOMS207.push(copy);}departmentsShell237();departmentsFurnish237();serverFarm237();};
 const startBefore237=startLevel5;startLevel5=(...args)=>{const r=startBefore237(...args);navigationBounds={minX:-34,maxX:196,minZ:-52,maxZ:56};return r;};
 const useBefore237=f5Use207;f5Use207=p=>{const r=useBefore237(p);if(f5.issued)for(const id of ['serverIn237','serverOut237'])f5.gates[id].scriptLocked=false;return r;};
@@ -15283,6 +15301,167 @@ const interactBefore237=interact;interact=()=>{if(activeLevel===5&&!uiPaused){co
 const flowBefore237=f5Flow207;f5Flow207=()=>{flowBefore237();if(activeLevel!==5||!f5)return;if(player.x>146&&player.x<164&&player.z< -12&&player.z> -30)f5Wake207('server237');};
 const targetBefore237=f5Target207;f5Target207=()=>f5.issued&&!f5.authority&&player.x>=146&&player.x<=164&&player.z< -4&&player.z> -30?[161,-4.8]:targetBefore237();
 const objectiveBefore237=f5Objective207;f5Objective207=()=>f5.issued&&!f5.authority&&player.x>=146&&player.x<=164&&player.z< -4&&player.z> -30?'SERVER FARM / CROSS TO OPERATIONAL PLANNING':objectiveBefore237();
+
+// Finer neutral chain-link keeps the cage readable as a separate enclosure.
+f5Cage209.texture=tex(tc(128,(c,n)=>{c.clearRect(0,0,n,n);c.strokeStyle='#596b74';c.lineWidth=1;for(let i=-128;i<256;i+=10){c.beginPath();c.moveTo(i,0);c.lineTo(i+128,128);c.moveTo(i,128);c.lineTo(i+128,0);c.stroke();}}));
+const shellBefore238=departmentsShell237;departmentsShell237=()=>{shellBefore238();
+ // A real service junction replaces the crowded Workshop/annex corner.
+ f5Wall207('h',12,156,158,[],4.4);f5Cut209('h',18,156,166);f5Cut209('v',166,18,20.15);f5Wall207('v',156,18,20,[],4.8);
+ f5Sign207(158.24,-.65,10,'LOGISTICS / EQUIPMENT STORAGE','v',3.2,.45);
+ f5Sign207(160,-.65,19.76,'WORKSHOP / ISSUE COUNTER','h',3.4,.45);
+ f5Sign207(157.15,-1.7,19.76,'LOGISTICS SERVICE JUNCTION|PLANNING / BLUE AUTHORITY|WORKSHOP / ISSUE COUNTER|STAFF FACILITIES / ANNEX','h',1.9,1.25);
+ f5Sign207(163.74,-.65,14,'PLANNING / BLUE AUTHORITY','v',3,.45);
+};
+
+
+// V239: destinations represent tasks, never intermediate navigation points.
+f5Target207=()=>!f5.communications?[13,-26.2]:!f5.authorized?[27,5.7]:!f5.field?[131,2]:!f5.issued?[161,31]:!f5.authority?[177,12.2]:!f5.reported?[27,5.7]:!f5.overrideReady?[26,48.7]:[48.6,50];
+f5Objective207=()=>{
+ if(f5.departing)return 'DESCENDING / LOWER OPERATIONS';
+ if(f5.overrideReady)return 'DESCENT AUTHORIZED / ENTER AND USE THE FLOOR 6 ELEVATOR';
+ if(f5.overrideStarted)return f5Alive207('response')?'CONTROL OVERRIDE / DEFEAT THE RESPONSE DETAIL':'CONTROL OVERRIDE / AUTHORITY TRANSFER IN PROGRESS';
+ if(f5.reported)return f5Alive207('control')?'CONTROL / CLEAR THE COMMAND DETAIL, THEN START OVERRIDE':'CONTROL / START THE DESCENT OVERRIDE';
+ if(f5.authority)return f5Alive207('return')?'WAR ROOM / CLEAR RETURN DETAIL, THEN REPORT AUTHORITY':'WAR ROOM / REPORT RESTRICTED AUTHORITY';
+ if(f5.issued)return f5Alive207('planning')?'PLANNING / CLEAR DETAIL, THEN RECOVER RESTRICTED AUTHORITY':'PLANNING / RECOVER RESTRICTED AUTHORITY';
+ if(f5.field)return f5Alive207('logistics')||f5Alive207('stores')?'WORKSHOP ISSUE / SECURE LOGISTICS AND STORES, THEN OBTAIN BLUE AUTHORITY':'WORKSHOP ISSUE / OBTAIN BLUE MOVEMENT AUTHORITY';
+ if(f5.authorized)return f5Alive207('bridge')?'FIELD STATION / SECURE BRIDGE APPROACHES, THEN ESTABLISH LINK':'FIELD STATION / ESTABLISH THE FIELD LINK';
+ if(!f5.communications)return f5Alive207('operations')?'COMMUNICATIONS / SECURE OPERATIONS WING, THEN RESTORE THE NET':'COMMUNICATIONS / RESTORE OPERATIONS NET';
+ return f5Alive207('war')?'WAR ROOM / CLEAR COMMAND DETAIL, THEN AUTHORIZE ACCESS':'WAR ROOM / AUTHORIZE GEOLOGICAL ACCESS';
+};
+// Interacting with a destination activates its own encounter even when approached by another route.
+const useBefore239=f5Use207;f5Use207=p=>{
+ const groups={f5_communications:['operations'],f5_ops:[f5.authority?'return':'war'],f5_field:['bridge'],f5_issue:['logistics','stores'],f5_authorization:['planning'],f5_override:['control']};
+ for(const g of groups[p.id]||[])f5Wake207(g);
+ return useBefore239(p);
+};
+const buildBefore239=f5Build207;f5Build207=()=>{buildBefore239();
+ // Rebuild the service spine as continuous room partitions. Preserve all gate locks.
+ f5Cut209('v',164,4,20);roomWall237('v',164,4,20,-4,4.8,[[14,3.2],[18,3.2]]);
+ // Cage is a separate room: solid rear and east boundaries; mesh retained at the front.
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(o.f5&&o.t===f5Cage209.texture&&o.x===156&&o.z===15)objects.splice(i,1);}
+ roomWall237('v',156,12,20,-4,4.8);
+ f5Cut209('h',18,146,156);roomWall237('h',18,146,156,-4,4.8);
+ // A single height through the junction removes dangling partial wall tops.
+ for(const id of ['planningService','welfareHall237','workshopService']){const d=f5.gates[id];d.label=id==='planningService'?'PLANNING / BLUE AUTHORITY':id==='welfareHall237'?'STAFF FACILITIES / ANNEX':'WORKSHOP / MOVEMENT AUTHORITY';}
+ f5Sign207(163.74,-.65,6.5,'SERVICE HALL / PLANNING','v',3,.5);
+ f5Sign207(156.24,-.65,15.5,'WORKSHOP / SOUTH|STAFF FACILITIES / EAST','v',3.2,.7);
+};
+
+// V240: one enclosed landing joins the north catwalk to the west return corridor.
+const buildBefore240=f5Build207;f5Build207=()=>{buildBefore240();
+ // Remove the old projecting bunker end and the rail across its circulation space.
+ f5Cut209('v',66,-12,-4.5);f5Cut209('h',-8,62,66);
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(!o.f5)continue;
+  const rail=o.sy===.08||o.sy===1.16;
+  if(rail&&o.sz<.2&&o.sx>.5&&o.z>=-12.05&&o.z<=-4.5&&o.x+o.sx/2>62&&o.x-o.sx/2<66){objects.splice(i,1);const hi=o.x+o.sx/2;if(hi>66.01)objects.push({...o,x:(66+hi)/2,sx:hi-66});continue;}
+  if(rail&&o.x>=61.9&&o.x<=66.1&&o.z>=-12.05&&o.z<=-4.5)objects.splice(i,1);
+  // Old end sign and its lamp are replaced by flush landing fixtures below.
+  else if(Math.abs(o.x-62.2)<.02&&Math.abs(o.z+10)<.02&&o.sy===.75)objects.splice(i,1);
+ }
+ // Constant floor and roof height through the bend; rock finishes meet the cave shell.
+ const a=f5Assets207();const f=f5Box207(64,-4.14,-8.25,4,.28,7.5,a.concrete,[.70,.74,.75,1]);f.fp112Material=1;
+ const c=f5Box207(64,.1,-10,4,.2,4,a.rock,[.62,.67,.69,1]);c.fp112Material=2;
+ f5Wall207('v',66,-12,-4.5,[],4,true);
+ // West wall stays solid against the cave; only the established Maintenance door admits entry.
+ f5Cut209('v',62,-12,-8);f5Wall207('v',62,-12,-8,[],4,true);
+ f5Sign207(65.79,-1.25,-9.8,'WEST SERVICE LANDING|OPERATIONS / TURN LEFT|MAINTENANCE / AUTHORITY REQUIRED','v',3.3,1);
+ f5Rail207(62,-16,62,-12,-4);
+ f5Light207(64,-10,-.28,1.5);
+};
+// V241: outbound main bridge, sabotage, service bridge and forced cave return.
+const floorBefore241=f5Floor207;f5Floor207=(x,z)=>{
+ if(f5?.route241){if(x>62&&x<66&&z>-8&&z< -4.5)return -24;if(f5.route241.broken&&x>82&&x<102&&Math.abs(z)<2.65)return -24;}
+ return floorBefore241(x,z);
+};
+const navBefore241=navWalkable;navWalkable=(x,z,...args)=>activeLevel===5&&f5?.route241&&f5Floor207(x,z)<-12?false:navBefore241(x,z,...args);
+function splitBridge241(){
+ const middle=[];
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(!o.f5||o.mesh||o.y>-.5||Math.abs(o.z)>7.4||o.x<74||o.x>110)continue;
+  const lo=o.x-o.sx/2,hi=o.x+o.sx/2;if(hi<=82||lo>=102)continue;
+  // Only the main bridge assembly, including overhead longitudinal beams.
+  if(Math.abs(o.z)>3&&o.sx<20)continue;
+  objects.splice(i,1);for(const [a,b,fall]of [[lo,Math.min(hi,82),false],[Math.max(lo,82),Math.min(hi,102),true],[Math.max(lo,102),hi,false]])if(b>a+.001){const q={...o,x:(a+b)/2,sx:b-a};objects.push(q);if(fall){q.sabotage241=true;q.f5Moving=true;middle.push({o:q,y:q.y,rot:q.rot||0});}}
+ }
+ return middle;
+}
+const buildBefore241=f5Build207;f5Build207=()=>{buildBefore241();f5.route241={broken:false,event:null,fall:0,middle:splitBridge241()};
+ // The two west approaches are separated by open chasm, not a narrow connector.
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(!o.f5)continue;const isLanding=o.x>=62&&o.x<=66&&o.z>=-12&&o.z< -4.5;
+  if(isLanding&&(o.sy===.08||o.sy===1.16||o.fp112Material===1||o.fp112Material===2||o.fp112Material===3||o.sy===1&&o.sz>3))objects.splice(i,1);
+ }
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(o.f5&&Math.abs(o.x-61.62)<.03&&o.z===-12)objects.splice(i,1);}
+ // Restore only the northern landing, reached from the service bridge.
+ const a=f5Assets207();const deck=f5Box207(64,-4.14,-10,4,.28,4,a.bridge,[.59,.66,.68,1]);deck.fp112Material=1;
+ f5Rail207(62,-16,62,-12,-4);f5Wall207('v',66,-12,-8,[],4,true);
+ // Open Maintenance directly from the landing; south edge is a real rock face.
+ for(let i=objects.length-1;i>=0;i--){const o=objects[i];if(o.f5&&o.solid&&Math.abs(o.x-62)<.03&&o.sx<.5&&o.z+o.sz/2> -11.6&&o.z-o.sz/2< -8.4){const lo=o.z-o.sz/2,hi=o.z+o.sz/2;objects.splice(i,1);for(const [a,b]of [[lo,Math.min(hi,-11.6)],[Math.max(lo,-8.4),hi]])if(b>a+.001)objects.push({...o,z:(a+b)/2,sz:b-a});}}
+ departmentDoor237('caveReturn241',62,-10,'v',3.2,'TEMPORARY CAVE / OPERATIONS RETURN',-4,4,true);
+ f5.gates.caveReturn241.lockReason209='Recover Restricted Operations authority in Planning.';
+ // Finished tunnel has collapsed west of the old junction. Both faces block shots and movement.
+ f5Wall207('v',53,-8,-4.5,[],4,true);
+ for(const [x,z,w,d,h]of [[53.1,-7.2,2.6,2,3.5],[53.5,-5.3,2.4,2,3.8],[54.2,-6.3,1.9,2.6,2.3],[54.9,-7.2,1.4,1,1.1]])f5CaveOutcrop211(x,z,w,d,h);
+ const beam=f5Box207(54,-1.25,-6.2,.22,4.1,.25,T.metal,[.22,.26,.28,1]);beam.rot=.43;
+ f5Sign207(55,-.65,-4.73,'SERVICE TUNNEL / COLLAPSED|USE TEMPORARY CAVE ACCESS','h',3.2,.65);
+ f5Sign207(63.8,-.8,-8.12,'OPERATIONS RETURN|TEMPORARY CAVE / WEST DOOR','h',3.3,.65);
+ // A solid southern edge prevents either bridge approach being used as a shortcut.
+ f5Wall207('h',-8,62,66,[],4,true);
+ f5Rail207(64,-6,66,-6,-4);
+ // Visible broken ceiling and a hanging electrical lead at the collapse.
+ f5Box207(54,-.15,-6,.18,.2,3,T.metal,[.25,.29,.31,1]);
+ f5Box207(54.1,-1.0,-5.1,.045,1.8,.045,T.metal,[.12,.15,.17,1]);
+};
+function bridgeBreak241(){const r=f5.route241;if(r.broken)return;r.broken=true;r.fall=0;
+ for(const {o}of r.middle)o.solid=false;
+ for(const x of [81.6,102.4])for(const z of [-2.4,2.4]){const o=f5Box207(x,-4.6,z,2.6,.18,.16,T.metal,[.20,.25,.28,1]);o.rot=(z<0?1:-1)*.32;}
+ for(const e of enemies){e.path=[];e.navClock=0;}
+ furnishedCollisionIndex=null;f3Nav141=null;clearWorld220();
+ sBarrelExplosion();tone(34,1.25,'sine',.16,-8);noiseBurst(1.1,.18,220);
+ for(const x of [85,92,99])spawnBlastEffect(x,-3.7,0,3.5);
+ for(let i=0;i<65;i++)particles.push({x:82+Math.random()*20,y:-3.7,z:(Math.random()-.5)*4,vx:(Math.random()-.5)*5,vy:1+Math.random()*5,vz:(Math.random()-.5)*4,life:.5+Math.random()*.8,t:i%4?T.spark:(T.smoke||T.spark),s:.08+Math.random()*.2});
+ hudToast('MAIN BRIDGE DESTROYED','Return via the service bridge. The finished tunnel has collapsed; use the temporary cave.','danger',7);
+}
+function beginSabotage241(){const r=f5.route241;if(r.broken||r.event)return;
+ r.event={time:0,x:player.x,y:player.y,z:player.z,yaw:player.yaw,pitch:player.pitch};
+ cancelC8Burst();c6Held=lidarHeld=chainsawHeld=adsHeld=false;for(const k in keys)keys[k]=false;
+ hudToast('POLICE OPERATIONS WO','Your return movement has not been authorized.','danger',3.1);
+}
+const flowBefore241=f5Flow207;f5Flow207=()=>{flowBefore241();if(activeLevel!==5||!f5?.route241)return;
+ if(f5.authority){f5.gates.caveReturn241.scriptLocked=false;f5.gates.caveReturn241.target=1;
+  if(!f5.route241.broken&&!f5.route241.event&&player.x>110&&player.x<119&&Math.abs(player.z)<3)beginSabotage241();
+  // Also handle a player choosing the service exit before revisiting the main landing.
+  else if(!f5.route241.broken&&!f5.route241.event&&player.x>118&&player.x<125&&player.z< -12&&player.z> -16)beginSabotage241();
+ }
+};
+const updateBefore241=update;update=dt=>{
+ if(activeLevel!==5||!f5?.route241||uiPaused||missionDone||f5.map)return updateBefore241(dt);
+ const r=f5.route241,e=r.event;
+ if(e){e.time+=Math.min(.1,dt);Object.assign(player,{x:e.x,y:e.y,z:e.z});for(const k in keys)keys[k]=false;
+  const target=e.time<1.7?[108,-2.5,0]:[92,-4,0],yaw=Math.atan2(target[0]-e.x,-(target[2]-e.z)),pitch=Math.atan2(target[1]-e.y,Math.hypot(target[0]-e.x,target[2]-e.z));
+  const blend=Math.min(1,e.time/.5)*(e.time>3.2?Math.max(0,(3.8-e.time)/.6):1),angle=Math.atan2(Math.sin(yaw-e.yaw),Math.cos(yaw-e.yaw));player.yaw=e.yaw+angle*blend;player.pitch=e.pitch+(pitch-e.pitch)*blend;
+  if(e.time>=1.7&&!r.broken)bridgeBreak241();if(e.time>=3.8){player.yaw=e.yaw;player.pitch=e.pitch;r.event=null;}updatePresentationHud();
+ }else updateBefore241(dt);
+ if(r.broken&&r.fall<2.5){r.fall+=dt;for(const {o,y,rot}of r.middle){o.y=y-2.5*r.fall*r.fall;o.rot=rot+Math.sin(o.x)*r.fall*.14;}
+  if(r.fall>=2.5){const dead=new Set(r.middle.map(q=>q.o));for(let i=objects.length-1;i>=0;i--)if(dead.has(objects[i]))objects.splice(i,1);clearWorld220();furnishedCollisionIndex=null;}
+ }
+};
+// Non-combat appearance: no extra enemy kill or invulnerable target is added.
+const effectsBefore241=renderBlastEffects;renderBlastEffects=vp=>{effectsBefore241(vp);if(activeLevel!==5||!f5?.route241)return;const e=f5.route241.event;
+ if((f5.clock235||0)%3.7<.18)renderBill(54.1,-1.8,-5.1,.16,.16,T.spark,vp,[1,.65,.2,1],1);
+ if(e&&e.time<1.9){const actor={kind:'commander',x:108,z:0,y:-2.75,alive:true,state:'idle',walk:0,pain:0,fire:0,facing:Math.atan2(player.x-108,player.z)};renderBill(108,-2.65,0,2.1,2.7,eTex(actor),vp,[1,1,1,1],.6);}
+};
+const objectiveBefore241=f5Objective207;f5Objective207=()=>f5.authority&&!f5.reported&&f5.route241?.broken?'WAR ROOM / RETURN VIA SERVICE BRIDGE AND TEMPORARY CAVE':objectiveBefore241();
+// Map records the broken span and the closed finished tunnel, matching physical geometry.
+const mapBefore241=f5Map207;f5Map207=(ctx,W,H,full=false)=>{mapBefore241(ctx,W,H,full);if(!f5?.route241)return;
+ const view=full?[-34,-52,230,110]:[player.x-34,player.z-21,68,42],s=Math.min((W-24)/view[2],(H-(full?100:34))/view[3]),ox=(W-view[2]*s)/2-view[0]*s,oy=(H-view[3]*s)/2-view[1]*s,X=x=>ox+x*s,Z=z=>oy+z*s;
+ ctx.save();ctx.beginPath();ctx.rect(6,full?42:20,W-12,H-(full?100:30));ctx.clip();ctx.fillStyle='#122127';ctx.fillRect(X(62),Z(-8),4*s,3.5*s);if(f5.route241.broken){ctx.fillRect(X(82),Z(-2.5),20*s,5*s);ctx.strokeStyle='#dd7052';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(X(84),Z(-2));ctx.lineTo(X(100),Z(2));ctx.moveTo(X(84),Z(2));ctx.lineTo(X(100),Z(-2));ctx.stroke();}
+ ctx.strokeStyle='#dd7052';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(X(53),Z(-8));ctx.lineTo(X(53),Z(-4.5));ctx.stroke();ctx.restore();
+};
+// Suppress firing during the brief camera glance; combat simulation is paused too.
+document.addEventListener('mousedown',e=>{if(activeLevel===5&&f5?.route241?.event){e.preventDefault();e.stopImmediatePropagation();}},true);
+// Floor 1 installs its flat terrain sampler when replayed. Restore the shared
+// floor dispatcher before starting this level again from the mission menu.
+const groundDispatcher241=groundHeight,startBefore241=startLevel5;
+startLevel5=(...args)=>{groundHeight=groundDispatcher241;return startBefore241(...args);};
 
 })();
 
