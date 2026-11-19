@@ -2,7 +2,7 @@
 
 A military police FPS.
 
-[Download the latest build — V240: West Service Landing](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_240_WEST_SERVICE_LANDING.html)
+[Download the latest build — V241: Bridge Sabotage and Cave Return](https://raw.githubusercontent.com/Jeanedb/MP-SHOOT/main/MP_SHOOT_V14_6B_241_BRIDGE_SABOTAGE.html)
 
 Download the HTML file and open it in your browser to play.
 
@@ -10,11 +10,11 @@ Download the HTML file and open it in your browser to play.
 
 | Version | Build |
 | --- | --- |
+| V241 | [Bridge Sabotage and Cave Return](MP_SHOOT_V14_6B_241_BRIDGE_SABOTAGE.html) |
 | V240 | [West Service Landing](MP_SHOOT_V14_6B_240_WEST_SERVICE_LANDING.html) |
 | V239 | [Operations Layout and Objectives](MP_SHOOT_V14_6B_239_OPERATIONS_LAYOUT_AND_OBJECTIVES.html) |
 | V238 | [Logistics Circulation and Rack Hardware](MP_SHOOT_V14_6B_238_LOGISTICS_CIRCULATION.html) |
 | V237 | [Operations Departments](MP_SHOOT_V14_6B_237_OPERATIONS_DEPARTMENTS.html) |
-| V236 | [Service Route Repairs](MP_SHOOT_V14_6B_236_SERVICE_ROUTE_REPAIRS.html) |
 
 The current branch retains the five most recent numbered game builds. Music experiments, assets and development notes are kept separately.
 
